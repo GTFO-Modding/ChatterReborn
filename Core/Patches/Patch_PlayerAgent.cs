@@ -26,7 +26,7 @@ namespace ChatterReborn.Patches
         public static bool LastDialogEnabled = false;
 
 
-        /*[HarmonyPostfix]
+        [HarmonyPostfix]
         [HarmonyPatch(MethodType.Setter)]
         [HarmonyPatch(nameof(PlayerAgent.CourseNode))]
 
@@ -36,7 +36,7 @@ namespace ChatterReborn.Patches
             {
                 __instance.WantToStartDialog(GD.PlayerDialog.dark_area_enter, false);
             }
-        }*/
+        }
 
         [HarmonyPostfix]
         [HarmonyPatch(nameof(PlayerAgent.Setup))]
