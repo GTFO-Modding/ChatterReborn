@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99B582D4-8D0C-4940-B059-4119E029356E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameData</RootNamespace>
+    <AssemblyName>GameData</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GameData_ArchetypeDataBlock_headers.cs" />
+    <Compile Include="GameData_ArtifactDataBlock_headers.cs" />
+    <Compile Include="GameData_ArtifactDistributionDataBlock_headers.cs" />
+    <Compile Include="GameData_ArtifactTagDataBlock_headers.cs" />
+    <Compile Include="GameData_AtmosphereDataBlock_headers.cs" />
+    <Compile Include="GameData_BigPickupDistributionDataBlock_headers.cs" />
+    <Compile Include="GameData_BoosterImplantConditionDataBlock_headers.cs" />
+    <Compile Include="GameData_BoosterImplantEffectDataBlock_headers.cs" />
+    <Compile Include="GameData_BoosterImplantTemplateDataBlock_headers.cs" />
+    <Compile Include="GameData_ChainedPuzzleDataBlock_headers.cs" />
+    <Compile Include="GameData_ChainedPuzzleTypeDataBlock_headers.cs" />
+    <Compile Include="GameData_CloudsDataBlock_headers.cs" />
+    <Compile Include="GameData_CommodityDataBlock_headers.cs" />
+    <Compile Include="GameData_ComplexResourceSetDataBlock_headers.cs" />
+    <Compile Include="GameData_ConsumableDistributionDataBlock_headers.cs" />
+    <Compile Include="GameData_CustomAssetShardDataBlock_headers.cs" />
+    <Compile Include="GameData_DimensionDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyBalancingDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyBehaviorDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyDetectionDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyGroupDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyMovementDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemyPopulationDataBlock_headers.cs" />
+    <Compile Include="GameData_EnemySFXDataBlock_headers.cs" />
+    <Compile Include="GameData_EnvironmentFeedbackDataBlock_headers.cs" />
+    <Compile Include="GameData_EventSequenceActionDataBlock_headers.cs" />
+    <Compile Include="GameData_EventSequenceDataBlock_headers.cs" />
+    <Compile Include="GameData_ExpeditionBalanceDataBlock_headers.cs" />
+    <Compile Include="GameData_ExtractionEventDataBlock_headers.cs" />
+    <Compile Include="GameData_FeedbackDataBlock_headers.cs" />
+    <Compile Include="GameData_FlashlightSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_FogSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_GameSetupDataBlock_headers.cs" />
+    <Compile Include="GameData_GearCategoryDataBlock_headers.cs" />
+    <Compile Include="GameData_GearCategoryFilterDataBlock_headers.cs" />
+    <Compile Include="GameData_GearDataBlock_headers.cs" />
+    <Compile Include="GameData_GearDecalDataBlock_headers.cs" />
+    <Compile Include="GameData_GearFlashlightPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearFrontPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearMagPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearMeleeHandlePartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearMeleeHeadPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearMeleeNeckPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearMeleePommelPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearPaletteDataBlock_headers.cs" />
+    <Compile Include="GameData_GearPartAttachmentDataBlock_headers.cs" />
+    <Compile Include="GameData_GearPatternDataBlock_headers.cs" />
+    <Compile Include="GameData_GearPerkDataBlock_headers.cs" />
+    <Compile Include="GameData_GearReceiverPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearSightPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearStockPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolDeliveryPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolGripPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolMainPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolPayloadPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolScreenPartDataBlock_headers.cs" />
+    <Compile Include="GameData_GearToolTargetingPartDataBlock_headers.cs" />
+    <Compile Include="GameData_ItemDataBlock_headers.cs" />
+    <Compile Include="GameData_ItemFPSSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_ItemMovementAnimationDataBlock_headers.cs" />
+    <Compile Include="GameData_ItemPartDataBlock_headers.cs" />
+    <Compile Include="GameData_LevelGenSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_LevelLayoutDataBlock_headers.cs" />
+    <Compile Include="GameData_LightSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_LootDataBlock_headers.cs" />
+    <Compile Include="GameData_MarkerGroupDataBlock_headers.cs" />
+    <Compile Include="GameData_MeleeAnimationSetDataBlock_headers.cs" />
+    <Compile Include="GameData_MeleeArchetypeDataBlock_headers.cs" />
+    <Compile Include="GameData_MeleeSFXDataBlock_headers.cs" />
+    <Compile Include="GameData_MiningMarkerDataBlock_headers.cs" />
+    <Compile Include="GameData_MLSArrayDescriptorReferenceDataBlock_headers.cs" />
+    <Compile Include="GameData_MusicStateDataBlock_headers.cs" />
+    <Compile Include="GameData_PlayerDataBlock_headers.cs" />
+    <Compile Include="GameData_PlayerDialogDataBlock_headers.cs" />
+    <Compile Include="GameData_PlayerOfflineGearDataBlock_headers.cs" />
+    <Compile Include="GameData_RecoilDataBlock_headers.cs" />
+    <Compile Include="GameData_RundownDataBlock_headers.cs" />
+    <Compile Include="GameData_ServiceMarkerDataBlock_headers.cs" />
+    <Compile Include="GameData_StaticSpawnDataBlock_headers.cs" />
+    <Compile Include="GameData_SurvivalWavePopulationDataBlock_headers.cs" />
+    <Compile Include="GameData_SurvivalWaveSettingsDataBlock_headers.cs" />
+    <Compile Include="GameData_TechMarkerDataBlock_headers.cs" />
+    <Compile Include="GameData_TextCharacterMetaDataBlock_headers.cs" />
+    <Compile Include="GameData_TextDataBlock_headers.cs" />
+    <Compile Include="GameData_VanityItemsGroupDataBlock_headers.cs" />
+    <Compile Include="GameData_VanityItemsLayerDropsDataBlock_headers.cs" />
+    <Compile Include="GameData_VanityItemsTemplateDataBlock_headers.cs" />
+    <Compile Include="GameData_WardenObjectiveDataBlock_headers.cs" />
+    <Compile Include="GameData_WeaponAudioDataBlock_headers.cs" />
+    <Compile Include="GameData_WeaponDataBlock_headers.cs" />
+    <Compile Include="GameData_WeaponMuzzleFlashDataBlock_headers.cs" />
+    <Compile Include="GameData_WeaponShellCasingDataBlock_headers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
