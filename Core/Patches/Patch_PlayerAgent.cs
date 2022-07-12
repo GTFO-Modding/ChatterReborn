@@ -1,21 +1,13 @@
-﻿using ChatterReborn.Extra;
+﻿using AIGraph;
 using ChatterReborn.Data;
+using ChatterReborn.Extra;
 using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using GameData;
-using Gear;
-using Globals;
 using HarmonyLib;
 using LevelGeneration;
 using Player;
-using SNetwork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using AIGraph;
 
 namespace ChatterReborn.Patches
 {
