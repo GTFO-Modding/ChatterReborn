@@ -31,7 +31,7 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
         {
             if (this.m_actionDesc.Status == PlayerBotActionBase.Descriptor.StatusType.Active)
             {
-                if (DramaManager.CurrentStateEnum == DRAMA_State.Combat)
+                if (DramaManager.CurrentStateEnum == DRAMA_State.Combat || DramaManager.CurrentStateEnum == DRAMA_State.IntentionalCombat || DramaManager.CurrentStateEnum == DRAMA_State.Survival || DramaManager.CurrentStateEnum == DRAMA_State.Encounter)
                 {
                     if (IsLocallyOwned)
                     {

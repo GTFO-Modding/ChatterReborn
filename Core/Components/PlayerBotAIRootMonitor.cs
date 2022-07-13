@@ -18,7 +18,7 @@ namespace ChatterReborn.Components
 
         void Awake()
         {
-            m_bot = m_agent.gameObject.GetComponent<PlayerAIBot>();
+            
             m_monitors = new List<PlayerBotMonitorBase>();
             m_debugLogger = new DebugLoggerObject("PlayerBotAIActionMonitor");
             m_monitorCollection = new PlayerBotMonitorCollection();
@@ -29,6 +29,7 @@ namespace ChatterReborn.Components
         {
             m_chatterMachine = machine;
             m_agent = machine.Owner;
+            m_bot = m_agent.gameObject.GetComponent<PlayerAIBot>();
         }
 
         void Update()
@@ -87,16 +88,40 @@ namespace ChatterReborn.Components
 
         void SetupRootAction()
         {
+            if (m_bot == null)
+            {
+                this.m_debugLogger.DebugPrint("PlayerAIBot m_bot is null!!", eLogType.Error);
+                return;
+            }
             if (m_bot.m_rootAction == null)
             {
+                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor m_rootAction is null!!", eLogType.Error);
                 return;
             }
 
 
-            if (m_bot.m_rootAction.ActionBase == null || !m_bot.m_rootAction.ActionBase.Convert(out m_rootAction))
+            if (m_bot.m_rootAction.ActionBase == null)
             {
+                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor ActionBase is null!!", eLogType.Error);
                 return;
             }
+
+            
+            if (!m_bot.m_rootAction.ActionBase.Convert(out RootPlayerBotAction rootAction))
+            {
+                this.m_debugLogger.DebugPrint("Failed to convert PlayerBotActionBase -> RootPlayerBotAction!!", eLogType.Error);
+                return;
+            }
+
+            if (rootAction == null)
+            {
+                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor m_rootAction is null!!", eLogType.Error);
+                return;
+            }
+
+            this.m_rootAction = rootAction;
+
+            m_debugLogger.DebugPrint("Attempting to setup monitors!", eLogType.Warning);
 
             InitiateMonitors();
             m_debugLogger.DebugPrint("RootPlayerBotAction - Has been gotten! for characterID " + m_agent.CharacterID, eLogType.Message);
