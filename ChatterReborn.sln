@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterRebornSettings", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wwise-IDS", "Wwise-IDS\Wwise-IDS.csproj", "{73F230CB-7647-438F-81C7-F864424B333B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterRebornDev", "Dev\ChatterRebornDev.csproj", "{7B422B7C-56E6-40A0-9FF3-6A41A9DA3A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{73F230CB-7647-438F-81C7-F864424B333B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F230CB-7647-438F-81C7-F864424B333B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F230CB-7647-438F-81C7-F864424B333B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B422B7C-56E6-40A0-9FF3-6A41A9DA3A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B422B7C-56E6-40A0-9FF3-6A41A9DA3A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B422B7C-56E6-40A0-9FF3-6A41A9DA3A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B422B7C-56E6-40A0-9FF3-6A41A9DA3A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

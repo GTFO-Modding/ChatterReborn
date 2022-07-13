@@ -3,10 +3,10 @@ using ChatterReborn.Data;
 using ChatterReborn.Element;
 using ChatterReborn.Utils;
 using GameData;
+using Il2CppInterop.Runtime.Attributes;
 using Player;
 using System;
 using System.Collections.Generic;
-using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 
 namespace ChatterReborn.ComponentsDev

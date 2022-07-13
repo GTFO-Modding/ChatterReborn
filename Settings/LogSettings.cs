@@ -14,6 +14,6 @@ namespace ChatterRebornSettings
         public const bool Warning = All || false;
         public const bool Error = All || false;
 
-        public const bool All = false;
+        public const bool All = true;
     }
 }

@@ -80,6 +80,7 @@
     <Compile Include="Extra\DialogOption.cs" />
     <Compile Include="Extra\PlayerDialogNode.cs" />
     <Compile Include="Extra\PlayerBotMonitorCollection.cs" />
+    <Compile Include="Extra\PlayerDialogNodeMenu.cs" />
     <Compile Include="Machines\CombatStateMachine.cs" />
     <Compile Include="Managers\CustomRundownManager.cs" />
     <Compile Include="Patches\Patch_PlayerInventoryBase.cs" />

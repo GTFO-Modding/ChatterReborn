@@ -9,6 +9,6 @@ namespace ChatterRebornSettings
     public static class PlayerBotSettings
     {
 
-        public const bool EnablePlayerMonitor = false; 
+        public const bool EnablePlayerMonitor = true; 
     }
 }

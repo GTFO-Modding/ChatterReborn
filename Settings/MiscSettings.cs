@@ -13,6 +13,6 @@ namespace ChatterRebornSettings
         public const bool DialogCastingDebugEnabled = false;
         public const bool AllowBondingDialogue = false;
         public const bool ElementsEnabled = true;
-        public const bool LoadDevComponents = false;
+        public const bool LoadDevComponents = true;
     }
 }
