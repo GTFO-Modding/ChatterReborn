@@ -24,6 +24,7 @@ namespace ChatterReborn.Components
             UpdateStealthInteraction();
             UpdateSteathInteractionPrompt();
             UpdateStealthInteractionInput();
+            UpdateOrderBackPlayer();
         }
 
         [HideFromIl2Cpp]
@@ -58,18 +59,21 @@ namespace ChatterReborn.Components
         }
 
 
+        private void UpdateOrderBackPlayer()
+        {
+            if (InputMapper.GetButtonDown.Invoke(InputAction.NavMarkerPing, eFocusState.FPS))
+            {
+                OrderPlayerBack();
+            }
+        }
+
+
         private void UpdateStealthInteractionInput()
         {
             if (!stealthTargetAquired)
             {
                 return;
             }
-
-            if (FocusStateManager.CurrentState != eFocusState.FPS)
-            {
-                return;
-            }
-
 
             /*if (InputMapper.GetButtonDown.Invoke(InputAction.NavMarkerPing, eFocusState.FPS))
             {
@@ -80,6 +84,7 @@ namespace ChatterReborn.Components
             {
                 StartCountDownCommand();
             }
+
         }
 
         private void StartCountDownCommand()
@@ -94,6 +99,80 @@ namespace ChatterReborn.Components
 
             m_countDownStarted = false;
             this.LocalPlayer.WantToStartDialog(GD.PlayerDialog.CL_CancelThat, true);
+        }
+
+        private bool m_firstBackHere = false;
+
+        private float m_getBackHereTime = 0f;
+
+        [HideFromIl2Cpp]
+        private void OrderPlayerBack()
+        {
+
+            if (!this.LocalPlayer.Alive)
+            {
+                return;
+            }
+
+
+            if (this.LocalPlayer.FPSCamera == null)
+            {
+                return;
+            }
+
+            if (this.LocalPlayer.FPSCamera.CameraRayObject == null)
+            {
+                return;
+            }
+
+            if (!this.LocalPlayer.IsInBioscan)
+            {
+                return;
+            }
+
+
+            PlayerAgent playerAgent = this.LocalPlayer.FPSCamera.CameraRayObject.GetAbsoluteComponent<PlayerAgent>();
+
+            if (playerAgent == null)
+            {
+                ChatterDebug.LogWarning("Didn't get a PlayerAgent??");
+                return;
+            }
+
+            if (playerAgent.IsInBioscan)
+            {
+                ChatterDebug.LogWarning("PlayerAgent is already in a bio scan..");
+                return;
+            }
+
+
+            uint dialogID = 0;
+
+            switch (playerAgent.PlayerCharacterFilter)
+            {
+                case DialogCharFilter.Char_G:
+                    dialogID = GD.PlayerDialog.order_back_to_bio_scan_woods;
+                    break;
+                case DialogCharFilter.Char_T:
+                    dialogID = GD.PlayerDialog.order_back_to_bio_scan_dauda;
+                    break;
+                case DialogCharFilter.Char_F:
+                    dialogID = GD.PlayerDialog.order_back_to_bio_scan_hackett;
+                    break;
+                case DialogCharFilter.Char_O:
+                    dialogID = GD.PlayerDialog.order_back_to_bio_scan_bishop;
+                    break;
+                default:
+                    break;
+            }
+
+            if (dialogID > 0 && (!this.m_firstBackHere || this.m_getBackHereTime < Time.time))
+            {
+                m_firstBackHere = true;
+                m_getBackHereTime = Time.time + 2f;
+                ChatterDebug.LogMessage("Now triggering dialogue -> " + PlayerDialogDataBlock.GetBlockName(dialogID));
+                this.LocalPlayer.WantToStartDialog(dialogID, true);
+            }
         }
 
         private bool m_countDownStarted;

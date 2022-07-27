@@ -55,13 +55,15 @@ namespace ChatterReborn.Drama_Chatter_States
         {
             get
             {
-                if (this.m_machine.m_current_state == null)
-                {
-                    return false;
+                switch (DramaManager.CurrentStateEnum)
+                {                    
+                    case DRAMA_State.Encounter:
+                    case DRAMA_State.Combat:
+                    case DRAMA_State.Survival:
+                    case DRAMA_State.IntentionalCombat:
+                        return true;
                 }
-
-
-                return this.m_machine.m_current_state is DRAMA_Chatter_Combat || this.m_machine.m_current_state is DRAMA_Chatter_IntentionalCombat || this.m_machine.m_current_state is DRAMA_Chatter_Survival;
+                return false;
             }
         }
 

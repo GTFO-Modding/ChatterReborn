@@ -5,6 +5,7 @@ using ChatterReborn.Machines;
 using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using ChatterReborn.Utils.Machine;
+using ChatterRebornSettings;
 using GameData;
 using Player;
 using System.Collections.Generic;
@@ -25,12 +26,15 @@ namespace ChatterReborn.Drama_Chatter_States
 
         protected void TryToOrderBackPlayer()
         {
-            if (!this.m_shout_triggered || this.m_next_shout_trigger_time < Time.time)
+            if (MiscSettings.AllowOrderBioScan_Drama_State)
             {
-                this.m_shout_triggered = true;
-                this.m_next_shout_trigger_time = Time.time + Random.Range(0.25f, 0.75f);
-                this.OnOrderBackToBioScanPrisoner();                
-            }
+                if (!this.m_shout_triggered || this.m_next_shout_trigger_time < Time.time)
+                {
+                    this.m_shout_triggered = true;
+                    this.m_next_shout_trigger_time = Time.time + Random.Range(0.25f, 0.75f);
+                    this.OnOrderBackToBioScanPrisoner();
+                }
+            }            
         }
 
         private void UpdateSeperatedFromGroup()

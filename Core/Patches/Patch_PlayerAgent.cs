@@ -64,7 +64,7 @@ namespace ChatterReborn.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(nameof(PlayerAgent.TriggerMarkerPing))]
-        static void BeforePing(PlayerAgent __instance, ref iPlayerPingTarget target, GameObject targetGameObject, Vector3 worldPos)
+        static void Pre_TriggerMarkerPing(PlayerAgent __instance, ref iPlayerPingTarget target, GameObject targetGameObject, Vector3 worldPos)
         {
             if (target != null && targetGameObject != null && __instance != null && (__instance.IsLocallyOwned || __instance.IsBotOwned()))
             {
@@ -100,6 +100,14 @@ namespace ChatterReborn.Patches
                 else if (target.PingTargetStyle == eNavMarkerStyle.PlayerPingDisinfection)
                 {
                     PlayerDialogManager.WantToStartDialogForced(GD.PlayerDialog.CL_DisinfectionHere, __instance);
+                }
+                else if (target.PingTargetStyle == eNavMarkerStyle.PlayerPingResourceBox)
+                {
+                    PlayerDialogManager.WantToStartDialogForced(GD.PlayerDialog.found_resource_box, __instance);
+                }
+                else if (target.PingTargetStyle == eNavMarkerStyle.PlayerPingResourceLocker)
+                {
+                    PlayerDialogManager.WantToStartDialogForced(GD.PlayerDialog.found_resource_locker, __instance);
                 }
                 else if (target.PingTargetStyle == eNavMarkerStyle.PlayerPingTerminal)
                 {

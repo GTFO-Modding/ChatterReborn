@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChatterRebornSettings
+﻿namespace ChatterRebornSettings
 {
     public static class MiscSettings
     {
@@ -13,6 +7,8 @@ namespace ChatterRebornSettings
         public const bool DialogCastingDebugEnabled = false;
         public const bool AllowBondingDialogue = false;
         public const bool ElementsEnabled = true;
-        public const bool LoadDevComponents = true;
+        public const bool LoadDevComponents = false;
+
+        public const bool AllowOrderBioScan_Drama_State = false;
     }
 }

@@ -17,7 +17,7 @@ namespace ChatterReborn.Extra
         {
             this.m_minigame = minigame;
             this.m_current_level = 1;
-            this.m_triggerMissedCallBack = new CallBackUtils.CallBack(TriggerMissedDialogue);
+            this.m_triggerMissedCallBack = new CallBackUtils.CallBack<int>(TriggerMissedDialogue);
             this.m_triggerHitCallBack = new CallBackUtils.CallBack(TriggerHitDialog);
         }
 
@@ -96,7 +96,7 @@ namespace ChatterReborn.Extra
             }
         }
 
-        private void TriggerMissedDialogue()
+        private void TriggerMissedDialogue(int amountMissed)
         {
 
             PlayerAgent playerAgent = PlayerManager.GetLocalPlayerAgent();
@@ -106,28 +106,33 @@ namespace ChatterReborn.Extra
                 return;
             }
 
+            if (amountMissed > this.m_max_misses)
+            {
+                return;
+            }
+
 
             uint failedDialog = 0U;
-            if (this.m_amount_missed == 1)
+            if (amountMissed == 1)
             {
                 failedDialog = GD.PlayerDialog.hacking_wrong_first;
             }
-            else if (this.m_amount_missed == 2)
+            else if (amountMissed == 2)
             {
                 failedDialog = GD.PlayerDialog.hacking_wrong_second;
             }
-            else if (this.m_amount_missed == 3)
+            else if (amountMissed == 3)
             {
                 failedDialog = GD.PlayerDialog.hacking_wrong_third;
             }
 
 
-            if (failedDialog > 0U)
+            if (failedDialog != 0U)
             {
                 ChatterDebug.LogWarning("Triggering missed dialogue " + failedDialog);
                 if (ConfigurationManager.HackingMiniGameCommentsEnabled)
                 {
-                    PlayerDialogManager.WantToStartDialogForced(failedDialog, playerAgent);
+                    playerAgent.WantToStartDialog(failedDialog, true);
                 }
             }
 
@@ -156,15 +161,12 @@ namespace ChatterReborn.Extra
         public void OnVerifyHit()
         {
             this.m_current_level++;
-            if (this.m_current_level != 3)
+            if (this.m_current_level != 3 && this.m_current_level < this.m_highest_level)
             {
-                if (this.m_current_level < this.m_highest_level)
-                {
-                    ChatterDebug.LogWarning("Current Level is not the same!!");
-                    return;
-                }
+                ChatterDebug.LogWarning("Current Level is not the same!!");
+                return;
             }
-            
+
 
 
             this.SaveLevel();
@@ -183,15 +185,12 @@ namespace ChatterReborn.Extra
             ChatterDebug.LogWarning("On Missed");
             ChatterDebug.LogWarning(string.Concat(Results));
 
-            this.m_amount_missed++;
+            this.m_amount_missed++;        
 
-            if (this.m_amount_missed < this.m_max_misses)
-            {
-                this.m_triggerMissedCallBack.QueueCallBack(0.35f);
-            }
+            this.m_triggerMissedCallBack.QueueCallBack(0.35f, this.m_amount_missed);
 
 
-            this.m_current_level = Mathf.Clamp(this.m_current_level - 1, 0, 4);
+            this.m_current_level = Mathf.Clamp(this.m_current_level - 1, 1, 4);
         }
 
         private void SaveLevel()
@@ -205,7 +204,7 @@ namespace ChatterReborn.Extra
 
         private int m_current_level;
 
-        private CallBackUtils.CallBack m_triggerMissedCallBack;
+        private CallBackUtils.CallBack<int> m_triggerMissedCallBack;
 
         private CallBackUtils.CallBack m_triggerHitCallBack;
 

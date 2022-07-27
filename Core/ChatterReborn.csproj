@@ -64,6 +64,7 @@
     <Compile Include="Data\CombatData.cs" />
     <Compile Include="Data\CombatState.cs" />
     <Compile Include="Data\CustomRundown.cs" />
+    <Compile Include="Data\TextLanguageLink.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_Encounter.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_IntentionalCombat.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_Survival.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Extra\PlayerDialogNodeMenu.cs" />
     <Compile Include="Machines\CombatStateMachine.cs" />
     <Compile Include="Managers\CustomRundownManager.cs" />
+    <Compile Include="Managers\TextDataBlockExtendedManager.cs" />
     <Compile Include="Patches\Patch_PlayerInventoryBase.cs" />
     <Compile Include="Patches\Patch_PLOC_GrabbedByPouncer.cs" />
     <Compile Include="Utils\AssemblyUtils.cs" />
