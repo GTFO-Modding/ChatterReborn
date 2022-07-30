@@ -14,7 +14,7 @@ namespace ChatterReborn.Managers
     {
         private DictionaryExtended<ItemType, ItemPingDescriptorBase> m_itemsDescriptor;
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             StorageColliders.Clear();
         }

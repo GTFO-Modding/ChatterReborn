@@ -24,7 +24,7 @@ namespace ChatterReborn.Extra
         }
 
 
-        public void OnRecieveDamage(float damageDelta, float totalDamageTaken, bool sourceZPos, bool isDropin, SNet_Player player)
+        public void OnReceiveDamage(float damageDelta, float totalDamageTaken, bool sourceZPos, bool isDropin, SNet_Player player)
         {
             DoorManager.AddDoorTakenDamage(this);
         }

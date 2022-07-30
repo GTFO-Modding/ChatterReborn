@@ -18,7 +18,7 @@ namespace ChatterReborn.Managers
             this.m_cooldowns.Clear();
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {            
             ResetCoolDowns();
         }

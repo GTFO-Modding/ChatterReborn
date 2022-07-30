@@ -13,5 +13,15 @@ namespace ChatterReborn.Managers
 
         void On_Registered_LocalPlayerAgent(LocalPlayerAgent localPlayerAgent);
         void On_DeRegistered_LocalPlayerAgent(LocalPlayerAgent localPlayerAgent);
+
+        void OnLevelCleanUp();
+        void OnResetSession();
+        void OnStartElevatorRide();
+        void OnElevatorArrived();
+        void OnDropinElevatorExit();
+        void OnStartExpedition();
+        void OnDropInElevatorExit();
+        void OnBuildDone();
+
     }
 }

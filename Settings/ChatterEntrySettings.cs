@@ -14,6 +14,6 @@ namespace ChatterRebornSettings
     {
         public const string Plugin_GUI = "CHTR";
         public const string Plugin_Name = "chatter-reborn";
-        public const string Plugin_Version = "0.2.7";            
+        public const string Plugin_Version = "0.2.8";            
     }
 }

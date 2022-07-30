@@ -1,16 +1,86 @@
-﻿using ChatterReborn.Drama_Chatter_States;
+﻿using CellMenu;
+using ChatterReborn.Data;
+using ChatterReborn.Drama_Chatter_States;
 using ChatterReborn.Machines;
 using ChatterReborn.Utils;
 using ChatterRebornSettings;
 using GameData;
 using LevelGeneration;
 using Player;
+using SNetwork;
 using System;
+using System.Reflection;
 
 namespace ChatterReborn.Managers
 {
     public class DramaChatterManager : ChatterManager<DramaChatterManager>
     {
+
+        protected override void PostSetup()
+        {
+            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.ChangeState), ChatterPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
+            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.CheckSyncedPlayerStates), ChatterPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
+            this.m_patcher.Patch<LockMelterFirstPerson>(nameof(LockMelterFirstPerson.Setup), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+            this.m_patcher.Patch<CM_PageExpeditionFail>(nameof(CM_PageExpeditionFail.OnEnable), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+            this.m_patcher.Patch<InfectionSpitter>(nameof(InfectionSpitter.DoExplode), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+        }
+
+
+        private static void InfectionSpitter__DoExplode__Postfix(InfectionSpitter __instance)
+        {
+            DramaChatterManager.CurrentState.OnSpitterExplode(__instance);
+        }
+
+        private static void DramaManager__ChangeState__Postfix(DRAMA_State state, bool doSync)
+        {
+            DramaChatterManager.OnChangeState(state, doSync);
+        }
+
+        static void LockMelterFirstPerson__Setup__Postfix(LockMelterFirstPerson __instance)
+        {
+            void OnTriggered(PlayerAgent playerAgent)
+            {
+                DramaChatterMachine dramaChatterMachine = DramaChatterManager.GetMachine(__instance.Owner);
+                dramaChatterMachine?.CurrentState?.OnThrowConsumable(__instance);
+            }
+            __instance.m_interactApplyResource.add_OnInteractionTriggered(new Action<PlayerAgent>(OnTriggered));
+        }
+
+        private static void DramaManager__CheckSyncedPlayerStates__Postfix(out bool hasCombat, out bool hasEncounter, out bool hasSneaking)
+        {
+            hasCombat = false;
+            hasEncounter = false;
+            hasSneaking = false;
+            if (SNet.HasMaster)
+            {
+                DRAMA_State master_DramaState = DramaManager.SyncedPlayerStates[SNet.Master.CharacterIndex];
+                if (master_DramaState == DRAMA_State.Encounter)
+                {
+                    hasEncounter = true;
+                }
+                if (master_DramaState == DRAMA_State.Combat || master_DramaState == DRAMA_State.IntentionalCombat || master_DramaState == DRAMA_State.Survival)
+                {
+                    hasCombat = true;
+                }
+                if (master_DramaState == DRAMA_State.Sneaking)
+                {
+                    hasSneaking = true;
+                }
+            }
+        }
+
+        private static void CM_PageExpeditionFail__OnEnable__Postfix(CM_PageExpeditionFail __instance)
+        {
+            if (__instance.m_isSetup)
+            {
+                if (ConfigurationManager.ExpeditionFailedDeathScreamEnabled)
+                {
+                    PrisonerDialogManager.DelayLocalDialogForced(UnityEngine.Random.Range(1f, 3f), GameData.GD.PlayerDialog.death_scream);
+                }
+                Current.DebugPrint("<<<<<<<<<DEATH SCREAM>>>>>>>>>>", eLogType.Message);
+            }
+        }
+
         public static void OtherPlayerSyncWield(ItemEquippable item)
         {
             for (int i = 0; i < Current.m_machines.Length; i++)
@@ -63,7 +133,7 @@ namespace ChatterReborn.Managers
 
         
 
-        protected override void OnElevatorArrived()
+        public override void OnElevatorArrived()
         {
             if (WardenObjectiveManager.Current != null && WardenObjectiveManager.Current.TryGetActiveWardenObjectiveData(LG_LayerType.MainLayer, out var wardenObjectiveDataBlock))
             {
@@ -212,7 +282,7 @@ namespace ChatterReborn.Managers
             ChatterDebug.LogWarning("[DialogDramaStateManager.UnregisterMachineForPlayer] BotDramaMachine has been unregistered for characterID " + characterID);
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             for (int i = 0; i < m_machines.Length; i++)
             {

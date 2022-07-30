@@ -10,7 +10,7 @@ namespace ChatterReborn.Managers
 {
     public class GlobalEventManager : ChatterManager<GlobalEventManager>
     {
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             m_firstdoorOpened = false;
         }

@@ -31,54 +31,43 @@ namespace ChatterReborn.Managers
         private void BaseSetup()
         {
             this.DebugPrint("New Manager Initialized", eLogType.Message);
-            Patch_GlobalMessage.OnCleanUps += this.OnLevelCleanup;
-            this.DebugPrint("Patching LevelCleanUps");
-
-            Patch_GlobalMessage.OnResetSessions += this.OnResetSession;
-            this.DebugPrint("Patching OnResetSessions");
-
-            ElevatorRide.add_OnElevatorHasArrived((Action)this.OnElevatorArrived);
-
-            this.DebugPrint("Adding ActionCallback add_OnElevatorHasArrived");
-
-            Patch_ElevatorRide.OnDropinElevatorExit += this.OnDropElevatorExit;
-
-            this.DebugPrint("Adding ActionCallback OnDropinElevatorExit");
-
-            LG_Factory.add_OnFactoryBuildDone(new Action(this.OnBuildDone));
-            this.DebugPrint("Adding ActionCallback OnFactoryBuildDone delegate to");
-
-            Patch_ElevatorRide.OnStartElevatorRide += this.OnStartElevatorRide;
-            this.DebugPrint("Adding ActionCallback OnStartElevatorRide delegate to");
-
-        }
-
-        protected virtual void OnElevatorArrived()
-        {
-        }
-
-        protected virtual void OnDropElevatorExit()
-        {
-        }
-
-        protected virtual void OnBuildDone()
-        {
-        }
-
-        protected virtual void OnStartElevatorRide()
-        {
+            m_patcher = new ChatterPatcher<T>(typeof(T).Name);
+            this.DebugPrint("Adding ChatterPatcher");
         }
 
 
-        protected virtual void OnLevelCleanup()
+        public virtual void OnLevelCleanUp()
         {
 
         }
 
-        protected virtual void OnResetSession()
+        public virtual void OnResetSession()
         {
 
         }
+
+        public virtual void OnElevatorArrived()
+        {
+        }
+
+        public virtual void OnDropElevatorExit()
+        {
+        }
+
+        public virtual void OnBuildDone()
+        {
+        }
+
+        public virtual void OnStartExpedition()
+        {
+        }
+
+        public virtual void OnDropInElevatorExit()
+        {
+        }
+
+
+
 
         public virtual void Update()
         {
@@ -135,6 +124,8 @@ namespace ChatterReborn.Managers
             }
         }
 
+        protected ChatterPatcher<T> m_patcher;
+
         protected void DebugPrint(object message, eLogType logType = eLogType.Debug)
         {
             m_debugLogger.DebugPrint(message, logType);
@@ -147,6 +138,14 @@ namespace ChatterReborn.Managers
         public virtual void On_Registered_LocalPlayerAgent(LocalPlayerAgent localPlayerAgent) { }
 
         public virtual void On_DeRegistered_LocalPlayerAgent(LocalPlayerAgent localPlayerAgent) { }
+
+        public virtual void OnStartElevatorRide()
+        {
+        }
+
+        public virtual void OnDropinElevatorExit()
+        {
+        }
 
         private static T m_manager = Activator.CreateInstance<T>();
 

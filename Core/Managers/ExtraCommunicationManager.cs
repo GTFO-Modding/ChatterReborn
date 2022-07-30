@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using ChatterReborn.Utils;
+using SNetwork;
+using ChatterReborn.ChatterEvent;
 
 namespace ChatterReborn.Managers
 {
@@ -17,10 +19,27 @@ namespace ChatterReborn.Managers
     {
         public static PUI_CommunicationMenu CurrentMenu;
 
-
-        public static void SetAsCurrentMenu(PUI_CommunicationMenu menu)
+        protected override void PostSetup()
         {
-            CurrentMenu = menu;
+            this.m_patcher.Patch<PUI_CommunicationMenu>(nameof(PUI_CommunicationMenu.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PUI_CommunicationMenu>(nameof(PUI_CommunicationMenu.OnCommunicationReceived), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        }
+
+
+        static void PUI_CommunicationMenu__Setup__Postfix(PUI_CommunicationMenu __instance)
+        {
+            CurrentMenu = __instance;
+        }
+
+
+        static void PUI_CommunicationMenu__OnCommunicationReceived__Postfix(SNet_Player src, uint textId, SNet_Player dst)
+        {
+            ChatterEventListenerHandler<TextCommandEvent>.PostEvent(new TextCommandEvent
+            {
+                source = src,
+                textId = textId,
+                destination = dst
+            });
         }
 
         public static CommunicationNode CreateNode(uint textID, uint dialogID)

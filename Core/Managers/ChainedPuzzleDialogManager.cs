@@ -9,7 +9,7 @@ namespace ChatterReborn.Managers
 {
     public class ChainedPuzzleDialogManager : ChatterManager<ChainedPuzzleDialogManager>
     {
-        protected override void OnElevatorArrived()
+        public override void OnElevatorArrived()
         {
             if (ChainedPuzzleManager.Current == null || ChainedPuzzleManager.Current.m_instances == null)
             {

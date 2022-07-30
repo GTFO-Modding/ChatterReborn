@@ -1,6 +1,7 @@
 ﻿using Agents;
 using AIGraph;
 using ChatterReborn.Attributes;
+using ChatterReborn.Components;
 using ChatterReborn.Utils;
 using Enemies;
 using GameData;
@@ -22,6 +23,29 @@ namespace ChatterReborn.Managers
             this.m_enemyScores = new float[4];
         }
 
+        protected override void PostSetup()
+        {
+            this.m_patcher.Patch<EnemyAgent>(nameof(EnemyAgent.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<EnemyAI>(nameof(EnemyAI.ModeChange), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        }
+
+        private static void EnemyAgent__Setup__Postfix(EnemyAgent __instance, pEnemySpawnData spawnData)
+        {
+            if (__instance != null && __instance.gameObject != null)
+            {
+                EnemyDetectionManager.SetupEnemy(__instance, spawnData.mode);
+                __instance.gameObject.AddAbsoluteComponent<EnemyDramaBehavior>();
+            }            
+        }
+        
+
+        private static void EnemyAI__ModeChange__Postfix(EnemyAI __instance)
+        {
+            if (__instance != null && __instance.m_enemyAgent != null)
+            {
+                EnemyDetectionManager.SetupEnemy(__instance.m_enemyAgent, __instance.Mode);
+            }
+        }
 
         private List<EnemyAgent> GetReachableEnemiesForPlayerAgent(PlayerAgent playerAgent)
         {

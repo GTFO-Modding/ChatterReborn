@@ -1,6 +1,9 @@
 ﻿using ChatterReborn.Attributes;
 using ChatterReborn.Managers;
+using ChatterReborn.Utils;
+using Globals;
 using Il2CppInterop.Runtime.Attributes;
+using LevelGeneration;
 using Player;
 using System;
 using System.Collections.Generic;
@@ -18,6 +21,8 @@ namespace ChatterReborn.Components
         void Awake()
         {
             _managers = new List<IChatterManager>();
+
+            LG_Factory.OnFactoryBuildDone += (Action)OnBuildDone;
         }
 
 
@@ -39,7 +44,7 @@ namespace ChatterReborn.Components
 
 
         [HideFromIl2Cpp]
-        public void RegisterPlayerAgent(PlayerAgent playerAgent)
+        public void OnRegisterPlayerAgent(PlayerAgent playerAgent)
         {
             for (int i = 0; i < _managers.Count; i++)
             {
@@ -48,7 +53,34 @@ namespace ChatterReborn.Components
         }
 
         [HideFromIl2Cpp]
-        public void RegisterLocalPlayerAgent(LocalPlayerAgent localPlayerAgent)
+        public void OnStartElevatorRide()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnStartElevatorRide();
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnStartExpedition()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnStartExpedition();
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnDropInElevatorExit()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnDropInElevatorExit();
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnRegisterLocalPlayerAgent(LocalPlayerAgent localPlayerAgent)
         {
             for (int i = 0; i < _managers.Count; i++)
             {
@@ -71,6 +103,41 @@ namespace ChatterReborn.Components
             for (int i = 0; i < _managers.Count; i++)
             {
                 _managers[i].On_DeRegistered_LocalPlayerAgent(localPlayerAgent);
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnLevelCleanup()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnLevelCleanUp();
+            }
+        }
+        [HideFromIl2Cpp]
+        public void OnResetSession()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnResetSession();
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnElevatorArrived()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnElevatorArrived();
+            }
+        }
+
+        [HideFromIl2Cpp]
+        public void OnBuildDone()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnBuildDone();
             }
         }
 

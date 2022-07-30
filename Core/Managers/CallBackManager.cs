@@ -16,7 +16,7 @@ namespace ChatterReborn.Managers
             this.m_callbacks = new List<CallBackUtils.CallBackBase>();
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             this.m_callbacks.Clear();
         }

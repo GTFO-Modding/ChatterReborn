@@ -1,12 +1,9 @@
-﻿using ChatterReborn.Managers;
+﻿using ChatterReborn.Data;
+using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using GameData;
 using Player;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ChatterReborn.Extra
@@ -16,22 +13,40 @@ namespace ChatterReborn.Extra
         public DialogTimedHackMiniGame(HackingMinigame_TimingGrid minigame)
         {
             this.m_minigame = minigame;
+            this.m_hackingGameKey = minigame.m_minigameRoot.gameObject.GetInstanceID();
             this.m_current_level = 1;
             this.m_triggerMissedCallBack = new CallBackUtils.CallBack<int>(TriggerMissedDialogue);
-            this.m_triggerHitCallBack = new CallBackUtils.CallBack(TriggerHitDialog);
+            this.m_triggerHitCallBack = new CallBackUtils.CallBack<int,int>(TriggerHitDialog);
+            
+        }
+
+
+        public void LoadLastProgress()
+        {
+            HackingManager.TryToLoadProgress(this);
+        }
+
+        public void Load(HackingMiniGameProgress progress)
+        {
+            this.m_max_misses = progress.max_misses;
+            this.m_highest_level = progress.highest_level;
+            this.m_current_level = progress.amounts_missed;
         }
 
 
         private HackingMinigame_TimingGrid m_minigame;
 
-        private void TriggerHitDialog()
+        private void TriggerHitDialog(int hits, int highestHits)
         {
             PlayerAgent playerAgent = PlayerManager.GetLocalPlayerAgent();
 
             if (playerAgent == null)
             {
                 return;
-            }
+            }    
+
+            
+
 
             uint hitDialogID = 0U;
 
@@ -50,14 +65,18 @@ namespace ChatterReborn.Extra
                     hitDialogID = GD.PlayerDialog.hacking_successful_regular;
                 }
             }
-            else if (this.m_current_level == 2)
+            else if (hits > highestHits)
             {
-                hitDialogID = GD.PlayerDialog.hacking_correct_first;
+                if (hits == 2)
+                {
+                    hitDialogID = GD.PlayerDialog.hacking_correct_first;
+                }
+                else if (hits == 3)
+                {
+                    hitDialogID = GD.PlayerDialog.hacking_correct_second;
+                }
             }
-            else if (this.m_current_level == 3)
-            {
-                hitDialogID = GD.PlayerDialog.hacking_correct_second;
-            }
+
 
             if (hitDialogID > 0U)
             {
@@ -158,24 +177,15 @@ namespace ChatterReborn.Extra
             "\n\tAmount missed : " + this.m_amount_missed
         };
 
+        public int HackingGameKey => m_hackingGameKey;
+
         public void OnVerifyHit()
         {
             this.m_current_level++;
-            if (this.m_current_level != 3 && this.m_current_level < this.m_highest_level)
-            {
-                ChatterDebug.LogWarning("Current Level is not the same!!");
-                return;
-            }
-
-
-
-            this.SaveLevel();
-
             ChatterDebug.LogWarning("On Verify Hit");
-            ChatterDebug.LogWarning(string.Concat(Results));
-
-            this.m_triggerHitCallBack.QueueCallBack(0.35f);
-
+            ChatterDebug.LogWarning(string.Concat(Results));            
+            this.m_triggerHitCallBack.QueueCallBack(0.35f, this.m_current_level, this.m_highest_level);
+            this.SaveStatus();
         }
 
 
@@ -191,23 +201,31 @@ namespace ChatterReborn.Extra
 
 
             this.m_current_level = Mathf.Clamp(this.m_current_level - 1, 1, 4);
+            SaveStatus();
         }
 
-        private void SaveLevel()
+        private void SaveStatus()
         {
             this.m_highest_level = Math.Max(this.m_current_level, this.m_highest_level);
+            HackingManager.SaveHackingStatus(this.m_hackingGameKey, new HackingMiniGameProgress
+            {
+                amounts_missed = this.m_amount_missed,
+                highest_level = this.m_highest_level,
+                max_misses = this.m_max_misses,
+            });
         }
 
+        private int m_hackingGameKey;
         private int m_amount_missed = 0;
 
         private int m_max_misses = 5;
 
-        private int m_current_level;
+        private int m_current_level;        
+
+        private int m_highest_level;
 
         private CallBackUtils.CallBack<int> m_triggerMissedCallBack;
 
-        private CallBackUtils.CallBack m_triggerHitCallBack;
-
-        private float m_highest_level;
+        private CallBackUtils.CallBack<int, int> m_triggerHitCallBack;
     }
 }

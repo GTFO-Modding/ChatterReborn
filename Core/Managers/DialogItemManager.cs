@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LevelGeneration;
+using Gear;
+using GameData;
 
 namespace ChatterReborn.Managers
 {
@@ -18,9 +21,61 @@ namespace ChatterReborn.Managers
             this.m_pickupDialogs = new Dictionary<int, BasePickUpDialog>();
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             this.m_pickupDialogs.Clear();
+        }
+
+        protected override void PostSetup()
+        {
+            this.m_patcher.Patch<GateKeyItem>(nameof(GateKeyItem.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<GenericSmallPickupItem_Core>(nameof(GenericSmallPickupItem_Core.SetupFromLevelgen), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.OnWield), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ResourcePackFirstPerson>(nameof(ResourcePackFirstPerson.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ResourcePackPickup>(nameof(ResourcePackPickup.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ThrowingWeapon>(nameof(ThrowingWeapon.Throw), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, new Type[] { typeof(float) } );
+        }
+
+        private static void ThrowingWeapon__Throw__Postfix(ThrowingWeapon __instance)
+        {
+            DramaChatterManager.GetMachine(__instance.Owner)?.CurrentState?.OnThrowConsumable(__instance);
+        }
+
+        private static void ResourcePackPickup__Setup__Postfix(ResourcePackPickup __instance)
+        {
+            ResourcePickUpDialog pack = new ResourcePickUpDialog(__instance);
+            DialogItemManager.Current.SetupPickUpInstance(__instance, pack);
+        }
+
+        private static void ResourcePackFirstPerson__Setup__Postfix(ResourcePackFirstPerson __instance)
+        {
+            ResourceFirstPersonDialog pack = new ResourceFirstPersonDialog(__instance);
+            Current.SetupPickUpInstance(__instance, pack);
+        }
+
+        private static void HeavyFogRepellerFirstPerson__Setup__Postfix(HeavyFogRepellerFirstPerson __instance, ItemDataBlock data)
+        {
+            DialogHeavyFogRepellerFirstPerson dialogRepeller = new DialogHeavyFogRepellerFirstPerson(__instance);
+            Current.SetupPickUpInstance(__instance, dialogRepeller);
+        }
+
+
+        private static void HeavyFogRepellerFirstPerson__OnWield__Postfix(HeavyFogRepellerFirstPerson __instance)
+        {
+            OnWield(__instance);
+        }
+
+        private static void GenericSmallPickupItem_Core__SetupFromLevelgen__Postfix(GenericSmallPickupItem_Core __instance)
+        {
+            var dialogitem = new GenericSmallItemPickUp(__instance);
+            Current.SetupPickUpInstance(__instance, dialogitem);
+        }
+
+        private static void GateKeyItem__Setup__Postfix(GateKeyItem __instance)
+        {
+            var dialogitem = new KeyItemPickUpDialog(__instance.keyPickupCore);
+            DialogItemManager.Current.SetupPickUpInstance(__instance.keyPickupCore, dialogitem);
         }
 
 

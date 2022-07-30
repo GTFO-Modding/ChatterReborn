@@ -1,4 +1,5 @@
 ﻿using ChatterReborn.Attributes;
+using ChatterReborn.Extra;
 using ChatterReborn.Utils;
 using GameData;
 using Gear;
@@ -21,6 +22,8 @@ namespace ChatterReborn.Managers
             base.Setup();
         }
 
+        
+
         public static void RegisterItem(Item item)
         {
             ChatterDebug.LogWarning("Registering item " + item.name + " ItemDataBlock " + ItemDataBlock.GetBlockName(item.ItemDataBlock.persistentID));
@@ -28,7 +31,7 @@ namespace ChatterReborn.Managers
         }
 
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             this.m_pickups.Clear();
         }

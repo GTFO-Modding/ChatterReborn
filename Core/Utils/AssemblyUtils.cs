@@ -52,5 +52,23 @@ namespace ChatterReborn.Utils
             }
 
         }
+
+
+        public static void LoadDevComponents()
+        {
+
+            if (!MiscSettings.LoadDevComponents)
+            {
+                return;
+            }
+
+            if (AssemblyUtils.LoadAssembly("ChatterRebornDev", out var assemblyLoaded))
+            {
+                CurrentAssemblies.AddRange(assemblyLoaded.GetTypes());
+            }
+        }
+
+
+        public static List<Type> CurrentAssemblies { get; set; } = new List<Type>();
     }
 }

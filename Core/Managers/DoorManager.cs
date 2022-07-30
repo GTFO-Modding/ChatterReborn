@@ -5,6 +5,7 @@ using ChatterReborn.Utils;
 using GameData;
 using LevelGeneration;
 using Player;
+using SNetwork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,45 @@ namespace ChatterReborn.Managers
             this.m_doors_taken_damage = new Dictionary<int, float>();
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             this.m_doors_taken_damage.Clear();
         }
 
 
+        protected override void PostSetup()
+        {
+            this.m_patcher.Patch<LG_SecurityDoor>(nameof(LG_SecurityDoor.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<LG_WeakDoor>(nameof(LG_WeakDoor.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+        }
 
+        static void LG_SecurityDoor__Setup__Postfix(LG_SecurityDoor __instance)
+        {
+            if (__instance != null)
+            {
+                SecurityDialogDoor dialogdoor = new SecurityDialogDoor(__instance);
+                __instance.m_sync.add_OnDoorStateChange(new Action<pDoorState, bool>(dialogdoor.OnOpenSecurityDoor));
+            }
+            else
+            {
+                Current.DebugPrint("No LG_SecurityDoor ???");
+            }
+        }
+
+        static void LG_WeakDoor__Setup__Postfix(LG_WeakDoor __instance)
+        {
+            if (__instance != null)
+            {
+                WeakDialogDoor dialogdoor = new WeakDialogDoor(__instance);
+                __instance.m_sync.add_OnDoorStateChange(new Action<pDoorState, bool>(dialogdoor.OnOpenWeakDoor));
+                __instance.m_sync.add_OnDoorGotDamage(new Action<float, float, bool, bool, SNet_Player>(dialogdoor.OnReceiveDamage));
+            }
+            else
+            {
+                Current.DebugPrint("No LG_WeakDoor ???");
+            }
+
+        }
 
         public static void AddDoorTakenDamage(WeakDialogDoor weakDialogDoor)
         {

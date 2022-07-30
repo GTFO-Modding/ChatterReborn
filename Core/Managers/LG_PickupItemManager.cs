@@ -1,10 +1,12 @@
 ﻿using ChatterReborn.Extra;
 using ChatterReborn.Utils;
 using LevelGeneration;
+using System;
 using System.Collections.Generic;
 
 namespace ChatterReborn.Managers
 {
+    [Obsolete("This should be reworked since it's useless at the moment..")]
     public class LG_PickupItemManager : ChatterManager<LG_PickupItemManager>
     {
         protected override void Setup()
@@ -33,7 +35,7 @@ namespace ChatterReborn.Managers
             return storageItems.Count > 0;
         }
 
-        protected override void OnLevelCleanup()
+        public override void OnLevelCleanUp()
         {
             this.m_pickUp_descriptors.Clear();
         }

@@ -86,36 +86,51 @@ namespace ChatterReborn.Components
             return m_rootAction != null;
         }
 
+        [HideFromIl2Cpp]
+        private void PrintError(string txt)
+        {
+            if (m_lastErrorMsg == txt)
+            {
+                return;
+            }
+
+
+            m_lastErrorMsg = txt;
+            this.m_debugLogger.DebugPrint(m_lastErrorMsg, eLogType.Error);
+        }
+
+        private string m_lastErrorMsg;
+
         void SetupRootAction()
         {
             if (m_bot == null)
             {
-                this.m_debugLogger.DebugPrint("PlayerAIBot m_bot is null!!", eLogType.Error);
+                PrintError("PlayerAIBot m_bot is null!!");
                 return;
             }
             if (m_bot.m_rootAction == null)
             {
-                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor m_rootAction is null!!", eLogType.Error);
+                PrintError("PlayerBotActionBase.Descriptor m_rootAction is null!!");
                 return;
             }
 
 
             if (m_bot.m_rootAction.ActionBase == null)
             {
-                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor ActionBase is null!!", eLogType.Error);
+                PrintError("PlayerBotActionBase.Descriptor ActionBase is null!!");
                 return;
             }
 
             
             if (!m_bot.m_rootAction.ActionBase.Convert(out RootPlayerBotAction rootAction))
             {
-                this.m_debugLogger.DebugPrint("Failed to convert PlayerBotActionBase -> RootPlayerBotAction!!", eLogType.Error);
+                PrintError("Failed to convert PlayerBotActionBase -> RootPlayerBotAction!!");
                 return;
             }
 
             if (rootAction == null)
             {
-                this.m_debugLogger.DebugPrint("PlayerBotActionBase.Descriptor m_rootAction is null!!", eLogType.Error);
+                PrintError("PlayerBotActionBase.Descriptor m_rootAction is null!!");
                 return;
             }
 
