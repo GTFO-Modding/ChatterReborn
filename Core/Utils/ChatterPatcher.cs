@@ -1,4 +1,5 @@
-﻿using ChatterReborn.Data;
+﻿using ChatterReborn.Attributes;
+using ChatterReborn.Data;
 using HarmonyLib;
 using System;
 using System.Reflection;
@@ -10,15 +11,14 @@ namespace ChatterReborn.Utils
 
         public ChatterPatcher(string id)
         {
-            m_harmonyInstance = new Harmony("Harmony-" + id);
+            m_harmonyInstance = new Harmony("Harmony_" + id);
             m_logger = new DebugLoggerObject(id);
         }
 
 
 
-        protected void Patch(Type myclass, Type classType, string methodName, ChatterPatchType patchType, MethodType methodType = MethodType.Normal ,BindingFlags binding = BindingFlags.Default, Type[] types = null)
+        protected void Patch(Type myclass, Type classType, MethodTokenName methodName, ChatterPatchType patchType, MethodType methodType = MethodType.Normal ,BindingFlags binding = BindingFlags.Default, Type[] types = null)
         {
-
 
             MethodInfo methodInfo = null;
 
@@ -61,7 +61,6 @@ namespace ChatterReborn.Utils
                 return;
             }
 
-            
 
 
             string myFullMethodName = string.Empty;
@@ -74,7 +73,28 @@ namespace ChatterReborn.Utils
                 myFullMethodName = classType.Name + "__" + methodName + "__Prefix";
             }
 
-            var myMethodInfo = myclass.GetMethod(myFullMethodName, BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo myMethodInfo = myclass.GetMethod(myFullMethodName, BindingFlags.NonPublic | BindingFlags.Static);
+
+            
+
+            if (methodName.HasToken)
+            {
+                if (MethodTokenUtils.TryToGetMethodInfoByTokenID(methodName.m_tokenID, out var tokenedMethodInfo))
+                {
+                    this.m_logger.DebugPrint("myMethodName " + myFullMethodName + " Has gotten overriden Token methodInfo instead with id -> " + methodName.m_tokenID, eLogType.Message);
+                    myMethodInfo = tokenedMethodInfo;
+                }
+                else
+                {
+                    this.m_logger.DebugPrint("myMethodName " + myFullMethodName + " has a tokenID but does not exist!??", eLogType.Error);
+                }
+                
+            }
+            else
+            {
+                this.m_logger.DebugPrint("MissingTokenID: myMethodName " + myFullMethodName + ", consider adding a tokenID!", eLogType.Warning);
+            }
+
             if (myMethodInfo == null)
             {
                 m_logger.DebugPrint("FAILED: Patching " + methodNameLog + " Could not get my method [" + myFullMethodName + "]", eLogType.Error);
@@ -82,7 +102,13 @@ namespace ChatterReborn.Utils
             }
 
 
-            var harmonyInfo = new HarmonyMethod(myMethodInfo);
+            if (myMethodInfo.GetCustomAttribute<MethodDecoderTokenAttribute>() == null)
+            {
+                m_logger.DebugPrint("MethodDecoderTokenAttribute missing: [" + myFullMethodName + "]", eLogType.Warning);
+
+            }
+
+            HarmonyMethod harmonyInfo = new HarmonyMethod(myMethodInfo);
             harmonyInfo.methodType = methodType;
             if (patchType == ChatterPatchType.Postfix)
             {
@@ -130,36 +156,36 @@ namespace ChatterReborn.Utils
 
 
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType);
         }
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType, BindingFlags bindingFlags)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, BindingFlags bindingFlags)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, MethodType.Normal, bindingFlags);
         }
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType, BindingFlags bindingFlags, Type[] types)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, BindingFlags bindingFlags, Type[] types)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, MethodType.Normal, bindingFlags, types);
         }
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType, MethodType methodType)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, MethodType methodType)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, methodType);
         }
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType, MethodType methodType, Type[] types)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, MethodType methodType, Type[] types)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, methodType, BindingFlags.Default, types);
         }
 
-        public void Patch<S>(string methodName, ChatterPatchType patchType, MethodType methodType, BindingFlags bindingFlags)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, MethodType methodType, BindingFlags bindingFlags)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, methodType, bindingFlags);
         }
-        public void Patch<S>(string methodName, ChatterPatchType patchType, MethodType methodType, BindingFlags bindingFlags, Type[] types)
+        public void Patch<S>(MethodTokenName methodName, ChatterPatchType patchType, MethodType methodType, BindingFlags bindingFlags, Type[] types)
         {
             base.Patch(typeof(T), typeof(S), methodName, patchType, methodType, bindingFlags, types);
         }

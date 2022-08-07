@@ -12,6 +12,7 @@ namespace ChatterReborn.Data
         Objective,
         Teamwork,
         Sneaking,
+        Responses,
         WhatINeed
     }
 }

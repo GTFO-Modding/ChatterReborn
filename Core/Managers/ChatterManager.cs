@@ -1,7 +1,5 @@
 ﻿using ChatterReborn.Data;
-using ChatterReborn.Patches;
 using ChatterReborn.Utils;
-using LevelGeneration;
 using Player;
 using System;
 
@@ -30,9 +28,7 @@ namespace ChatterReborn.Managers
 
         private void BaseSetup()
         {
-            this.DebugPrint("New Manager Initialized", eLogType.Message);
-            m_patcher = new ChatterPatcher<T>(typeof(T).Name);
-            this.DebugPrint("Adding ChatterPatcher");
+            this.DebugPrint("New Manager Initialized", eLogType.Message);            
         }
 
 
@@ -87,6 +83,8 @@ namespace ChatterReborn.Managers
             {
                 if (!m_firstSetup)
                 {
+                    m_patcher = new ChatterPatcher<T>(typeof(T).Name);
+                    this.DebugPrint("Adding ChatterPatcher");
                     Setup();
                     BaseSetup();
                     m_firstSetup = true;

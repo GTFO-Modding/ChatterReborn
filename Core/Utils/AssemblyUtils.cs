@@ -25,7 +25,7 @@ namespace ChatterReborn.Utils
             }
             catch (Exception e)
             {
-                ChatterDebug.LogError("Could not load " + assemblyName + ": it does not exist! ERROR : " + e.Message);
+                ChatterDebug.LogError("Could not load " + assemblyName + ": it does not exist! \nERROR : " + e.Message);
             }
             return false;
         }

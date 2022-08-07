@@ -1,7 +1,9 @@
 ﻿using Agents;
+using ChatterReborn.Attributes;
 using ChatterReborn.ChatterEvent;
 using ChatterReborn.Data;
 using ChatterReborn.Utils;
+using ChatterRebornTokens;
 using GameData;
 using Player;
 using System;
@@ -51,7 +53,8 @@ namespace ChatterReborn.Managers
             this.m_patcher.Patch<PlayerVoice>(nameof(PlayerVoice.VoiceCallback), ChatterPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
         }
 
-        private static void Dam_EnemyDamageBase__BulletDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent)
+        [MethodDecoderToken]
+        private static void Dam_EnemyDamageBase__BulletDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent, Vector3 position, Vector3 direction, Vector3 normal, bool allowDirectionalBonus = false, int limbID = 0, float staggerMulti = 1f, float precisionMulti = 1f)
         {
 
             ChatterEventListenerHandler<EnemyDamageEvent>.PostEvent(new EnemyDamageEvent
@@ -63,13 +66,15 @@ namespace ChatterReborn.Managers
             });
         }
 
+
+        [MethodDecoderToken]
         static void Dam_PlayerDamageLocal__ReceiveBulletDamage__Prefix(Dam_PlayerDamageLocal __instance)
         {
             __instance.Owner.WantToStartDialog(GD.PlayerDialog.friendly_fire_outburst, true);
             __instance.m_damageVoiceTimer = Clock.Time + 2f;
         }
 
-
+        [MethodDecoderToken]
         static void PlayerVoice__VoiceCallback__Prefix(PlayerVoice __instance)
         {
             if (__instance != null && __instance.m_owner != null)
@@ -81,6 +86,7 @@ namespace ChatterReborn.Managers
             }
         }
 
+        [MethodDecoderToken]
         private static void Dam_EnemyDamageBase__MeleeDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent)
         {
             ChatterEventListenerHandler<EnemyDamageEvent>.PostEvent(new EnemyDamageEvent
@@ -92,6 +98,7 @@ namespace ChatterReborn.Managers
             });
         }
 
+        [MethodDecoderToken]
         private static void Dam_PlayerDamageBase__OnIncomingDamage__Postfix(Dam_PlayerDamageBase __instance, float damage)
         {
             ChatterEventListenerHandler<PlayerDamageEvent>.PostEvent(new PlayerDamageEvent
@@ -101,6 +108,8 @@ namespace ChatterReborn.Managers
             });
         }
 
+
+        [MethodDecoderToken]
         private static void Dam_PlayerDamageBase__ReceiveTentacleAttackDamage__Postfix(Dam_PlayerDamageBase __instance, pMediumDamageData data)
         {
 
@@ -115,11 +124,15 @@ namespace ChatterReborn.Managers
             }
         }
 
+
+        [MethodDecoderToken]
         private static void Dam_SyncedDamageBase__ShooterProjectileDamage__Postfix(Dam_PlayerDamageBase __instance, float dam, Vector3 position)
         {
             OnHitReactBot(__instance.Owner);
         }
 
+
+        [MethodDecoderToken]
         private static void Dam_PlayerDamageBase__ReceiveMeleeDamage__Postfix(Dam_PlayerDamageBase __instance, pMediumDamageData data)
         {
             OnHitReactBot(__instance.Owner);
