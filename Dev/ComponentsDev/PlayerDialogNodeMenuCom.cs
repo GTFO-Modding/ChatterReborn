@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace ChatterReborn.ComponentsDev
 {
-    [IL2CPPType(AddComponentOnStart = true, DontDestroyOnLoad = true)]
+    [IL2CPPType(AddComponentOnStart = false, DontDestroyOnLoad = true)]
     public class PlayerDialogNodeMenuCom : MonoBehaviour
     {
         public PlayerDialogNodeMenuCom(IntPtr pointer) : base(pointer)

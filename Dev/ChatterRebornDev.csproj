@@ -33,6 +33,8 @@
   <ItemGroup>
     <Compile Include="ComponentsDev\ChatterElementDirector.cs" />
     <Compile Include="ComponentsDev\PlayerDialogNodeMenuCom.cs" />
+    <Compile Include="ComponentsDev\PUI_CommunicationMenuDebugger.cs" />
+    <Compile Include="ElementDebug\ElementBuilderMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

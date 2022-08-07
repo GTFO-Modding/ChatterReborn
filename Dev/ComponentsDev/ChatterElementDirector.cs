@@ -2,6 +2,7 @@
 using ChatterReborn.Data;
 using ChatterReborn.Element;
 using ChatterReborn.Utils;
+using ChatterRebornDev.ElementDebug;
 using GameData;
 using Il2CppInterop.Runtime.Attributes;
 using Player;
@@ -29,6 +30,8 @@ namespace ChatterReborn.ComponentsDev
 
         }
 
+       
+
 
         private DebugLoggerObject debugLoggerObject;
 
@@ -50,16 +53,41 @@ namespace ChatterReborn.ComponentsDev
 
         void Update()
         {
-            foreach (var actionType in m_actionType)
+            
+            /*foreach (var actionType in m_actionType)
             {
                 if (Input.GetKeyDown(actionType.Key))
                 {
                     AddElementType(actionType);
                     return;
                 }
-            }
+            }*/
         }
 
+        private eFocusState m_lastState;
+
+        void OnGUI()
+        {
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                if (FocusStateManager.CurrentState == eFocusState.DebugMenu)
+                {
+                    FocusStateManager.ChangeState(m_lastState, true);
+                }
+                else
+                {
+                    m_lastState = FocusStateManager.CurrentState;
+                    FocusStateManager.ChangeState(eFocusState.DebugMenu, true);
+                }                
+            }
+
+            if (FocusStateManager.CurrentState == eFocusState.DebugMenu)
+            {
+                ElementBuilderMain.OnGUI();
+            }
+            
+        }
         private void AddEnemyToEnemyFilters()
         {
             if (Globals.Global.RundownIdToLoad != 1)

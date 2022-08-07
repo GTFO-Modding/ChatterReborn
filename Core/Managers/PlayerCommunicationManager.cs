@@ -86,13 +86,14 @@ namespace ChatterReborn.Managers
                         affirmHandler.Clear();
                         affirmHandler.AddValue(GD.PlayerDialog.CL_ICantPlaceItThere, 1f);
                     }
+
                     uint dialogID = 0U;
                     switch ((eTextCommandID)chatterEvent.textId)
                     {
                         case eTextCommandID.Follow:
                             dialogID = followYou.Best.Value;
                             break;
-                        case eTextCommandID.Carry:
+                        /*case eTextCommandID.Carry:
                             dialogID = affirmHandler.Best.Value;
                             break;
                         case eTextCommandID.DeploySentry:
@@ -108,7 +109,7 @@ namespace ChatterReborn.Managers
                             dialogID = affirmHandler.Best.Value;
                             break;
                         default:
-                            break;
+                            break;*/
                     }
                     if (dialogID > 0U && ConfigurationManager.ComResponseEnabled)
                     {

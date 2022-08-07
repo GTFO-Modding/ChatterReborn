@@ -36,6 +36,7 @@
     <Compile Include="Attributes\ConfigurationBaseAttribute.cs" />
     <Compile Include="Attributes\ConfigurationToggleAttribute.cs" />
     <Compile Include="Attributes\CustomElementTypeAttribute.cs" />
+    <Compile Include="Attributes\MethodDecoderTokenAttribute.cs" />
     <Compile Include="ChatterEvent\ChatterEventListenerHandler.cs" />
     <Compile Include="ChatterEvent\EnemyDamageEvent.cs" />
     <Compile Include="ChatterEvent\OpenSecurityDoorEvent.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Data\CombatData.cs" />
     <Compile Include="Data\CombatState.cs" />
     <Compile Include="Data\CustomRundown.cs" />
+    <Compile Include="Data\CustomTextDataBlock.cs" />
     <Compile Include="Data\HackingMiniGameProgress.cs" />
     <Compile Include="Data\TextLanguageLink.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_Encounter.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Machines\CombatStateMachine.cs" />
     <Compile Include="Managers\AgentDamageManager.cs" />
     <Compile Include="Managers\CustomRundownManager.cs" />
+    <Compile Include="Managers\ExtraTextDataBlockManager.cs" />
     <Compile Include="Managers\PlayerAgentStateManager.cs" />
     <Compile Include="Managers\TextDataBlockExtendedManager.cs" />
     <Compile Include="Utils\AssemblyUtils.cs" />
@@ -98,6 +101,8 @@
     <Compile Include="Utils\Il2cppPackager.cs" />
     <Compile Include="Utils\JsonUtils.cs" />
     <Compile Include="Utils\Machine\IStateMachine.cs" />
+    <Compile Include="Utils\MethodTokenName.cs" />
+    <Compile Include="Utils\MethodTokenUtils.cs" />
     <Compile Include="Utils\MinMaxTimer.cs" />
     <Compile Include="Utils\WeightValue.cs" />
     <Compile Include="WieldingItemStates\WI_Deciding.cs" />
