@@ -138,6 +138,7 @@ namespace ChatterReborn.Managers
                 this.DebugPrint("Found the PUI_CommunicationMenu, now adding more nodes!!", eLogType.Message);
                 var parentNode = CreateNode(CustomTextDataBlock.MoreResponses, 0, false);
 
+                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Deployables].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Scan, GD.PlayerDialog.CL_Scan, CommunicationNode.ScriptType.UseTool, true));
                 menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Shh, GD.PlayerDialog.CL_Shh));
                 menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Insert(2, CreateNode(GD.Text.PlayerDialogData.CommunicationList.AreYouReady, GD.PlayerDialog.CL_AreYouReady));
                 menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Secure_This_Room, GD.PlayerDialog.CL_SecureThisRoom));
@@ -178,10 +179,15 @@ namespace ChatterReborn.Managers
 
         public static CommunicationNode CreateNode(uint textID, uint dialogID, bool isLastNode = true)
         {
+            return CreateNode(textID, dialogID, CommunicationNode.ScriptType.None, isLastNode);
+        }
+
+        public static CommunicationNode CreateNode(uint textID, uint dialogID, CommunicationNode.ScriptType scriptType, bool isLastNode = true)
+        {
             var m_node3 = new CommunicationNode();
             m_node3.TextId = textID;
             m_node3.DialogID = dialogID;
-            m_node3.Script = CommunicationNode.ScriptType.None;
+            m_node3.Script = scriptType;
             m_node3.Icon = new Sprite();
             m_node3.m_ChildNodes = new Il2CppSystem.Collections.Generic.List<CommunicationNode>();
             m_node3.IsLastNode = isLastNode;

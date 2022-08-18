@@ -1,4 +1,5 @@
 ﻿using BepInEx.IL2CPP;
+using BepInEx.Unity.IL2CPP;
 using ChatterReborn.Attributes;
 using ChatterReborn.Data;
 using ChatterReborn.Utils;

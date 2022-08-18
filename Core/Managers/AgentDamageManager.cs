@@ -53,10 +53,10 @@ namespace ChatterReborn.Managers
             this.m_patcher.Patch<PlayerVoice>(nameof(PlayerVoice.VoiceCallback), ChatterPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
         }
 
+
         [MethodDecoderToken]
         private static void Dam_EnemyDamageBase__BulletDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent, Vector3 position, Vector3 direction, Vector3 normal, bool allowDirectionalBonus = false, int limbID = 0, float staggerMulti = 1f, float precisionMulti = 1f)
         {
-
             ChatterEventListenerHandler<EnemyDamageEvent>.PostEvent(new EnemyDamageEvent
             {
                 m_attacker = sourceAgent,

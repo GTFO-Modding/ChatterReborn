@@ -1,5 +1,4 @@
 ﻿using ChatterReborn.Utils;
-using GTFO.API.JSON;
 using System;
 using System.Collections.Generic;
 using System.IO;
