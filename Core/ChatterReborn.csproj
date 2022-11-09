@@ -35,7 +35,6 @@
   <ItemGroup>
     <Compile Include="Attributes\ConfigurationBaseAttribute.cs" />
     <Compile Include="Attributes\ConfigurationToggleAttribute.cs" />
-    <Compile Include="Attributes\CustomElementTypeAttribute.cs" />
     <Compile Include="Attributes\MethodDecoderTokenAttribute.cs" />
     <Compile Include="ChatterEvent\ChatterEventListenerHandler.cs" />
     <Compile Include="ChatterEvent\EnemyDamageEvent.cs" />
@@ -64,18 +63,12 @@
     <Compile Include="Components\PlayerBotAIRootMonitor.cs" />
     <Compile Include="Data\CombatData.cs" />
     <Compile Include="Data\CombatState.cs" />
-    <Compile Include="Data\CustomRundown.cs" />
     <Compile Include="Data\CustomTextDataBlock.cs" />
     <Compile Include="Data\HackingMiniGameProgress.cs" />
     <Compile Include="Data\TextLanguageLink.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_Encounter.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_IntentionalCombat.cs" />
     <Compile Include="Drama_Chatter_States\DRAMA_Chatter_Survival.cs" />
-    <Compile Include="Element\ChatterTrailerElement.cs" />
-    <Compile Include="Element\CustomRundownElement.cs" />
-    <Compile Include="Element\EnemyFilterElement.cs" />
-    <Compile Include="Element\EnemyFilterHolder.cs" />
-    <Compile Include="Element\LevelExpeditionElement.cs" />
     <Compile Include="Data\EnemyFilter.cs" />
     <Compile Include="Data\EnemyFilterData.cs" />
     <Compile Include="Data\ZoneAction.cs" />
@@ -87,7 +80,6 @@
     <Compile Include="Machines\CombatStateMachine.cs" />
     <Compile Include="Machines\MusicControlMachine.cs" />
     <Compile Include="Managers\AgentDamageManager.cs" />
-    <Compile Include="Managers\CustomRundownManager.cs" />
     <Compile Include="Managers\ExtraTextDataBlockManager.cs" />
     <Compile Include="Managers\PlayerAgentStateManager.cs" />
     <Compile Include="Managers\TextDataBlockExtendedManager.cs" />
@@ -113,16 +105,9 @@
     <Compile Include="Extra\CP_Bioscan_Core_Dialog.cs" />
     <Compile Include="Extra\CP_ChainedPuzzleCore_Base_Dialog.cs" />
     <Compile Include="Extra\CP_Cluster_Core_Dialog.cs" />
-    <Compile Include="Element\ElementEnvolope.cs" />
     <Compile Include="Data\ConfigurationType.cs" />
-    <Compile Include="Element\CustomElementBase.cs" />
-    <Compile Include="Element\ElementType.cs" />
     <Compile Include="Data\FixedVector3.cs" />
     <Compile Include="Data\GameDataDefinition.cs" />
-    <Compile Include="Element\IElementHolder.cs" />
-    <Compile Include="Element\SecurityDoorElement.cs" />
-    <Compile Include="Element\TeammateCommentElement.cs" />
-    <Compile Include="Element\CustomElementHolderBase.cs" />
     <Compile Include="Managers\PlayerCommunicationManager.cs" />
     <Compile Include="Managers\WardenObjectiveListenerManager.cs" />
     <Compile Include="Machines\DramaChatterMachine.cs" />
@@ -148,7 +133,6 @@
     <Compile Include="Components\PlayerBreathingTester.cs" />
     <Compile Include="Extra\ResourceFirstPersonDialog.cs" />
     <Compile Include="Machines\WieldingItemMachine.cs" />
-    <Compile Include="Managers\CustomElementManager.cs" />
     <Compile Include="Managers\IChatterManager.cs" />
     <Compile Include="Extra\CustomElementUtils.cs" />
     <Compile Include="Patches\Patch_WardenObjectiveManager.cs" />

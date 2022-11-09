@@ -1,6 +1,5 @@
 ﻿using ChatterReborn.Data;
 using ChatterReborn.Drama_Chatter_States;
-using ChatterReborn.Element;
 using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using Enemies;
@@ -15,14 +14,7 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
         public PlayerBotActionAttackDescriptorMonitor(PlayerBotAIRootMonitor aiActionMonitor) : base(aiActionMonitor)
         {
             this.m_actionDesc = aiActionMonitor.m_rootAction.m_attackAction;
-            if (CustomRundownManager.IsCustomRundown)
-            {
-                this.CallOutMonsterDel = AttemptToCallOutSpecialMonster_Modded;
-            }
-            else
-            {
-                this.CallOutMonsterDel = AttemptToCallOutSpecialMonster_Main;
-            }
+            this.CallOutMonsterDel = AttemptToCallOutSpecialMonster_Main;
         }
 
         private DRAMA_Chatter_Combat CombatState => (DRAMA_Chatter_Combat)this.m_rootMonitor.ChatterMachine.GetState(DRAMA_State.Combat);
@@ -81,72 +73,20 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
         private delegate void FuncClkMonster(EnemyAgent enemyAgent);
 
         private FuncClkMonster CallOutMonsterDel { get; set; }
-        
 
-
-        private void AttemptToCallOutSpecialMonster_Modded(EnemyAgent enemyAgent)
-        {
-            CallOutEnemyTarget targetCallOut = new CallOutEnemyTarget();
-
-
-            for (int i = 0; i < CustomRundownManager.EnemyFilterElements.Count; i++)
-            {
-                EnemyFilterElement element = CustomRundownManager.EnemyFilterElements[i];
-                if (element.EnemyIDs.Contains(enemyAgent.EnemyDataID))
-                {
-                    targetCallOut.Recognize(element.EnemyFilter);
-                }
-            }
-
-            if (enemyAgent.RequireTagForDetection && !enemyAgent.IsTagged)
-            {
-                targetCallOut.Recognize(EnemyFilter.Shadow);
-            }
-            AttemptToCallOut(targetCallOut);
-        }
 
 
         private void AttemptToCallOutSpecialMonster_Main(EnemyAgent enemyAgent)
         {
 
-            CallOutEnemyTarget targetCallOut = new CallOutEnemyTarget();
-            uint enemyDataID = enemyAgent.EnemyDataID;
-
-            if (enemyDataID == GD.Enemy.Striker_Big_Wave || enemyDataID == GD.Enemy.Striker_Big_Hibernate || enemyDataID == GD.Enemy.Striker_Big_Bullrush)
-            {
-                targetCallOut.Recognize(EnemyFilter.Striker);
-                targetCallOut.Recognize(EnemyFilter.Big);
-                if (enemyDataID == GD.Enemy.Striker_Big_Bullrush)
-                {
-                    targetCallOut.Recognize(EnemyFilter.BullRush);
-                }
-            }
-            else if (enemyDataID == GD.Enemy.Flyer)
-            {
-                if (enemyAgent.EyePosition.y > this.BotAgent.EyePosition.y)
-                {
-                    if (Mathf.Abs(enemyAgent.EyePosition.y - this.BotAgent.EyePosition.y) > 5f)
-                    {
-                        targetCallOut.Recognize(EnemyFilter.Flyer);
-                    }
-                }
-            }
-            else if (enemyAgent.RequireTagForDetection)
-            {
-                if (enemyDataID == GD.Enemy.Shadow)
-                {
-                    targetCallOut.Recognize(EnemyFilter.Striker);
-                    if (enemyDataID == GD.Enemy.Striker_Big_Shadow)
-                    {
-                        targetCallOut.Recognize(EnemyFilter.Big);
-                    }
-                }                
+            CallOutEnemyTarget targetCallOut = new CallOutEnemyTarget();            
+            if (enemyAgent.RequireTagForDetection)
+            {               
                 if (!enemyAgent.IsTagged)
                 {
                     targetCallOut.Recognize(EnemyFilter.Shadow);
                 }                
             }
-
             AttemptToCallOut(targetCallOut);
         }
 
@@ -199,13 +139,9 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
                     CallOutTargetEnemy(handler.Best.Value);
                 }                
             }
-            else if (targetCallOut.IsRecognizedAs(EnemyFilter.Big) && targetCallOut.IsRecognizedAs(EnemyFilter.Striker))
+            else if (targetCallOut.IsRecognizedAs(EnemyFilter.Big))
             {
                 CallOutTargetEnemy(GD.PlayerDialog.CL_BigGuyHere);
-            }
-            else if (targetCallOut.IsRecognizedAs(EnemyFilter.Scout))
-            {
-                CallOutTargetEnemy(GD.PlayerDialog.CL_Scout);
             }
             else if (targetCallOut.IsRecognizedAs(EnemyFilter.Flyer))
             {
