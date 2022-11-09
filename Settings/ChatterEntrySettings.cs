@@ -8,6 +8,6 @@
     {
         public const string Plugin_GUI = "CHTR";
         public const string Plugin_Name = "chatter-reborn";
-        public const string Plugin_Version = "0.3.2";            
+        public const string Plugin_Version = "0.3.1";            
     }
 }
