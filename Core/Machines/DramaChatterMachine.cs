@@ -55,17 +55,6 @@ namespace ChatterReborn.Machines
             m_combatMachine = new CombatStateMachine();
             m_combatMachine.Setup(playerAgent);
 
-            foreach (var state in this.m_states)
-            {
-                if (state != null)
-                {
-                    IDRAMA_Chatter_Combat combat_state = state as IDRAMA_Chatter_Combat;
-                    if (combat_state != null)
-                    {
-                        combat_state.SetupCombatState(m_combatMachine);
-                    }
-                }
-            }
 
             this.StartState = this.GetState(DRAMA_State.ElevatorIdle);
             this.m_IsSetup = true;

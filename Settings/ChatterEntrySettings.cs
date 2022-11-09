@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ChatterRebornSettings
+﻿namespace ChatterRebornSettings
 {
 
     /// <summary>
@@ -14,6 +8,6 @@ namespace ChatterRebornSettings
     {
         public const string Plugin_GUI = "CHTR";
         public const string Plugin_Name = "chatter-reborn";
-        public const string Plugin_Version = "0.3.0";            
+        public const string Plugin_Version = "0.3.2";            
     }
 }

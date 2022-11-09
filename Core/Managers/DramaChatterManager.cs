@@ -5,6 +5,7 @@ using ChatterReborn.Machines;
 using ChatterReborn.Utils;
 using ChatterRebornSettings;
 using GameData;
+using HarmonyLib;
 using LevelGeneration;
 using Player;
 using SNetwork;
@@ -18,11 +19,11 @@ namespace ChatterReborn.Managers
 
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.ChangeState), ChatterPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
-            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.CheckSyncedPlayerStates), ChatterPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
-            this.m_patcher.Patch<LockMelterFirstPerson>(nameof(LockMelterFirstPerson.Setup), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
-            this.m_patcher.Patch<CM_PageExpeditionFail>(nameof(CM_PageExpeditionFail.OnEnable), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
-            this.m_patcher.Patch<InfectionSpitter>(nameof(InfectionSpitter.DoExplode), ChatterPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.ChangeState), HarmonyPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
+            this.m_patcher.Patch<DramaManager>(nameof(DramaManager.CheckSyncedPlayerStates), HarmonyPatchType.Postfix, BindingFlags.Static | BindingFlags.Public);
+            this.m_patcher.Patch<LockMelterFirstPerson>(nameof(LockMelterFirstPerson.Setup), HarmonyPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+            this.m_patcher.Patch<CM_PageExpeditionFail>(nameof(CM_PageExpeditionFail.OnEnable), HarmonyPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
+            this.m_patcher.Patch<InfectionSpitter>(nameof(InfectionSpitter.DoExplode), HarmonyPatchType.Postfix, BindingFlags.Instance | BindingFlags.Public);
         }
 
 

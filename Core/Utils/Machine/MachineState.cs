@@ -1,6 +1,8 @@
-﻿namespace ChatterReborn.Utils.Machine
+﻿using StateMachines;
+
+namespace ChatterReborn.Utils.Machine
 {
-    public abstract class MachineState
+    public abstract class MachineStateBase
     {
         public virtual void Enter() { }
         public virtual void SyncEnter() { }
@@ -25,21 +27,17 @@
 
         public bool DEBUG_ENABLED { get; set; }
 
-        public abstract void SetMachine(IStateMachine stateMachine);
+        public abstract void SetMachine(StateMachineBase stateMachine);
         
     }
 
-    public class MachineState<SM> : MachineState where SM : class, IStateMachine
+    public abstract class MachineState<SM> : MachineStateBase where SM : StateMachineBase
     {
         public SM m_machine;
 
-        public override void SetMachine(IStateMachine stateMachine)
+        public override void SetMachine(StateMachineBase stateMachine)
         {
-            m_machine = stateMachine as SM;
-            if (m_machine == null)
-            {
-                throw new System.Exception("Cannot implicitly convert IStateMachine -> " + typeof(SM).Name);
-            }
+            m_machine = (SM)stateMachine;
         }
     }
 }

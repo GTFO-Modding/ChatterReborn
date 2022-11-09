@@ -1,16 +1,13 @@
-﻿using ChatterReborn.Attributes;
+﻿using ChatterReborn.Data;
 using ChatterReborn.Extra;
-using ChatterReborn.Data;
 using ChatterReborn.Utils;
-using Player;
+using GameData;
+using Gear;
+using HarmonyLib;
+using LevelGeneration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LevelGeneration;
-using Gear;
-using GameData;
 
 namespace ChatterReborn.Managers
 {
@@ -28,13 +25,13 @@ namespace ChatterReborn.Managers
 
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<GateKeyItem>(nameof(GateKeyItem.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<GenericSmallPickupItem_Core>(nameof(GenericSmallPickupItem_Core.SetupFromLevelgen), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.OnWield), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<ResourcePackFirstPerson>(nameof(ResourcePackFirstPerson.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<ResourcePackPickup>(nameof(ResourcePackPickup.Setup), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<ThrowingWeapon>(nameof(ThrowingWeapon.Throw), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, new Type[] { typeof(float) } );
+            this.m_patcher.Patch<GateKeyItem>(nameof(GateKeyItem.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<GenericSmallPickupItem_Core>(nameof(GenericSmallPickupItem_Core.SetupFromLevelgen), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HeavyFogRepellerFirstPerson>(nameof(HeavyFogRepellerFirstPerson.OnWield), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ResourcePackFirstPerson>(nameof(ResourcePackFirstPerson.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ResourcePackPickup>(nameof(ResourcePackPickup.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<ThrowingWeapon>(nameof(ThrowingWeapon.Throw), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, new Type[] { typeof(float) } );
         }
 
         private static void ThrowingWeapon__Throw__Postfix(ThrowingWeapon __instance)

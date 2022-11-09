@@ -34,6 +34,7 @@
     <Compile Include="ComponentsDev\ChatterElementDirector.cs" />
     <Compile Include="ComponentsDev\PlayerDialogNodeMenuCom.cs" />
     <Compile Include="ComponentsDev\PUI_CommunicationMenuDebugger.cs" />
+    <Compile Include="ComponentsDev\MusicEventTester.cs" />
     <Compile Include="ElementDebug\ElementBuilderMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +50,9 @@
     <Reference Include="BepInEx.IL2CPP, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CoreReferences\core\BepInEx.IL2CPP.dll</HintPath>
+    </Reference>
+    <Reference Include="CellSound-ASM">
+      <HintPath>..\..\CoreReferences\interop\CellSound-ASM.dll</HintPath>
     </Reference>
     <Reference Include="GlobalFramework-ASM, Version=3.7.1.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -110,6 +114,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CoreReferences\interop\Utils-ASM.dll</HintPath>
     </Reference>
+    <Reference Include="Wwise-ASM">
+      <HintPath>..\..\CoreReferences\interop\Wwise-ASM.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\ChatterReborn.csproj">
@@ -119,6 +126,10 @@
     <ProjectReference Include="..\GameData\GameData.csproj">
       <Project>{99b582d4-8d0c-4940-b059-4119e029356e}</Project>
       <Name>GameData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wwise-IDS\Wwise-IDS.csproj">
+      <Project>{73f230cb-7647-438f-81c7-f864424b333b}</Project>
+      <Name>Wwise-IDS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,7 @@ using ChatterReborn.ChatterEvent;
 using ChatterReborn.Extra;
 using ChatterReborn.Utils;
 using GameData;
+using HarmonyLib;
 using LevelGeneration;
 using Player;
 using SNetwork;
@@ -30,8 +31,8 @@ namespace ChatterReborn.Managers
 
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<LG_SecurityDoor>(nameof(LG_SecurityDoor.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<LG_WeakDoor>(nameof(LG_WeakDoor.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<LG_SecurityDoor>(nameof(LG_SecurityDoor.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<LG_WeakDoor>(nameof(LG_WeakDoor.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
         }
 
         static void LG_SecurityDoor__Setup__Postfix(LG_SecurityDoor __instance)

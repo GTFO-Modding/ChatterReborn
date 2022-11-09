@@ -1,6 +1,7 @@
 ﻿using ChatterReborn.Attributes;
 using ChatterReborn.Data;
 using Globals;
+using HarmonyLib;
 using Player;
 using System;
 using System.Reflection;
@@ -17,13 +18,13 @@ namespace ChatterReborn.Utils
             m_inited = true;
             m_patcher = new ChatterPatcher<GlobalPatcher>("ChatterGlobal");
 
-            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.StartElevatorRide), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
-            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.OnGSWantToStartExpedition), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
-            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.DropinElevatorExit), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
-            m_patcher.Patch<Global>(nameof(Global.OnLevelCleanup), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
-            m_patcher.Patch<Global>(nameof(Global.OnResetSession), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
-            m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.Setup), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.OnDespawn), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.StartElevatorRide), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
+            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.OnGSWantToStartExpedition), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
+            m_patcher.Patch<ElevatorRide>(nameof(ElevatorRide.DropinElevatorExit), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
+            m_patcher.Patch<Global>(nameof(Global.OnLevelCleanup), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
+            m_patcher.Patch<Global>(nameof(Global.OnResetSession), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Static);
+            m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.Setup), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.OnDespawn), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
 
 
         }

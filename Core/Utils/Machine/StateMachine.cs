@@ -2,10 +2,10 @@
 
 namespace ChatterReborn.Utils.Machine
 {
-    public class StateMachine<S> : IStateMachine where S : MachineState
+    public class StateMachine<S> : StateMachineBase where S : MachineStateBase
     {
 
-        public bool DEBUG_ENABLED
+        public override bool DEBUG_ENABLED
         {
             get
             {
@@ -52,12 +52,12 @@ namespace ChatterReborn.Utils.Machine
             this.m_states = new S[m_state_count];
         }
 
-        public void ChangeState(Enum state)
+        public override void ChangeState(Enum state)
         {
             this.ChangeState(Convert.ToInt32(state));
         }
 
-        public void ChangeState(int stateID)
+        public override void ChangeState(int stateID)
         {
             this.ChangeState(this.m_states[stateID]);
         }
@@ -124,7 +124,7 @@ namespace ChatterReborn.Utils.Machine
             }
         }
 
-        public void Reset()
+        public override void Reset()
         {
             this.ChangeState(this.m_start_state);
         }

@@ -1,5 +1,6 @@
 ﻿using ChatterReborn.Data;
 using ChatterReborn.Extra;
+using HarmonyLib;
 using System.Collections.Generic;
 
 namespace ChatterReborn.Managers
@@ -17,8 +18,8 @@ namespace ChatterReborn.Managers
 
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<HackingMinigame_TimingGrid>(nameof(HackingMinigame_TimingGrid.StartGame), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<HackingMinigame_TimingGrid>(nameof(HackingMinigame_TimingGrid.EndGame), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HackingMinigame_TimingGrid>(nameof(HackingMinigame_TimingGrid.StartGame), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<HackingMinigame_TimingGrid>(nameof(HackingMinigame_TimingGrid.EndGame), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
         }
 
 

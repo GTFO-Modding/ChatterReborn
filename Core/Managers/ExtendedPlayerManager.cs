@@ -15,10 +15,10 @@ namespace ChatterReborn.Managers
     {
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<PlayerInventorySynced>(nameof(PlayerInventorySynced.SyncWieldItem), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.CourseNode), ChatterPatchType.Postfix, MethodType.Setter, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.TriggerMarkerPing), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<PlayerInventoryBase>(nameof(PlayerInventoryBase.DoReload), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PlayerInventorySynced>(nameof(PlayerInventorySynced.SyncWieldItem), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.CourseNode), HarmonyPatchType.Postfix, MethodType.Setter, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PlayerAgent>(nameof(PlayerAgent.TriggerMarkerPing), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PlayerInventoryBase>(nameof(PlayerInventoryBase.DoReload), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
         }
 
         static void PlayerInventoryBase__DoReload__Postfix(PlayerInventoryBase __instance)

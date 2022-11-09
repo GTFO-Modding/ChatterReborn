@@ -11,8 +11,10 @@ using UnityEngine;
 
 namespace ChatterReborn.Drama_Chatter_States
 {
-    public class DRAMA_Chatter_Combat : DRAMA_Chatter_Base, IDRAMA_Chatter_Combat
+    public class DRAMA_Chatter_Combat : DRAMA_Chatter_Base
     {
+
+        
         public static readonly Vector2 Combat_CallOut_Chance = new Vector2(0.005f, 0.025f);
         public static readonly Vector2 Combat_CallOut_Delay = new Vector2(10f, 3f);
 
@@ -615,9 +617,5 @@ namespace ChatterReborn.Drama_Chatter_States
         private float m_last_enemy_killed_expire;
         private float m_damageVoiceTimer;
         private float m_accumulatedLocalDamage;
-        private bool m_initial_combat_dialogue;
-        private float m_combat_dialogueTimer;
-        private float m_attemptTimer;
-        private bool m_alot_of_monsters;
     }
 }

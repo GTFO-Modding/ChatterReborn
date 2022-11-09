@@ -4,7 +4,6 @@ using ChatterReborn.Utils;
 using ChatterRebornSettings;
 using GameData;
 using Player;
-using UnityEngine;
 
 namespace ChatterReborn.Drama_Chatter_States
 {

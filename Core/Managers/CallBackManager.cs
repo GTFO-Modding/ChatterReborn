@@ -1,11 +1,5 @@
-﻿using ChatterReborn.Attributes;
-using ChatterReborn.ChatterEvent;
-using ChatterReborn.Utils;
-using System;
+﻿using ChatterReborn.Utils;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChatterReborn.Managers
 {

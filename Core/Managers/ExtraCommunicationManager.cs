@@ -3,9 +3,12 @@ using ChatterReborn.Components;
 using ChatterReborn.Data;
 using ChatterReborn.Utils;
 using GameData;
+using HarmonyLib;
 using Localization;
 using Player;
 using SNetwork;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using Il2CPPGeneric = Il2CppSystem.Collections.Generic;
 
@@ -14,11 +17,23 @@ namespace ChatterReborn.Managers
     public class ExtraCommunicationManager : ChatterManager<ExtraCommunicationManager>
     {
         public static PUI_CommunicationMenu CurrentMenu;
+        private CommunicationNode m_startingNode;
 
         protected override void PostSetup()
         {
+            GetCurrentMenu();
             AddNewComs();
-            this.m_patcher.Patch<PUI_CommunicationMenu>(nameof(PUI_CommunicationMenu.OnCommunicationReceived), ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<PUI_CommunicationMenu>(nameof(PUI_CommunicationMenu.OnCommunicationReceived), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            //this.m_patcher.Patch<PUI_CommunicationMenu>(nameof(PUI_CommunicationMenu.click), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+        }
+
+        private void GetCurrentMenu()
+        {
+            if (TryToGetCommunicationMenu(out PUI_CommunicationMenu menu))
+            {
+                CurrentMenu = menu;
+                m_startingNode = menu.m_menu.CurrentNode;
+            }
         }
 
         private CommunicationNode GetFirstPersonActionNodes()
@@ -36,29 +51,45 @@ namespace ChatterReborn.Managers
             return node;
         }
 
-        private CommunicationNode GetPickTargetNodes()
+        private void GiveTargetsToNode(CommunicationNode node)
         {
-            var node = CreateNode(CustomTextDataBlock.PickAttackTarget, false);
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_In_The_Middle, GD.PlayerDialog.CL_TheOneInTheMiddle));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_On_The_Left, GD.PlayerDialog.CL_TheOneOnTheLeft));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_On_The_Right, GD.PlayerDialog.CL_TheOneOnTheRight));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_On_The_Far_Left, GD.PlayerDialog.CL_TheOneOnTheFarLeft));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_On_The_Far_Right, GD.PlayerDialog.CL_TheOneOnTheFarRight));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_In_The_Middle, GD.PlayerDialog.CL_TheOneInTheMiddle));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_Closest_To_Me, GD.PlayerDialog.CL_TheOneClosestToMe));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_Closest_To_You, GD.PlayerDialog.CL_TheOneClosestToYou));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.The_One_Right_In_Front_Of_Me, GD.PlayerDialog.CL_TheOneRightInFrontOfMe));
-            return node;
         }
+
+
         private CommunicationNode GetSecondPersonActionNodes()
         {
+
             var node = CreateNode(CustomTextDataBlock.SneakKillTargets, false);
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.You_Take, GD.PlayerDialog.CL_YouTake));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Ill_Take, GD.PlayerDialog.CL_IllTake));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.We_Take, GD.PlayerDialog.CL_WeTake));
-            node.m_ChildNodes.Add(GetPickTargetNodes());
+
+            m_Youll_Take_Node = CreateNode(GD.Text.PlayerDialogData.CommunicationList.You_Take, 0, false);
+            m_Ill_Take_Node = CreateNode(GD.Text.PlayerDialogData.CommunicationList.Ill_Take, 0, false);
+            m_We_Take_Node = CreateNode(GD.Text.PlayerDialogData.CommunicationList.We_Take, 0, false);
+
+            node.m_ChildNodes.Add(m_Youll_Take_Node);
+            node.m_ChildNodes.Add(m_Ill_Take_Node);
+            node.m_ChildNodes.Add(m_We_Take_Node);
+
+            GiveTargetsToNode(m_Youll_Take_Node);
+            GiveTargetsToNode(m_Ill_Take_Node);
+            GiveTargetsToNode(m_We_Take_Node);
+
+            m_sneakKillTargetsNode = node;
             return node;
         }
+
+        private CommunicationNode m_Ill_Take_Node;
+        private CommunicationNode m_Youll_Take_Node;
+        private CommunicationNode m_We_Take_Node;
+
+        private CommunicationNode m_sneakKillTargetsNode;
 
         private CommunicationNode GetDirectionsNodes()
         {
@@ -132,25 +163,25 @@ namespace ChatterReborn.Managers
 
         private void AddNewComs()
         {
-            if (TryToGetCommunicationMenu(out var menu))
+            if (CurrentMenu != null)
             {
 
                 this.DebugPrint("Found the PUI_CommunicationMenu, now adding more nodes!!", eLogType.Message);
-                var parentNode = CreateNode(CustomTextDataBlock.MoreResponses, 0, false);
+                var extrasNode = CreateNode(CustomTextDataBlock.MoreResponses, 0, false);
 
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Deployables].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Scan, GD.PlayerDialog.CL_Scan, CommunicationNode.ScriptType.UseTool, true));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Shh, GD.PlayerDialog.CL_Shh));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Insert(2, CreateNode(GD.Text.PlayerDialogData.CommunicationList.AreYouReady, GD.PlayerDialog.CL_AreYouReady));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Secure_This_Room, GD.PlayerDialog.CL_SecureThisRoom));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Be_Right_Back, GD.PlayerDialog.CL_BRB));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Im_Exhausted, GD.PlayerDialog.CL_ImExhausted));
-                menu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Limited_Vision, GD.PlayerDialog.CL_LimitedVision));
-                parentNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
-                parentNode.m_ChildNodes.Add(GetSecondPersonActionNodes());
-                parentNode.m_ChildNodes.Add(GetDirectionsNodes());
-                parentNode.m_ChildNodes.Add(GetResourcesNodes());
-                parentNode.m_ChildNodes.Add(GetMiscActionNodes());
-                menu.m_menu.CurrentNode.m_ChildNodes.Add(parentNode);
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Deployables].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Scan, GD.PlayerDialog.CL_Scan, CommunicationNode.ScriptType.UseTool, true));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Shh, GD.PlayerDialog.CL_Shh));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Insert(2, CreateNode(GD.Text.PlayerDialogData.CommunicationList.AreYouReady, GD.PlayerDialog.CL_AreYouReady));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Secure_This_Room, GD.PlayerDialog.CL_SecureThisRoom));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Be_Right_Back, GD.PlayerDialog.CL_BRB));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Im_Exhausted, GD.PlayerDialog.CL_ImExhausted));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData.CommunicationList.Limited_Vision, GD.PlayerDialog.CL_LimitedVision));
+                extrasNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
+                extrasNode.m_ChildNodes.Add(GetSecondPersonActionNodes());
+                extrasNode.m_ChildNodes.Add(GetDirectionsNodes());
+                extrasNode.m_ChildNodes.Add(GetResourcesNodes());
+                extrasNode.m_ChildNodes.Add(GetMiscActionNodes());
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(extrasNode);
                 
                 return;
             }
@@ -217,9 +248,78 @@ namespace ChatterReborn.Managers
         }
 
 
+        public override void Update()
+        {
+            if (FocusStateManager.CurrentState != eFocusState.FPS_CommunicationDialog)
+            {
+                m_isInSneakKillMenu = false;
+                m_sneakKillMenuExited = false;
+                m_NodeMenuHasDialog = false;
+                return;
+            }            
+
+            if (!m_isInSneakKillMenu)
+            {
+                if (m_sneakKillTargetsNode.TextId == CurrentMenu.m_menu.CurrentNode.TextId)
+                {
+                    m_isInSneakKillMenu = true;
+                }
+            }
+            else if (!m_sneakKillMenuExited)
+            {
+               
+                if (CurrentMenu.m_menu.CurrentNode.TextId == m_Ill_Take_Node.TextId)
+                {
+                    m_secondDialogID = GD.PlayerDialog.CL_IllTake;
+                    m_textId = GD.Text.PlayerDialogData.CommunicationList.Ill_Take;
+                    m_NodeMenuHasDialog = true;
+                }
+
+                else if (CurrentMenu.m_menu.CurrentNode.TextId == m_Youll_Take_Node.TextId)
+                {
+                    m_secondDialogID = GD.PlayerDialog.CL_YouTake;
+                    m_textId = GD.Text.PlayerDialogData.CommunicationList.You_Take;
+                    m_NodeMenuHasDialog = true;
+                }
+
+                else if (CurrentMenu.m_menu.CurrentNode.TextId == m_We_Take_Node.TextId)
+                {
+                    m_secondDialogID = GD.PlayerDialog.CL_WeTake;
+                    m_textId = GD.Text.PlayerDialogData.CommunicationList.We_Take;
+                    m_NodeMenuHasDialog = true;
+                }
+                if (m_NodeMenuHasDialog)
+                {
+                    m_sneakKillMenuExited = true;
+                    PlayerAgent localPlayerAgent = PlayerManager.GetLocalPlayerAgent();
+                    if (localPlayerAgent != null)
+                    {
+                        PlayerDialogManager.WantToStartDialogForced(m_secondDialogID, localPlayerAgent);
+                        if (m_textId > 0)
+                        {
+                            CurrentMenu.m_menu.BroadcastDialog(localPlayerAgent, m_textId, CurrentMenu.m_menu.TryGetCurrentTarget());
+                        }
+                    }
+                }
+                
+            }
+        }
+
+
         public static void AddNodeTo(CommunicationListCategory category, CommunicationNode nodeToAdd)
         {
             CurrentMenu.m_buttons[(int)category].Node.m_ChildNodes.Add(nodeToAdd);
         }
+
+
+        private bool m_isInSneakKillMenu;
+
+        private bool m_sneakKillMenuExited;
+
+        private uint m_secondDialogID;
+
+        private uint m_textId;
+
+        private bool m_NodeMenuHasDialog;
     }
 }

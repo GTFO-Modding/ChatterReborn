@@ -5,6 +5,7 @@ using ChatterReborn.Data;
 using ChatterReborn.Utils;
 using ChatterRebornTokens;
 using GameData;
+using HarmonyLib;
 using Player;
 using System;
 using System.Reflection;
@@ -43,14 +44,14 @@ namespace ChatterReborn.Managers
                 typeof(bool),
                 typeof(DamageNoiseLevel),
             };
-            this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.BulletDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, bulletDmgTypes);
-            this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.MeleeDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, meleeDmgTypes);
-            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.OnIncomingDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveTentacleAttackDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<Dam_SyncedDamageBase>(nameof(Dam_SyncedDamageBase.ShooterProjectileDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveMeleeDamage), ChatterPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<Dam_PlayerDamageLocal>(nameof(Dam_PlayerDamageLocal.ReceiveBulletDamage), ChatterPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<PlayerVoice>(nameof(PlayerVoice.VoiceCallback), ChatterPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.BulletDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, bulletDmgTypes);
+            this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.MeleeDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, meleeDmgTypes);
+            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.OnIncomingDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveTentacleAttackDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_SyncedDamageBase>(nameof(Dam_SyncedDamageBase.ShooterProjectileDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveMeleeDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_PlayerDamageLocal>(nameof(Dam_PlayerDamageLocal.ReceiveBulletDamage), HarmonyPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<PlayerVoice>(nameof(PlayerVoice.VoiceCallback), HarmonyPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
         }
 
 

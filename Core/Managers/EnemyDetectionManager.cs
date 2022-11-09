@@ -5,6 +5,7 @@ using ChatterReborn.Components;
 using ChatterReborn.Utils;
 using Enemies;
 using GameData;
+using HarmonyLib;
 using Player;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,8 @@ namespace ChatterReborn.Managers
 
         protected override void PostSetup()
         {
-            this.m_patcher.Patch<EnemyAgent>(nameof(EnemyAgent.Setup), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-            this.m_patcher.Patch<EnemyAI>(nameof(EnemyAI.ModeChange), Data.ChatterPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<EnemyAgent>(nameof(EnemyAgent.Setup), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            this.m_patcher.Patch<EnemyAI>(nameof(EnemyAI.ModeChange), HarmonyPatchType.Postfix, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
         }
 
         private static void EnemyAgent__Setup__Postfix(EnemyAgent __instance, pEnemySpawnData spawnData)
