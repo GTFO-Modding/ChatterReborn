@@ -20,7 +20,7 @@ namespace GameData
 			public const uint MeleeKnife = 27;
 			public const uint MeleeSledgehammer = 14;
 			public const uint MeleeSpear = 28;
-			public const uint MotionTracker = 9;
+			public const uint Motion_Tracker = 9;
 			public const uint NanoSwarm = 26;
 			public const uint Pistol = 8;
 			public const uint Pistol_Stagger = 21;

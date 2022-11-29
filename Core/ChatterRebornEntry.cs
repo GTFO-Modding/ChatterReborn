@@ -48,12 +48,8 @@ namespace ChatterReborn
             ChatterDebug.LogMessage("CHATTER INITIATED!");
         }
 
-        private Harmony m_harmonyInstance;
-
-        public static Harmony HarmonyInstance => Instance.m_harmonyInstance;
 
         public static ChatterRebornEntry Instance;  
-
 
         private static bool m_started;
 

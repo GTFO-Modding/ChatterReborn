@@ -100,32 +100,8 @@ namespace ChatterReborn.Managers
             if (target != null && targetGameObject != null && __instance != null && (__instance.IsLocallyOwned || __instance.IsBotOwned()))
             {
                 DevToolManager.LogComponents(targetGameObject);
-
-                if (__instance.IsLocallyOwned)
-                {
-                    LG_ResourceContainer_Storage lg_ResourceContainer_Storage = targetGameObject.GetComponentInParent<LG_ResourceContainer_Storage>();
-                    if (lg_ResourceContainer_Storage != null)
-                    {
-                        bool hit = Physics.Raycast(worldPos, __instance.FPSCamera.Forward, out var raycastHit2, 0.4f, LayerManager.MASK_APPLY_CARRY_ITEM, QueryTriggerInteraction.Ignore);
-                        if (hit)
-                        {
-                            var itemComp = raycastHit2.collider.GetComponent<Item>();
-                            if (itemComp == null)
-                            {
-                                itemComp = raycastHit2.collider.GetComponentInParent<Item>();
-                            }
-                            if (itemComp != null && itemComp.PickupInteraction != null && itemComp.PickupInteraction.IsActive)
-                            {
-                                targetGameObject = itemComp.gameObject;
-                            }
-                        }
-                    }
-                }
-
                 if (SpecificPingManager.TryToGetItemPingDescriptor(worldPos, targetGameObject, out ItemPingDescriptorBase bestItemPingDescriptor))
                 {
-                    target.PingTargetStyle = bestItemPingDescriptor.m_style;
-
                     bestItemPingDescriptor.PlayPingDialog(__instance);
                 }
                 else if (target.PingTargetStyle == eNavMarkerStyle.PlayerPingDisinfection)

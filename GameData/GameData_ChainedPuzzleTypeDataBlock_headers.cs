@@ -26,6 +26,7 @@ namespace GameData
 			public const uint SecurityScan_Cluster_Six = 9;
 			public const uint SecurityScan_Cluster_Small = 4;
 			public const uint SecurityScan_D10_RequireAll = 20;
+			public const uint SecurityScan_ExitTeam = 41;
 			public const uint SecurityScan_ExpeditionExit = 7;
 			public const uint SecurityScan_Hack = 30;
 			public const uint SecurityScan_Small = 3;
@@ -41,10 +42,6 @@ namespace GameData
 			public const uint SecurityScan_Sustained_MegaHuge_RequireAll = 17;
 			public const uint SecurityScan_Sustained_RequireAll = 13;
 			public const uint SecurityScan_Sustained_Small_RequireAll = 14;
-			public class SecurityScan
-			{
-				public const uint ExitTeam = 41;
-			}
 		}
 	}
 }

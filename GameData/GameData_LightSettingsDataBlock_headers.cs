@@ -30,6 +30,7 @@ namespace GameData
 			public const uint monochrome = 43;
 			public const uint Monochrome_Blue = 19;
 			public const uint Monochrome_Blue_Flickering = 74;
+			public const uint monochrome_copy_R1C2 = 86;
 			public const uint Monochrome_Cyan = 60;
 			public const uint Monochrome_Green = 22;
 			public const uint Monochrome_iceblue = 36;
@@ -37,6 +38,7 @@ namespace GameData
 			public const uint Monochrome_Orange_Flickering = 78;
 			public const uint Monochrome_Red = 20;
 			public const uint Monochrome_Red_Copy = 69;
+			public const uint Monochrome_Red_R1D1_z9 = 87;
 			public const uint Monochrome_Red_R7D1 = 83;
 			public const uint Monochrome_Yellow = 21;
 			public const uint Monochrome_YellowToGreen = 59;

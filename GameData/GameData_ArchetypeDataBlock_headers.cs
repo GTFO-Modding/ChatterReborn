@@ -17,7 +17,7 @@ namespace GameData
 			public const uint GEAR_DMR_Semi_Special = 68;
 			public const uint GEAR_DMR_Semi_v2 = 25;
 			public const uint GEAR_DMR_SemiBurst = 28;
-			public const uint GEAR_HEL_Gun_Mechinegun_Semi = 21;
+			public const uint GEAR_HEL_Gun___Mechinegun_Semi = 21;
 			public const uint GEAR_HEL_Rifle_semi = 65;
 			public const uint GEAR_HEL_Shotgun_Auto = 78;
 			public const uint GEAR_HighCal_Pistol = 80;

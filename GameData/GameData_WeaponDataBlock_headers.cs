@@ -4,6 +4,7 @@ namespace GameData
 	{
 		public class Weapon
 		{
+			public const uint _RevolverCannon = 31;
 			public const uint AKM = 7;
 			public const uint BenelliSemi = 15;
 			public const uint BurstRifle = 3;
@@ -27,7 +28,6 @@ namespace GameData
 			public const uint PT8 = 20;
 			public const uint Redhawk = 25;
 			public const uint Revolver = 29;
-			public const uint RevolverCannon = 31;
 			public const uint SCAR = 10;
 			public const uint Shotgun = 4;
 			public const uint Sig = 21;

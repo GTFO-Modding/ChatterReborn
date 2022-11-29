@@ -11,9 +11,11 @@ namespace GameData
 			public const uint Activate_Small_HSU_Stage_1_2 = 29;
 			public const uint Activate_Small_HSU_Stage_1_2_R7_A1_01 = 133;
 			public const uint Activate_Small_HSU_Stage_2_3 = 31;
-			public const uint Activate_Small_HSU_Stage_2_3R7B1 = 153;
+			public const uint Activate_Small_HSU_Stage_2_3_R7B1 = 153;
 			public const uint Activate_Small_HSU_Stage_3_4 = 32;
+			public const uint ActivateSmallHSU_R7A1_V2 = 146;
 			public const uint CentralPowerGeneratorCluster_2 = 63;
+			public const uint CentralPowerGeneratorCluster_3_R5_5_A3 = 96;
 			public const uint CentralPowerGeneratorCluster_3_R6_C3_L2 = 114;
 			public const uint CentralPowerGeneratorCluster_4 = 23;
 			public const uint CentralPowerGeneratorCluster_4_R3 = 30;
@@ -48,6 +50,7 @@ namespace GameData
 			public const uint Gather_Harddrive_Copy = 84;
 			public const uint Gather_Harddrives_6 = 34;
 			public const uint Gather_OSIPs_3_R7C2 = 148;
+			public const uint Gather_OSIPs_4_R5_5_C3 = 103;
 			public const uint Gather_OSIPs_5 = 50;
 			public const uint Gather_OSIPs_6 = 41;
 			public const uint Gather_Partial_Decoders_10 = 11;
@@ -65,7 +68,8 @@ namespace GameData
 			public const uint HSU_DNA_C3L3 = 68;
 			public const uint HSU_DNA_Core_1 = 6;
 			public const uint HSU_DNA_R4 = 46;
-			public const uint HSU_DNA_R5_Copy2 = 71;
+			public const uint HSU_DNA_R5 = 71;
+			public const uint HSU_DNA_R5_5_A3 = 97;
 			public const uint HSU_DNA_R5_Copy = 82;
 			public const uint HSU_DNA_R6 = 108;
 			public const uint HSU_DNA_R7B3 = 131;
@@ -86,21 +90,81 @@ namespace GameData
 			public const uint Reactor_Startup_Waves_6_L2_FAST = 65;
 			public const uint Reactor_Startup_Waves_7_only_defend = 93;
 			public const uint Reactor_Startup_Waves_8 = 7;
-			public const uint RetrieveEssentialItems_1_Cargo = 56;
-			public const uint RetrieveEssentialItems_1_Cargo_R5 = 75;
-			public const uint RetrieveEssentialItems_1_Cargo_R7B3 = 135;
-			public const uint RetrieveEssentialItems_1_Defoggers = 17;
-			public const uint RetrieveEssentialItems_1_Defoggers_no_trickle = 69;
-			public const uint RetrieveEssentialItems_1_MWP = 106;
-			public const uint RetrieveEssentialItems_1_Neonate = 24;
-			public const uint RetrieveEssentialItems_1_Neonate_A1 = 26;
-			public const uint RetrieveEssentialItems_1_Neonate_B2 = 28;
-			public const uint RetrieveEssentialItems_1_R6_C2 = 123;
-			public const uint RetrieveEssentialItems_2_Cargo_Crates = 22;
-			public const uint RetrieveEssentialItems_2_Cryo_cases_B3 = 67;
-			public const uint RetrieveEssentialItems_2_DataSphere = 55;
-			public const uint RetrieveEssentialItems_2_Medical_cooling_case = 36;
-			public const uint RetrieveEssentialItems_CellDefogger = 15;
+			public const uint Retrieve_Essential_Items__1_MWP = 106;
+			public const uint Retrieve_Essential_Items__1_R6_C2 = 123;
+			public const uint Retrieve_Essential_Items__1_R8_A1 = 193;
+			public const uint Retrieve_Essential_Items_1_Cargo = 56;
+			public const uint Retrieve_Essential_Items_1_Cargo_R5 = 75;
+			public const uint Retrieve_Essential_Items_1_Cargo_R7B3 = 135;
+			public const uint Retrieve_Essential_Items_1_Defoggers = 17;
+			public const uint Retrieve_Essential_Items_1_Defoggers_no_trickle = 69;
+			public const uint Retrieve_Essential_Items_1_Neonate = 24;
+			public const uint Retrieve_Essential_Items_1_Neonate_A1 = 26;
+			public const uint Retrieve_Essential_Items_1_Neonate_B2 = 28;
+			public const uint Retrieve_Essential_Items_2_Cargo_Crates = 22;
+			public const uint Retrieve_Essential_Items_2_Cryo_cases_B3 = 67;
+			public const uint Retrieve_Essential_Items_2_DataSphere = 55;
+			public const uint Retrieve_Essential_Items_2_Medical_cooling_case = 36;
+			public const uint Retrieve_Essential_Items_CellDefogger = 15;
+			public const uint Rundown001_A1_HSU_DNA_Core_1 = 166;
+			public const uint Rundown001_B1_Gather_Personnel_IDs_12 = 167;
+			public const uint Rundown001_B2_HSU_DNA_Core_1_1 = 192;
+			public const uint Rundown001_C1_Reactor_Startup_Waves_8 = 163;
+			public const uint Rundown001_C2_Gather_Partial_Decoders_10 = 165;
+			public const uint Rundown001_D1_Reactor_Shutdown = 164;
+			public const uint Rundown002_A1_Retrieve_Essential_Items_2_Cargo_Crates = 168;
+			public const uint Rundown002_B1_ClearAPath_Default = 169;
+			public const uint Rundown002_B2_Distribute_PowerCells_4 = 176;
+			public const uint Rundown002_B3_TerminalUplink_One_Terminal = 177;
+			public const uint Rundown002_B4_Retrieve_Essential_Items_1_Defoggers = 178;
+			public const uint Rundown002_C1_TerminalUplink_Three_Terminals = 179;
+			public const uint Rundown002_C2_Gather_Personnel_IDs_7_with_trickle = 180;
+			public const uint Rundown002_D1_CentralPowerGeneratorCluster_4 = 181;
+			public const uint Rundown002_D2_Reactor_Startup_Waves_10_HARD = 182;
+			public const uint Rundown002_E1_Retrieve_Essential_Items_1_Neonate = 183;
+			public const uint Rundown003_A1_Activate_Small_HSU_Stage_1_2 = 184;
+			public const uint Rundown003_A2_CentralPowerGeneratorCluster_4_R3 = 185;
+			public const uint Rundown003_A3_Reactor_Startup_Waves_6_EASY_1 = 187;
+			public const uint Rundown003_B1_TerminalUplink_Two_Terminals = 188;
+			public const uint Rundown003_B2_Activate_Small_HSU_Stage_2_3 = 189;
+			public const uint Rundown003_C1_HSU_DNA_Core_1 = 190;
+			public const uint Rundown003_D1_Activate_Small_HSU_Stage_3_4 = 191;
+			public const uint Rundown004_A1_L1_Gather_Harddrives_6 = 194;
+			public const uint Rundown004_A1_L2_TerminalUplink_Two_Terminals_Hardrive = 195;
+			public const uint Rundown004_A2_L1_Retrieve_Essential_Items_2_Medical_cooling_case = 196;
+			public const uint Rundown004_A2_L2_HSU_DNA_R4 = 197;
+			public const uint Rundown004_A2_L3_SpecialTerminalCommand_DisableLifeSupport = 198;
+			public const uint Rundown004_A3_L1_ClearAPath_Easy = 199;
+			public const uint Rundown004_A3_L2_Gather_OSIPs_5 = 200;
+			public const uint Rundown004_A3_L3_SpecialTerminalCommand_RapidsAtEnd = 201;
+			public const uint Rundown004_B1_L1_Distribute_PowerCells_3 = 202;
+			public const uint Rundown004_B1_L2_Reactor_Startup_Waves_5 = 203;
+			public const uint Rundown004_B2_L1_CentralPowerGeneratorCluster_4 = 204;
+			public const uint Rundown004_B2_L2_SpecialTerminalCommand = 205;
+			public const uint Rundown004_B2_L3_Gather_OSIPs_6 = 206;
+			public const uint Rundown004_B3_L1_TerminalUplink_Three_Terminals_Four_Verifications = 223;
+			public const uint Rundown004_B3_L2_Retrieve_Essential_Items_2_Cryo_Cases = 224;
+			public const uint Rundown004_B3_L3_SpecialTerminalCommand = 225;
+			public const uint Rundown004_C1_L1_Activate_DataSphere = 207;
+			public const uint Rundown004_C1_L2_TerminalUplink_One_Terminal_10 = 208;
+			public const uint Rundown004_C2_L1_Gather_GLP_15 = 211;
+			public const uint Rundown004_C2_L2_Gather_Personnel_IDs_1 = 210;
+			public const uint Rundown004_C2_L3_Retrieve_Essential_Items_2_DataSphere = 209;
+			public const uint Rundown004_C3_L1_Retrieve_Essential_Items_1_Defoggers_No_Trickle = 212;
+			public const uint Rundown004_C3_L2_CentralPowerGeneratorCluster_2 = 214;
+			public const uint Rundown004_C3_L3_HSU_DNA = 215;
+			public const uint Rundown004_D1_L1_Reactor_Startup_Waves_4_HARD = 216;
+			public const uint Rundown004_D1_L2_SpecialTerminalCommand = 217;
+			public const uint Rundown004_D2_L1_ClearAPath = 218;
+			public const uint Rundown004_D2_L2_CentralPowerGeneratorCluster_4 = 219;
+			public const uint Rundown004_D2_L3_Retrieve_Essential_Items_1_Cargo = 220;
+			public const uint Rundown004_E1_L1_Distribute_PowerCells_2 = 221;
+			public const uint Rundown004_E1_L2_Reactor_Startup_Waves_6_FAST = 222;
+			public const uint Rundown005_A1_L1_SpecialTerminalCommand_Override = 226;
+			public const uint Rundown005_A1_L2_Gather_Plant = 231;
+			public const uint Rundown005_A2_L1_Retrieve_Essential_Items_1_Cargo = 227;
+			public const uint Rundown005_A2_L2_SpecialTerminalCommand_Blackout = 228;
+			public const uint Rundown005_A2_L3_Gather_Harddrive = 230;
 			public const uint SpecialTerminalCommand_A3_rapids_at_end = 61;
 			public const uint SpecialTerminalCommand_Activate_All_HSUs = 104;
 			public const uint SpecialTerminalCommand_B2 = 51;
@@ -128,6 +192,7 @@ namespace GameData
 			public const uint SpecialTerminalCommand_unused = 147;
 			public const uint SpecialTerminalCommand_ZoneScan = 92;
 			public const uint SpecialTerminalCommand_ZoneScan_V2 = 95;
+			public const uint Survival_R5_5_B4 = 98;
 			public const uint Survival_R6_B3 = 128;
 			public const uint Survival_R6_C3 = 111;
 			public const uint Survival_R6_C3_v2 = 116;
@@ -149,29 +214,6 @@ namespace GameData
 			public const uint TerminalUplink_Two_Terminals_R6_B2_L2 = 117;
 			public const uint TerminalUplink_Two_Terminals_R7_B2 = 142;
 			public const uint TimedTerminalSequence_R7D1 = 155;
-			public class ActivateSmallHSU
-			{
-				public class R7A1
-				{
-					public const uint V2 = 146;
-				}
-			}
-			public class CentralPowerGeneratorCluster_3_R5
-			{
-				public const uint _5_A3 = 96;
-			}
-			public class Gather_OSIPs_4_R5
-			{
-				public const uint _5_C3 = 103;
-			}
-			public class HSU_DNA_R5
-			{
-				public const uint _5_A3 = 97;
-			}
-			public class Survival_R5
-			{
-				public const uint _5_B4 = 98;
-			}
 		}
 	}
 }

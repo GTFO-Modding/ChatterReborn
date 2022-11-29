@@ -18,6 +18,7 @@ namespace GameData
 			public const uint Carry_HSU_Small_Stage_2 = 141;
 			public const uint Carry_HSU_Small_Stage_3 = 143;
 			public const uint Carry_HSU_Small_Stage_4 = 145;
+			public const uint Carry_HSU_Small_Stage_4_R3D1 = 175;
 			public const uint Carry_HSU_Small_Stage_5 = 170;
 			public const uint Carry_MWP = 164;
 			public const uint Carry_PortalKey = 166;
@@ -33,6 +34,7 @@ namespace GameData
 			public const uint CONSUMABLE_GlowStick = 114;
 			public const uint CONSUMABLE_GlowStick_Christmas = 130;
 			public const uint CONSUMABLE_GlowStick_Halloween = 167;
+			public const uint CONSUMABLE_GlowStick_Yellow = 174;
 			public const uint CONSUMABLE_GlueGrenade = 115;
 			public const uint CONSUMABLE_Grenade = 136;
 			public const uint CONSUMABLE_LockMelter = 116;

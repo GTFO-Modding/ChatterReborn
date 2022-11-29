@@ -8,7 +8,7 @@ namespace GameData
 			public const uint HackingTools = 15;
 			public const uint Mappers = 10;
 			public const uint MeleeWeapons = 14;
-			public const uint MotionTrackers = 9;
+			public const uint Motion_Trackers = 9;
 			public const uint NanoSwarms = 16;
 			public const uint Pistols = 8;
 			public const uint Revolvers = 7;

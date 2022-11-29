@@ -18,7 +18,7 @@ namespace ChatterReborn.Managers
             m_customTextBlocks = new Dictionary<CustomTextDataBlock, TextDataBlock>();
             AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.Title", "Extras!", CustomTextDataBlock.MoreResponses);
             AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.FirstPerson", "Acknowledgements", CustomTextDataBlock.Acknowledgements);
-            AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.SecondPerson", "Sneak Kill Targets", CustomTextDataBlock.SneakKillTargets);
+            AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.SecondPerson", "Pick a Target", CustomTextDataBlock.SneakKillTargets);
             AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.Directions", "Directions", CustomTextDataBlock.Directions);
             AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.PickTarget", "..Pick Target", CustomTextDataBlock.PickAttackTarget);
             AddNewBlock("ChatterReborn.ExtraCommunicationList.MoreResponses.Combat", "Combat", CustomTextDataBlock.Combat);

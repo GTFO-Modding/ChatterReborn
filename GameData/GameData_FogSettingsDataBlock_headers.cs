@@ -27,9 +27,17 @@ namespace GameData
 			public const uint Fog_light_green_high1_INFECTION__R6D1 = 101;
 			public const uint Fog_light_green_high1_INFECTION_FG1 = 35;
 			public const uint Fog_light_green_high1_INFECTION_FG1_Copy = 45;
+			public const uint Fog_light_green_high1_INFECTION_FG1_R3A2 = 136;
 			public const uint Fog_light_green_high2_FG5 = 69;
 			public const uint Fog_light_green_high6_INFECTION_R7C2_03_Inverted = 117;
 			public const uint Fog_light_green_high8_INFECTION_R7C2_02 = 116;
+			public const uint Fog_light_green_INFECTION_R2D1_1 = 128;
+			public const uint Fog_light_green_INFECTION_R2D1_2 = 129;
+			public const uint Fog_light_green_INFECTION_R2D1_3 = 130;
+			public const uint Fog_light_green_INFECTION_R2D1_4 = 131;
+			public const uint Fog_light_green_INFECTION_R2D1_5 = 132;
+			public const uint Fog_light_green_INFECTION_R2D1_6 = 133;
+			public const uint Fog_light_green_INFECTION_R3A2_high = 137;
 			public const uint Fog_light_green_inv6_LOW_INFECTION_FG3 = 62;
 			public const uint Fog_light_green_low_INFECTION_R7_B3 = 112;
 			public const uint Fog_light_green_low0_INFECTION = 32;
@@ -39,6 +47,7 @@ namespace GameData
 			public const uint Fog_light_green_low175_FG5 = 72;
 			public const uint Fog_light_green_low2_INFECTION = 33;
 			public const uint Fog_light_green_low2_INFECTION_FG1 = 37;
+			public const uint Fog_light_green_low2_INFECTION_R2C2 = 127;
 			public const uint Fog_light_green_low2_INFECTION_R7C2_03_Inverted = 118;
 			public const uint Fog_light_green_low25_FG5 = 73;
 			public const uint Fog_light_green_low3_INFECTION = 42;
@@ -47,12 +56,14 @@ namespace GameData
 			public const uint Fog_light_green_low3_INFECTION_Phase1 = 84;
 			public const uint Fog_light_green_low3_INFECTION_Phase2 = 85;
 			public const uint Fog_light_green_low3_INFECTION_Phase3 = 86;
+			public const uint Fog_light_green_low3_INFECTION_R2D2 = 135;
 			public const uint Fog_light_green_low35_FG5 = 74;
 			public const uint Fog_light_green_low5_INFECTION_FG1 = 39;
 			public const uint Fog_light_green_low5_LOW_INFECTION_FG3 = 61;
 			public const uint Fog_light_green_low6_FG5 = 75;
 			public const uint Fog_light_green_low6_LOW_INFECTION_FG3 = 63;
 			public const uint Fog_light_green_low6_LOW_INFECTION_FG3_R5 = 68;
+			public const uint Fog_light_green_low6_LOW_INFECTION_R6_5_D4 = 108;
 			public const uint Fog_light_green_low8_INFECTION_R7C2_01 = 115;
 			public const uint Fog_light_green_mid0_INFECTION = 99;
 			public const uint Fog_light_high0_FG2 = 53;
@@ -76,7 +87,9 @@ namespace GameData
 			public const uint Fog_light_white_low6_d1 = 97;
 			public const uint Fog_light_white_low6_d1_Infection = 98;
 			public const uint Fog_light_white_low6_Flyer_Arena = 93;
+			public const uint Fog_light_white_low6_R2C1 = 126;
 			public const uint Fog_light_with_soft_layer = 29;
+			public const uint Fog_light_with_soft_layer_R1A1 = 139;
 			public const uint Fog_lightest_White_low_R7B1 = 122;
 			public const uint Fog_lightest_White_low1_2_INFECTION = 47;
 			public const uint Fog_lightest_White_low1_INFECTION = 30;
@@ -106,6 +119,8 @@ namespace GameData
 			public const uint Fog_very_light_White_low_dispersed = 60;
 			public const uint Fog_very_light_White_low_layer = 19;
 			public const uint Fog_very_light_White_low_layer_2 = 58;
+			public const uint Fog_very_light_White_low_layer_R1B2_alt = 138;
+			public const uint Fog_very_light_White_low_layer_R5A2 = 140;
 			public const uint Fog_very_light_White_low_layer_R7B3 = 111;
 			public const uint Fog_very_light_White_low_layer_thicker = 89;
 			public const uint Fog_very_light_White_low_layer_thicker_Copy = 91;
@@ -118,10 +133,7 @@ namespace GameData
 			public const uint Fog_very_light_White_R6D1 = 102;
 			public const uint Fog_very_light_White_R6D2 = 105;
 			public const uint Fog_very_light_White_R7D1 = 124;
-			public class Fog_light_green_low6_LOW_INFECTION_R6
-			{
-				public const uint _5_D4 = 108;
-			}
+			public const uint Rundown004_B2_L1_Fog_light_inverted_high8_FG2 = 125;
 		}
 	}
 }

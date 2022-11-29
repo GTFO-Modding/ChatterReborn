@@ -1,61 +1,61 @@
-﻿using ChatterReborn.Extra;
+﻿using AIGraph;
+using ChatterReborn.Extra;
 using ChatterReborn.Utils;
 using LevelGeneration;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ChatterReborn.Managers
 {
-    [Obsolete("This should be reworked since it's useless at the moment..")]
+
     public class LG_PickupItemManager : ChatterManager<LG_PickupItemManager>
     {
-        protected override void Setup()
-        {
-            this.m_pickUp_descriptors = new DictionaryExtended<int, LG_PickupItemDescriptor>();
-           
-        }
-
-
-        public static bool GetItemsFromStorage(LG_ResourceContainer_Storage storage, out List<Item> storageItems)
+        public static bool GetItemsFromStorageContainer(LG_ResourceContainer_Storage storage, out List<Item> storageItems)
         {
             storageItems = new List<Item>();
-            foreach (var desc in Current.m_pickUp_descriptors)
+            var boxColliders = storage.GetComponentsInChildren<BoxCollider>();
+            if (boxColliders != null && boxColliders.Count > 0)
             {
-                if (desc.Value != null && desc.Value.m_item != null)
+                ChatterDebug.LogMessage("Got " + boxColliders.Length + " box colliders from storage container " + storage.name);
+
+                Collider[] colliders = Physics.OverlapSphere(storage.transform.position, 2f, LayerManager.MASK_APPLY_CARRY_ITEM, QueryTriggerInteraction.Ignore);
+
+                if (colliders.Length > 0)
                 {
-                    if (desc.Value.m_storage != null)
+                    for (int i = 0; i < colliders.Length; i++)
                     {
-                        if (desc.Value.m_storage == storage)
+                        Collider collider = colliders[i];
+                        var itemComp = collider.GetComponentInParent<Item>();
+                        if (itemComp != null)
                         {
-                            storageItems.Add(desc.Value.m_item);
+                            bool isInside = false;
+                            for (int k = 0; k < boxColliders.Count; k++)
+                            {
+                                BoxCollider bc = boxColliders[k];
+                                if (bc.bounds.Contains(itemComp.transform.position))
+                                {
+                                    isInside = true;
+                                    break;
+                                }
+                            }
+                            ChatterDebug.LogMessage("\tAn item detected -> " + itemComp.PublicName + " is in resource container : " + isInside);
+                            if (isInside)
+                            {
+                                storageItems.Add(itemComp);
+                            }                            
                         }
                     }
                 }
             }
+            else
+            {
+                ChatterDebug.LogError("Couldn't get box colliders!!");
+            }
             return storageItems.Count > 0;
         }
 
-        public override void OnLevelCleanUp()
-        {
-            this.m_pickUp_descriptors.Clear();
-        }
-
-        public static void SetStorage(Item targetItem, LG_ResourceContainer_Storage storage)
-        {
-            foreach (var desc in Current.m_pickUp_descriptors)
-            {
-                if (desc.Value != null && desc.Value.m_item == targetItem)
-                {
-                    desc.Value.m_storage = storage;
-                    Current.DebugPrint("Setting an origin storage to " + desc.Value.m_item.name);
-                    return;
-                }
-            }
-        }
 
 
-        private DictionaryExtended<int, LG_PickupItemDescriptor> m_pickUp_descriptors;
-
-        public static DictionaryExtended<int, LG_PickupItemDescriptor> PickUpDescriptors { get => Current.m_pickUp_descriptors; }
     }
 }

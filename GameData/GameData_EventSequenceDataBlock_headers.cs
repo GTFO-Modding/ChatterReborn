@@ -4,7 +4,7 @@ namespace GameData
 	{
 		public class EventSequence
 		{
-			public const uint ApexDefendEvent = 2;
+			public const uint Apex_Defend_Event = 2;
 			public const uint Decontamination = 1;
 		}
 	}

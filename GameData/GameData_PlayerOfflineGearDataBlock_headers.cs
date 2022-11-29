@@ -4,7 +4,7 @@ namespace GameData
 	{
 		public class PlayerOfflineGear
 		{
-			public const uint Autopistolstaggering = 45;
+			public const uint Autopistol_staggering = 45;
 			public const uint Bat = 55;
 			public const uint Bio_Tracker = 18;
 			public const uint BullpupAuto = 40;

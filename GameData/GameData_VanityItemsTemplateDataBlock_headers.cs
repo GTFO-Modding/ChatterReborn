@@ -18,6 +18,7 @@ namespace GameData
 			public const uint Backpack013Security = 70;
 			public const uint Backpack014Security = 80;
 			public const uint Backpack015Construction = 81;
+			public const uint Backpack016Gamescom = 105;
 			public const uint Headgear001 = 5;
 			public const uint Headgear002Hackett = 20;
 			public const uint Headgear002HackettB = 42;
@@ -39,6 +40,7 @@ namespace GameData
 			public const uint Headgear014Garden = 83;
 			public const uint Headgear015Construction = 84;
 			public const uint Headgear016Security = 85;
+			public const uint Headgear016SecurityHalloween = 108;
 			public const uint Legs001 = 4;
 			public const uint Legs002Hackett = 10;
 			public const uint Legs003Woods = 16;
@@ -52,6 +54,7 @@ namespace GameData
 			public const uint Legs009Lab = 78;
 			public const uint Legs010Garden = 86;
 			public const uint Legs011Garden = 101;
+			public const uint Legs012Gamescom = 102;
 			public const uint Palette002Hackett = 7;
 			public const uint Palette003Woods = 25;
 			public const uint Palette004Dauda = 26;
@@ -71,6 +74,8 @@ namespace GameData
 			public const uint Palette021Garden = 98;
 			public const uint Palette022Security = 99;
 			public const uint Palette023Construction = 93;
+			public const uint Palette024Black = 109;
+			public const uint Palette025Red = 107;
 			public const uint Torso001 = 2;
 			public const uint Torso001b = 40;
 			public const uint Torso001c = 41;
@@ -84,6 +89,7 @@ namespace GameData
 			public const uint Torso009Lab = 77;
 			public const uint Torso010Garden = 87;
 			public const uint Torso011Garden = 100;
+			public const uint Torso012Gamescom = 103;
 		}
 	}
 }
