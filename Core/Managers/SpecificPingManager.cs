@@ -140,11 +140,11 @@ namespace ChatterReborn.Managers
                                     float storageItemDistance = Vector3.Distance(storageItem.transform.position, pingWorldPos);
                                     if (bestStorageItem == null || closestStorageItemDistance > storageItemDistance)
                                     {
-                                        if (TryGetDescriptorFromItem(storageItem.ItemDataBlock.persistentID, out ItemPingDescriptor descriptorBase))
+                                        if (TryGetDescriptorFromItem(storageItem.ItemDataBlock.persistentID, out ItemPingDescriptor descriptor))
                                         {
                                             bestStorageItem = storageItem;
                                             closestStorageItemDistance = storageItemDistance;
-                                            bestItemPingDescriptor = descriptorBase;
+                                            bestItemPingDescriptor = descriptor;
                                             bestItemPingDescriptor.TryToApplyAmmo(storageItem);
                                         }
                                     }
