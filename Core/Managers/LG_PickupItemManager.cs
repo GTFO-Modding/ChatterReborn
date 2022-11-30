@@ -1,20 +1,17 @@
-﻿using AIGraph;
-using ChatterReborn.Extra;
-using ChatterReborn.Utils;
+﻿using ChatterReborn.Utils;
 using LevelGeneration;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChatterReborn.Managers
 {
 
-    public class LG_PickupItemManager : ChatterManager<LG_PickupItemManager>
+    public class LevelGenerationExtManager : ChatterManager<LevelGenerationExtManager>
     {
         public static bool GetItemsFromStorageContainer(LG_ResourceContainer_Storage storage, out List<Item> storageItems)
         {
             storageItems = new List<Item>();
-            var boxColliders = storage.GetComponentsInChildren<BoxCollider>();
+            Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppArrayBase<BoxCollider> boxColliders = storage.GetComponentsInChildren<BoxCollider>();
             if (boxColliders != null && boxColliders.Count > 0)
             {
                 ChatterDebug.LogMessage("Got " + boxColliders.Length + " box colliders from storage container " + storage.name);

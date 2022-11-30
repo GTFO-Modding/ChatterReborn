@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChatterReborn.Extra
 {
-    public class TerminalPingDescriptor : ItemPingDescriptorBase
+    public class TerminalPingDescriptor : ItemPingDescriptor
     {
         public LG_ComputerTerminal m_targetItem;
     }

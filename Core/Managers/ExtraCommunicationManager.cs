@@ -4,13 +4,10 @@ using ChatterReborn.Data;
 using ChatterReborn.Utils;
 using GameData;
 using HarmonyLib;
-using Localization;
 using Player;
 using SNetwork;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using Il2CPPGeneric = Il2CppSystem.Collections.Generic;
 
 namespace ChatterReborn.Managers
 {

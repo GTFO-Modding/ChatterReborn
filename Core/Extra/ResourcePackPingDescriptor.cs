@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ChatterReborn.Extra
 {
-    public class ResourcePackPingDescriptor : ItemPingDescriptorBase
+    public class ResourcePackPingDescriptor : ItemPingDescriptor
     {
 
         public uint m_dialogID_Low;

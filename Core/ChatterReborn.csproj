@@ -113,7 +113,6 @@
     <Compile Include="Machines\DramaChatterMachine.cs" />
     <Compile Include="ChatterEvent\IChatterEventListener.cs" />
     <Compile Include="Extra\ItemPingDescriptor.cs" />
-    <Compile Include="Extra\ItemPingDescriptorBase.cs" />
     <Compile Include="Attributes\IL2CPPTypeAttribute.cs" />
     <Compile Include="Extra\ResourcePackPingDescriptor.cs" />
     <Compile Include="Extra\TerminalPingDescriptor.cs" />

@@ -12,12 +12,12 @@ namespace ChatterReborn.Managers
 {
     public class SpecificPingManager : ChatterManager<SpecificPingManager>
     {
-        private DictionaryExtended<ItemType, ItemPingDescriptorBase> m_itemsDescriptor;
+        private DictionaryExtended<ItemType, ItemPingDescriptor> m_itemsDescriptor;
 
 
         protected override void Setup()
         {
-            m_itemsDescriptor = new DictionaryExtended<ItemType, ItemPingDescriptorBase>();
+            m_itemsDescriptor = new DictionaryExtended<ItemType, ItemPingDescriptor>();
             m_itemsDescriptor.Add(ItemType.Ammo, new ResourcePackPingDescriptor
             {
                 m_dialogID = GD.PlayerDialog.found_ammo,
@@ -103,12 +103,11 @@ namespace ChatterReborn.Managers
                 m_dialogID = GD.PlayerDialog.CL_ThereIsAFoamMineHere,
                 m_style = eNavMarkerStyle.PlayerPingCarryItem,
             });
-            base.Setup();
         }
 
         
 
-        public static bool TryToGetItemPingDescriptor(Vector3 pingWorldPos, GameObject targetGameObject, out ItemPingDescriptorBase bestItemPingDescriptor)
+        public static bool TryToGetItemPingDescriptor(Vector3 pingWorldPos, GameObject targetGameObject, out ItemPingDescriptor bestItemPingDescriptor)
         {
             bestItemPingDescriptor = null;
             Item targetItem = targetGameObject.GetComponentInParent<Item>();
@@ -129,8 +128,8 @@ namespace ChatterReborn.Managers
                 if (lg_ResourceContainer_Storage != null)
                 {
                     float closestStorageItemDistance = 0f;
-                    Item overrideComponent = null;
-                    if (LG_PickupItemManager.GetItemsFromStorageContainer(lg_ResourceContainer_Storage, out List<Item> storageItems))
+                    Item bestStorageItem = null;
+                    if (LevelGenerationExtManager.GetItemsFromStorageContainer(lg_ResourceContainer_Storage, out List<Item> storageItems))
                     {
                         foreach (Item storageItem in storageItems)
                         {
@@ -139,11 +138,11 @@ namespace ChatterReborn.Managers
                                 if (storageItem.PickupInteraction != null && storageItem.PickupInteraction.IsActive)
                                 {
                                     float storageItemDistance = Vector3.Distance(storageItem.transform.position, pingWorldPos);
-                                    if (overrideComponent == null || closestStorageItemDistance > storageItemDistance)
+                                    if (bestStorageItem == null || closestStorageItemDistance > storageItemDistance)
                                     {
-                                        if (TryGetDescriptorFromItem(storageItem.ItemDataBlock.persistentID, out ItemPingDescriptorBase descriptorBase))
+                                        if (TryGetDescriptorFromItem(storageItem.ItemDataBlock.persistentID, out ItemPingDescriptor descriptorBase))
                                         {
-                                            overrideComponent = storageItem;
+                                            bestStorageItem = storageItem;
                                             closestStorageItemDistance = storageItemDistance;
                                             bestItemPingDescriptor = descriptorBase;
                                             bestItemPingDescriptor.TryToApplyAmmo(storageItem);
@@ -192,7 +191,7 @@ namespace ChatterReborn.Managers
         }
 
 
-        public static bool TryGetDescriptorFromItem(uint itemID, out ItemPingDescriptorBase itemPingDescriptorBase)
+        public static bool TryGetDescriptorFromItem(uint itemID, out ItemPingDescriptor itemPingDescriptorBase)
         {
             return Current.m_itemsDescriptor.TryGetValue((ItemType)itemID, out itemPingDescriptorBase);
         }

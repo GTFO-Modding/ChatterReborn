@@ -100,7 +100,7 @@ namespace ChatterReborn.Managers
             if (target != null && targetGameObject != null && __instance != null && (__instance.IsLocallyOwned || __instance.IsBotOwned()))
             {
                 DevToolManager.LogComponents(targetGameObject);
-                if (SpecificPingManager.TryToGetItemPingDescriptor(worldPos, targetGameObject, out ItemPingDescriptorBase bestItemPingDescriptor))
+                if (SpecificPingManager.TryToGetItemPingDescriptor(worldPos, targetGameObject, out ItemPingDescriptor bestItemPingDescriptor))
                 {
                     bestItemPingDescriptor.PlayPingDialog(__instance);
                 }
