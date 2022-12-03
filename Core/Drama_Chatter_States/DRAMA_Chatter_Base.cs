@@ -16,6 +16,10 @@ namespace ChatterReborn.Drama_Chatter_States
 {
     public class DRAMA_Chatter_Base : MachineState<DramaChatterMachine>
     {
+
+        public virtual bool IsCombatState => false;
+
+
         protected PlayerAgent Owner
         {
             get
@@ -268,7 +272,7 @@ namespace ChatterReborn.Drama_Chatter_States
 
         public virtual void OnThrowConsumable(ItemEquippable itemthrown)
         {
-            if (itemthrown.Owner.Alive && this.Machine.AllowedToParticipate)
+            if (itemthrown.Owner.Alive && this.m_machine.AllowedToParticipate)
             {
                 var playerBackpack = PlayerBackpackManager.GetBackpack(itemthrown.Owner.Owner);
                 if (playerBackpack != null && playerBackpack.AmmoStorage != null && playerBackpack.AmmoStorage.ConsumableAmmo.BulletsInPack == 0)
@@ -317,7 +321,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 weightHandler.AddValue(GD.PlayerDialog.bit_by_parasite, 2f);
                 weightHandler.AddValue(GD.PlayerDialog.get_parasite, 1f);
 
-                if (ConfigurationManager.OnExplodeSpitterCommentsEnabled && UnityEngine.Random.value < 0.65 && this.Machine.AllowedToParticipate)
+                if (ConfigurationManager.OnExplodeSpitterCommentsEnabled && UnityEngine.Random.value < 0.65 && this.m_machine.AllowedToParticipate)
                 {
                     PlayerDialogManager.WantToStartDialogForced(weightHandler.Best.Value, playerAgent);
                 }
@@ -352,9 +356,9 @@ namespace ChatterReborn.Drama_Chatter_States
 
         protected void OnRevivedComment()
         {
-            if (ConfigurationManager.RevivedCommentEnabled && this.Machine.AllowedToParticipate)
+            if (ConfigurationManager.RevivedCommentEnabled && this.m_machine.AllowedToParticipate)
             {
-                PrisonerDialogManager.WantToStartLocalDialog(GD.PlayerDialog.CL_ThankYou);
+                this.Owner.WantToStartDialog(GD.PlayerDialog.CL_ThankYou, false);
             }
         }
 
@@ -386,7 +390,6 @@ namespace ChatterReborn.Drama_Chatter_States
 
         protected PlayerAgent m_owner;
 
-        public DramaChatterMachine Machine => m_machine;
 
         protected bool m_isbot;
 
@@ -412,14 +415,6 @@ namespace ChatterReborn.Drama_Chatter_States
         private bool m_shout_triggered;
 
         private float m_next_shout_trigger_time;
-
-        public DRAMA_State StateEnum
-        {
-            get
-            {
-                return (DRAMA_State)this.ENUM_ID;
-            }
-        }
 
 
         protected new void DebugPrint(string txt)

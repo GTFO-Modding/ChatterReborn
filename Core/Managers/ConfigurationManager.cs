@@ -1,10 +1,9 @@
-﻿using BepInEx;
-using BepInEx.Configuration;
-using ChatterReborn.Attributes;
+﻿using ChatterReborn.Attributes;
 using ChatterReborn.Data;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using BepInEx.Configuration;
 
 namespace ChatterReborn.Managers
 {
@@ -63,7 +62,7 @@ namespace ChatterReborn.Managers
         }
 
 
-        public static readonly string CONFIG_PATH = Path.Combine(Paths.ConfigPath, "ChatterReborn.cfg");
+        public static readonly string CONFIG_PATH = Path.Combine(BepInEx.Paths.ConfigPath, "ChatterReborn.cfg");
 
         //public static readonly string CONFIG_PATH = Path.Combine(Paths.ConfigPath, "ChatterRebornDev.cfg");
 
@@ -107,7 +106,7 @@ namespace ChatterReborn.Managers
         [ConfigurationToggle("Force Player in Team Scan", "If set to true and you are pointing/aiming at a player that's not in a team scan, your character will irritably shout at them. ", false)]
         public static bool IrritatedScanningCommentEnabled;
 
-        [ConfigurationToggle("Fog Turbine Carrying Comment", "Your character will warn others to stay close when carrying a Fog turbine. (Currently not working)", false)]
+        [ConfigurationToggle("Fog Turbine Carrying Comment", "Your character will warn others to stay close when carrying a Fog turbine.", false)]
         public static bool HeavyFogRepellerCommmentEnabled;
 
 

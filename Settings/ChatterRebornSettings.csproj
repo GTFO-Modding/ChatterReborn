@@ -45,7 +45,6 @@
     <Compile Include="ChatterRebornTokens.cs" />
     <Compile Include="DramaSettings.cs" />
     <Compile Include="EnemyScannerSettings.cs" />
-    <Compile Include="LogSettings.cs" />
     <Compile Include="MiscSettings.cs" />
     <Compile Include="PlayerBotSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -78,7 +78,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 return;
             }
 
-            if (!this.Machine.AllowedToParticipate)
+            if (!this.m_machine.AllowedToParticipate)
             {
                 return;
             }

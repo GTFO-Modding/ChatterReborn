@@ -7,8 +7,6 @@ namespace ChatterReborn.Managers
     public class DES_Manager : ChatterManager<DES_Manager>
     {
 
-
-
         public override void Update()
         {
             if (!m_hasScanner)

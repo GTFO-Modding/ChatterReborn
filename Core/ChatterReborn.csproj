@@ -45,11 +45,6 @@
     <Compile Include="ChatterEvent\TextCommandEvent.cs" />
     <Compile Include="ChatterEvent\WardenObjectiveStatus.cs" />
     <Compile Include="ChatterRebornEntry.cs" />
-    <Compile Include="CombatStates\COMBAT_Base.cs" />
-    <Compile Include="CombatStates\COMBAT_Hidden.cs" />
-    <Compile Include="CombatStates\COMBAT_None.cs" />
-    <Compile Include="CombatStates\COMBAT_Regular.cs" />
-    <Compile Include="CombatStates\COMBAT_Extreme.cs" />
     <Compile Include="Components\AutoCommunicator.cs" />
     <Compile Include="Components\EnemyDramaBehavior.cs" />
     <Compile Include="Components\PlayerBotActionsMonitor\PlayerBotActionAttackDescriptorMonitor.cs" />
@@ -77,13 +72,10 @@
     <Compile Include="Extra\PlayerDialogNode.cs" />
     <Compile Include="Extra\PlayerBotMonitorCollection.cs" />
     <Compile Include="Extra\PlayerDialogNodeMenu.cs" />
-    <Compile Include="Machines\CombatStateMachine.cs" />
-    <Compile Include="Machines\MusicControlMachine.cs" />
     <Compile Include="Managers\AgentDamageManager.cs" />
     <Compile Include="Managers\ExtraTextDataBlockManager.cs" />
     <Compile Include="Managers\PlayerAgentStateManager.cs" />
     <Compile Include="Managers\TextDataBlockExtendedManager.cs" />
-    <Compile Include="Music\MusicStateBase.cs" />
     <Compile Include="Utils\AssemblyUtils.cs" />
     <Compile Include="Utils\ChatterPatcher.cs" />
     <Compile Include="Utils\ChatterPatcherBase.cs" />
@@ -93,7 +85,9 @@
     <Compile Include="Utils\ExtendedStringUtils.cs" />
     <Compile Include="Utils\Il2cppPackager.cs" />
     <Compile Include="Utils\JsonUtils.cs" />
+    <Compile Include="Utils\Machine\MachineStateBase.cs" />
     <Compile Include="Utils\Machine\StateMachineBase.cs" />
+    <Compile Include="Utils\Machine\StateMachineExtended.cs" />
     <Compile Include="Utils\MethodTokenName.cs" />
     <Compile Include="Utils\MethodTokenUtils.cs" />
     <Compile Include="Utils\MinMaxTimer.cs" />
@@ -132,7 +126,6 @@
     <Compile Include="Extra\ResourceFirstPersonDialog.cs" />
     <Compile Include="Machines\WieldingItemMachine.cs" />
     <Compile Include="Managers\IChatterManager.cs" />
-    <Compile Include="Extra\CustomElementUtils.cs" />
     <Compile Include="Patches\Patch_WardenObjectiveManager.cs" />
     <Compile Include="Utils\GameDataBlockUtils.cs" />
     <Compile Include="Managers\ChainedPuzzleDialogManager.cs" />
@@ -200,9 +193,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CoreReferences\core\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Addons-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -210,43 +202,42 @@
     </Reference>
     <Reference Include="BepInEx.Core, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\R7.3 Vanilla\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\BepInEx.Core.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Preloader.Core, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\R7.3 Vanilla\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Unity.Common, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\R7.3 Vanilla\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\R7.3 Vanilla\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
     </Reference>
     <Reference Include="Cpp2IL.Core">
-      <HintPath>..\..\CoreReferences\core\Cpp2IL.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\Cpp2IL.Core.dll</HintPath>
     </Reference>
     <Reference Include="GlobalFramework-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CoreReferences\interop\GlobalFramework-ASM.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppInterop.Common">
-      <HintPath>..\..\CoreReferences\core\Il2CppInterop.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\Il2CppInterop.Common.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppInterop.Generator">
-      <HintPath>..\..\CoreReferences\core\Il2CppInterop.Generator.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\Il2CppInterop.Generator.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppInterop.HarmonySupport">
-      <HintPath>..\..\CoreReferences\core\Il2CppInterop.HarmonySupport.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\Il2CppInterop.HarmonySupport.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppInterop.Runtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CoreReferences\core\Il2CppInterop.Runtime.dll</HintPath>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CoreReferences\interop\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Modules-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

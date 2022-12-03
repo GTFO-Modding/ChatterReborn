@@ -2,7 +2,7 @@
 
 namespace ChatterReborn.Utils.Machine
 {
-    public class StateMachine<S> : StateMachineBase where S : MachineStateBase
+    public abstract class StateMachine<MS> : StateMachineBase where MS : MachineStateBase
     {
 
         public override bool DEBUG_ENABLED
@@ -13,7 +13,7 @@ namespace ChatterReborn.Utils.Machine
             }
             set
             {
-                m_debug_enabled = true;
+                m_debug_enabled = value;
                 if (this.m_states != null)
                 {
                     foreach (var state in this.m_states)
@@ -28,8 +28,7 @@ namespace ChatterReborn.Utils.Machine
             }
         }
 
-        public virtual bool IsLocallyOwned => true;
-        protected S AddState(int stateID, S instance)
+        protected MS AddState(int stateID, MS instance)
         {
             instance.DEBUG_ENABLED = this.DEBUG_ENABLED;            
             instance.SetMachine(this);
@@ -39,18 +38,13 @@ namespace ChatterReborn.Utils.Machine
             return instance;
         }
 
-        protected virtual S AddState(Enum stateEnum, S stateInstance)
+        protected virtual MS AddState(Enum stateEnum, MS stateInstance)
         {
             int id = Convert.ToInt32(stateEnum);
             return this.AddState(id, stateInstance);
         }
 
-        protected void SetupEnum<E>() where E : Enum
-        {
-            this.m_state_count = Enum.GetValues(typeof(E)).Length;
 
-            this.m_states = new S[m_state_count];
-        }
 
         public override void ChangeState(Enum state)
         {
@@ -62,12 +56,21 @@ namespace ChatterReborn.Utils.Machine
             this.ChangeState(this.m_states[stateID]);
         }
 
-        public void ChangeState(S state)
+        public void ChangeState(MS state)
         {
             this.m_last_state = this.m_current_state;
+
+            if (this.m_last_state != null)
+            {
+                this.OnLastState(Convert.ToInt32(this.m_last_state.ENUM_ID));
+            }
+            
             this.m_current_state = state;
             this.m_current_state.StateChangeTime = Clock.Time;
             this.m_changeStateTime = Clock.Time;
+
+            this.OnCurrentState(Convert.ToInt32(this.m_current_state.ENUM_ID));
+
             if (this.IsLocallyOwned)
             {
                 if (this.m_last_state != null)
@@ -111,7 +114,7 @@ namespace ChatterReborn.Utils.Machine
 
         }
 
-        public S StartState
+        public MS StartState
         {
             get
             {
@@ -126,37 +129,32 @@ namespace ChatterReborn.Utils.Machine
 
         public override void Reset()
         {
-            this.ChangeState(this.m_start_state);
+            if (this.m_start_state != null)
+            {
+                this.ChangeState(this.m_start_state);
+            }            
         }
 
 
 
-        public S GetState(int id)
+        public MS GetState(int id)
         {
             return this.m_states[id];
         }
 
-        public S GetState(Enum stateEnum)
+        public MS GetState(Enum stateEnum)
         {
             return this.m_states[Convert.ToInt32(stateEnum)];
         }
 
-        public S[] m_states;
 
-        public S m_last_state;
+        public MS[] m_states;
 
-        public S m_current_state = Activator.CreateInstance<S>();
+        public MS m_last_state;
 
-        private S m_start_state;
+        public MS m_current_state = Activator.CreateInstance<MS>();
 
-        public float m_changeStateTime;
-
-        protected bool m_IsSetup;
-
-        public int m_state_count;
-
-        protected float m_localDeltaRef;
-        public float m_localDelta;
+        private MS m_start_state;
 
         private bool m_debug_enabled;
     }

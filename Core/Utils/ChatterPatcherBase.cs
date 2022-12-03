@@ -17,7 +17,7 @@ namespace ChatterReborn.Utils
 
 
 
-        protected void Patch(Type myclass, Type classType, MethodTokenName methodName, HarmonyPatchType patchType, MethodType methodType = MethodType.Normal ,BindingFlags binding = BindingFlags.Default, Type[] types = null)
+        protected void Patch(Type myclass, Type classType, MethodToken methodName, HarmonyPatchType patchType, MethodType methodType = MethodType.Normal ,BindingFlags binding = BindingFlags.Default, Type[] types = null)
         {
 
             MethodInfo methodInfo = null;

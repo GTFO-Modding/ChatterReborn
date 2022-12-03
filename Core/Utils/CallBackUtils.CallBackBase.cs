@@ -22,6 +22,9 @@ namespace ChatterReborn.Utils
             public bool Started { get; set; }
 
 
+            
+
+
             protected void Queue(DelayValue timer)
             {
                 if (timer <= 0f)

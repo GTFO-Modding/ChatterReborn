@@ -11,13 +11,13 @@ using UnityEngine;
 
 namespace ChatterReborn.Machines
 {
-    public class WieldingItemMachine : StateMachine<WI_Base>
+    public class WieldingItemMachine : StateMachineExtended<WI_Base, WI_State>
     {
 
         public void Setup(LocalPlayerAgent owner)
         {
             this.m_owner = owner;
-            this.SetupEnum<WI_State>();
+            this.SetupMachine();
             this.AddState(WI_State.Deciding, new WI_Deciding());
             this.AddState(WI_State.EnemyScanning, new WI_EnemyScanning());
             this.AddState(WI_State.EnemyScanResults, new WI_EnemyScanResults());                            

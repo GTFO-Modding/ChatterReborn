@@ -1,47 +1,47 @@
 ﻿namespace ChatterReborn.Utils
 {
-    public struct MethodTokenName
+    public struct MethodToken
     {
 
 
-        public static implicit operator string(MethodTokenName token)
+        public static implicit operator string(MethodToken token)
         {
             return token.m_name;
         }
 
 
-        public static implicit operator uint(MethodTokenName token)
+        public static implicit operator uint(MethodToken token)
         {
             return token.m_tokenID;
         }
 
 
-        public static implicit operator MethodTokenName(string name)
+        public static implicit operator MethodToken(string name)
         {
-            return new MethodTokenName(name);
+            return new MethodToken(name);
         }
 
 
-        public static implicit operator MethodTokenName(uint tokenID)
+        public static implicit operator MethodToken(uint tokenID)
         {
-            return new MethodTokenName(tokenID);
+            return new MethodToken(tokenID);
         }
 
 
 
-        public MethodTokenName(uint tokenID)
+        public MethodToken(uint tokenID)
         {
             this = default;
             m_tokenID  = tokenID;
         }
 
-        public MethodTokenName(string name)
+        public MethodToken(string name)
         {
             this = default;
             m_name  = name;
         }
 
-        public MethodTokenName(string name, uint tokenID)
+        public MethodToken(string name, uint tokenID)
         {
             m_tokenID = tokenID;
             m_name  = name;

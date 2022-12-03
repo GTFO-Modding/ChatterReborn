@@ -13,12 +13,12 @@ using UnityEngine;
 
 namespace ChatterReborn.Machines
 {
-    public class DramaChatterMachine : StateMachine<DRAMA_Chatter_Base>, IChatterEventListener<PlayerDamageEvent>, IChatterEventListener<EnemyDamageEvent>, IChatterEventListener<ScoutScreamEvent>
+    public class DramaChatterMachine : StateMachineExtended<DRAMA_Chatter_Base, DRAMA_State>, IChatterEventListener<PlayerDamageEvent>, IChatterEventListener<EnemyDamageEvent>, IChatterEventListener<ScoutScreamEvent>
     {
         public void Setup(PlayerAgent playerAgent)
         {
             this.DEBUG_ENABLED = DramaSettings.MachineDebugEnabled;
-            this.SetupEnum<DRAMA_State>();
+            this.SetupMachine();
             this.AddState(DRAMA_State.ElevatorIdle, new DRAMA_Chatter_ElevatorIdle());
             this.AddState(DRAMA_State.ElevatorGoingDown, new DRAMA_Chatter_ElevatorGoingDown());
             this.AddState(DRAMA_State.Exploration, new DRAMA_Chatter_Exploration());
@@ -38,7 +38,7 @@ namespace ChatterReborn.Machines
             SetupHurtIntensity();
             
             DramaChatterManager.Current.m_updateAction += this.Update;
-            this.WantToSyncDramaState(DramaManager.CurrentStateEnum);
+            
             DramaChatterManager.EnableParticipation(this.CharacterID, true);
             ChatterEventListenerHandler<EnemyDamageEvent>.RegisterListener(this);
             ChatterEventListenerHandler<PlayerDamageEvent>.RegisterListener(this);
@@ -52,16 +52,12 @@ namespace ChatterReborn.Machines
             }
 
 
-            m_combatMachine = new CombatStateMachine();
-            m_combatMachine.Setup(playerAgent);
-
 
             this.StartState = this.GetState(DRAMA_State.ElevatorIdle);
             this.m_IsSetup = true;
         }
 
 
-        private CombatStateMachine m_combatMachine;
         
        
         private CallBackUtils.CallBack m_thanksCallBack;
@@ -150,7 +146,7 @@ namespace ChatterReborn.Machines
                 return;
             }
 
-            if (ConfigurationManager.VoiceIntensityAdapterEnabled && this.CurrentState is DRAMA_Chatter_Combat)
+            if (ConfigurationManager.VoiceIntensityAdapterEnabled && this.m_current_state.IsCombatState)
             {
                 DRAMA_State switchState = DRAMA_State.Combat;
 
@@ -218,7 +214,6 @@ namespace ChatterReborn.Machines
                 this.CheckResourcePackReceived();
             }
 
-            m_combatMachine.UpdateState();
             this.UpdateCombatState();
             this.UpdateIntensity();
             this.UpdateVoiceIntensity();            
@@ -233,15 +228,13 @@ namespace ChatterReborn.Machines
             }
         }
 
-        public void ChangeState(DRAMA_State state)
+        public new void ChangeState(DRAMA_State state)
         {
-            m_currentDramaState = state;
             ChatterDebug.LogWarning("Changing to State " + state + " for characterID " + this.Owner.CharacterID);
             base.ChangeState(state);
         }
 
 
-        private DRAMA_State m_currentDramaState;
 
         public float LastStateChangeTime
         {
@@ -376,7 +369,6 @@ namespace ChatterReborn.Machines
         private PlayerAgent m_owner;
 
         public bool HasLastCombatData { get; set; }
-        public DRAMA_State CurrentDramaState { get => m_currentDramaState; }
 
         public CombatData m_lastCombatData;
     }

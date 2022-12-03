@@ -1,6 +1,5 @@
 ﻿using ChatterReborn.ChatterEvent;
 using ChatterReborn.Data;
-using ChatterReborn.Machines;
 using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using GameData;
@@ -90,7 +89,7 @@ namespace ChatterReborn.Drama_Chatter_States
 
 
 
-            this.m_heat_level = Math.Max(this.Machine.Intensity, this.m_heat_level);
+            this.m_heat_level = Math.Max(this.m_machine.Intensity, this.m_heat_level);
         }
 
 
@@ -134,14 +133,14 @@ namespace ChatterReborn.Drama_Chatter_States
 
         public void UpdateCombatChatter()
         {
-            if (this.Machine.Intensity < Combat_Chatter_Tension.x)
+            if (this.m_machine.Intensity < Combat_Chatter_Tension.x)
             {
                 return;
             }
 
 
 
-            float tension_val = (Mathf.Min(this.Machine.Intensity, Combat_Chatter_Tension.y) - Combat_Chatter_Tension.x) / (Combat_Chatter_Tension.y - Combat_Chatter_Tension.x);
+            float tension_val = (Mathf.Min(this.m_machine.Intensity, Combat_Chatter_Tension.y) - Combat_Chatter_Tension.x) / (Combat_Chatter_Tension.y - Combat_Chatter_Tension.x);
 
             if (_combatChatterStarted)
             {
@@ -198,7 +197,7 @@ namespace ChatterReborn.Drama_Chatter_States
 
         public void LoadLastCombatData()
         {
-            if (this.Machine.HasLastCombatData)
+            if (this.m_machine.HasLastCombatData)
             {
                 this.m_accumulatedLocalDamage = this.m_machine.m_lastCombatData.localDamageReceived;
                 this.m_accumulatedTeamDamage = this.m_machine.m_lastCombatData.teamDamageReceived;
@@ -206,7 +205,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 this.m_combatStateEnterTime = this.m_machine.m_lastCombatData.combatStateEnterTime;
                 this.m_triggerEndCombatDialog = this.m_machine.m_lastCombatData.triggerCombatEndDialog;
                 this.m_heat_level = this.m_machine.m_lastCombatData.heatLevel;
-                this.Machine.HasLastCombatData = false;
+                this.m_machine.HasLastCombatData = false;
             }            
         }
 
@@ -253,7 +252,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 WeightHandler<uint> combatComs = WeightHandler<uint>.CreateWeightHandler();
                 if (DramaManager.PlayersSeparated)
                 {
-                    if (ConfigurationManager.GroupStayCloseCombatDialoguesEnabled && this.Machine.AllowedToParticipate)
+                    if (ConfigurationManager.GroupStayCloseCombatDialoguesEnabled && this.m_machine.AllowedToParticipate)
                     {
                         combatComs.AddValue(GD.PlayerDialog.group_is_not_together, 3f);
                     }
@@ -280,9 +279,11 @@ namespace ChatterReborn.Drama_Chatter_States
             this.m_scoutAlerted = true;
         }
 
+
+        public override bool IsCombatState => true;
         private void TriggerEndCombatDialogue(bool scoutAlerted)
         {
-            if (this.m_machine.CurrentDramaState == DRAMA_State.Alert || this.m_machine.CurrentDramaState  == DRAMA_State.Exploration)
+            if (this.m_machine.CurrentStateName == DRAMA_State.Alert || this.m_machine.CurrentStateName == DRAMA_State.Exploration)
             {
                 if (!this.HasOwner || !this.Owner.Alive)
                 {
@@ -296,7 +297,7 @@ namespace ChatterReborn.Drama_Chatter_States
                     return;
                 }
 
-                if (!this.Machine.AllowedToParticipate)
+                if (!this.m_machine.AllowedToParticipate)
                 {
                     return;
                 }
@@ -366,7 +367,7 @@ namespace ChatterReborn.Drama_Chatter_States
             {
                 if (ConfigurationManager.HearHunterGroupDialogueEnabled)
                 {
-                    if (this.Machine.AllowedToParticipate)
+                    if (this.m_machine.AllowedToParticipate)
                     {
                         this.Owner.WantToStartDialog(GD.PlayerDialog.attracted_monsters_intentional, false);
                     }
@@ -376,8 +377,7 @@ namespace ChatterReborn.Drama_Chatter_States
 
         private void NextDialogLoop()
         {
-            float timer = UnityEngine.Random.Range(this.m_idle_delay.x, this.m_idle_delay.y);
-            this.m_idle_combat.QueueCallBack(timer);
+            this.m_idle_combat.QueueCallBack(new MinMaxTimer(this.m_idle_delay.x, this.m_idle_delay.y));
         }
 
         private bool CanTriggerLastEnemyKilledDialogue
@@ -389,7 +389,7 @@ namespace ChatterReborn.Drama_Chatter_States
                     return false;
                 }
 
-                if (!this.Machine.AllowedToParticipate)
+                if (!this.m_machine.AllowedToParticipate)
                 {
                     return false;
                 }
@@ -509,7 +509,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 {
                     if (ConfigurationManager.StartCombatDialogueEnabled)
                     {
-                        if (this.Machine.AllowedToParticipate)
+                        if (this.m_machine.AllowedToParticipate)
                         {
                             bool success = true;
                             if (this.m_machine.m_last_state != null)
@@ -581,13 +581,6 @@ namespace ChatterReborn.Drama_Chatter_States
             this.m_accumulatedTeamDamage += damage;
         }
 
-        public void SetupCombatState(CombatStateMachine combatMachine)
-        {
-            m_combatMachine = combatMachine;
-        }
-
-
-        private CombatStateMachine m_combatMachine;
         private float m_accumulatedTeamDamage;
 
         private bool m_triggerEndCombatDialog;

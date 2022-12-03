@@ -1,11 +1,6 @@
 ﻿using ChatterReborn.Managers;
 using ChatterReborn.Utils;
 using GameData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChatterReborn.Drama_Chatter_States
 {
@@ -44,7 +39,7 @@ namespace ChatterReborn.Drama_Chatter_States
 
         public override void OnLevelCleanUp()
         {
-            this.m_level_clean_up_dialog = this.m_machine.m_last_state.StateEnum == DRAMA_State.Combat;
+            this.m_level_clean_up_dialog = this.m_machine.LastStateName == DRAMA_State.Combat;
             base.OnLevelCleanUp();
         }
 

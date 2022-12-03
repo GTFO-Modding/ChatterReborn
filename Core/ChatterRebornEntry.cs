@@ -1,7 +1,5 @@
-﻿using BepInEx.IL2CPP;
-using BepInEx.Unity.IL2CPP;
+﻿using BepInEx.Unity.IL2CPP;
 using ChatterReborn.Attributes;
-using ChatterReborn.Data;
 using ChatterReborn.Utils;
 using ChatterRebornSettings;
 using HarmonyLib;
@@ -28,7 +26,7 @@ namespace ChatterReborn
         private void InitiateEntryPatches()
         {
             m_init_patcher = new ChatterPatcher<ChatterRebornEntry>("ChatterEntry");
-            m_init_patcher.Patch<StartMainGame>(new MethodTokenName(nameof(StartMainGame.Start), ChatterRebornTokens.ChatterMethodTokens.StartMainGame__Start__Postfix), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            m_init_patcher.Patch<StartMainGame>(new MethodToken(nameof(StartMainGame.Start), ChatterRebornTokens.ChatterMethodTokens.StartMainGame__Start__Postfix), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
         }
 
 

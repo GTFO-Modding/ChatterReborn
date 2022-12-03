@@ -232,12 +232,22 @@ namespace ChatterReborn.Managers
             ChatterDebug.LogWarning("Is CharacterID " + characterID + " bot : " + isBot);
 
             this.m_machines[characterID] = new DramaChatterMachine();
-            var machine = this.m_machines[characterID];
+            DramaChatterMachine machine = this.m_machines[characterID];
             machine.Setup(player);
             
             if (isLocallyOwned)
             {
                 m_local_machine = machine;
+            }
+
+            if (GameStateManager.CurrentStateName == eGameStateName.InLevel)
+            {
+                if (SNet.IsMaster && isBot)
+                {
+                    this.DebugPrint("DramaMachine setup mid-game, changing the state -> " + DramaManager.CurrentStateEnum, eLogType.Warning);
+                    machine.ChangeState(DramaManager.CurrentStateEnum);
+                    machine.WantToSyncDramaState(DramaManager.CurrentStateEnum);                    
+                }
             }
 
             if (isLocallyOwned)
