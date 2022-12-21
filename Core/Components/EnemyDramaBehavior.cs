@@ -18,6 +18,7 @@ namespace ChatterReborn.Components
 
         private float[] m_playerVisiblity;
 
+
         public EnemyAgent m_enemyAgent;
 
         public EnemyAI EnemyAI { get; private set; }
@@ -78,7 +79,7 @@ namespace ChatterReborn.Components
             {
                 this.m_detectedPlayers[characterID] = false;
                 EnemyDetectionManager.Current.m_enemyVisibilites[characterID]--;
-                EnemyDetectionManager.Current.m_enemyScores[characterID] -= DramaSettings.enemyScoreNormal;
+                EnemyDetectionManager.Current.m_enemyScores[characterID] -= Settings.Drama.enemyScoreNormal;
             }
         }
 
@@ -176,7 +177,7 @@ namespace ChatterReborn.Components
                 if (this.m_detectedPlayers[i])
                 {
                     EnemyDetectionManager.Current.m_enemyVisibilites[i]--;
-                    EnemyDetectionManager.Current.m_enemyScores[i] -= DramaSettings.enemyScoreNormal;
+                    EnemyDetectionManager.Current.m_enemyScores[i] -= Settings.Drama.enemyScoreNormal;
                 }
             }
         }

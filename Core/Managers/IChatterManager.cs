@@ -16,6 +16,8 @@ namespace ChatterReborn.Managers
 
         void OnLevelCleanUp();
         void OnResetSession();
+
+        void OnGUI();
         void OnStartElevatorRide();
         void OnElevatorArrived();
         void OnDropinElevatorExit();

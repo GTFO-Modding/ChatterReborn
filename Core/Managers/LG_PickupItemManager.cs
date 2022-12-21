@@ -14,11 +14,8 @@ namespace ChatterReborn.Managers
             Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppArrayBase<BoxCollider> boxColliders = storage.GetComponentsInChildren<BoxCollider>();
             if (boxColliders != null && boxColliders.Count > 0)
             {
-                ChatterDebug.LogMessage("Got " + boxColliders.Length + " box colliders from storage container " + storage.name);
-
                 Collider[] colliders = Physics.OverlapSphere(storage.transform.position, 2f, LayerManager.MASK_APPLY_CARRY_ITEM, QueryTriggerInteraction.Ignore);
-
-                if (colliders.Length > 0)
+                 if (colliders.Length > 0)
                 {
                     for (int i = 0; i < colliders.Length; i++)
                     {
@@ -26,28 +23,18 @@ namespace ChatterReborn.Managers
                         var itemComp = collider.GetComponentInParent<Item>();
                         if (itemComp != null)
                         {
-                            bool isInside = false;
                             for (int k = 0; k < boxColliders.Count; k++)
                             {
                                 BoxCollider bc = boxColliders[k];
                                 if (bc.bounds.Contains(itemComp.transform.position))
                                 {
-                                    isInside = true;
+                                    storageItems.Add(itemComp);
                                     break;
                                 }
-                            }
-                            ChatterDebug.LogMessage("\tAn item detected -> " + itemComp.PublicName + " is in resource container : " + isInside);
-                            if (isInside)
-                            {
-                                storageItems.Add(itemComp);
-                            }                            
+                            }                        
                         }
                     }
                 }
-            }
-            else
-            {
-                ChatterDebug.LogError("Couldn't get box colliders!!");
             }
             return storageItems.Count > 0;
         }

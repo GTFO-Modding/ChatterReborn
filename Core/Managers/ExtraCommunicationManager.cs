@@ -36,15 +36,16 @@ namespace ChatterReborn.Managers
         private CommunicationNode GetFirstPersonActionNodes()
         {
             var node = CreateNode(CustomTextDataBlock.Acknowledgements, false);
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Will_Do, GD.PlayerDialog.CL_WillDo));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IWillDoIt, GD.PlayerDialog.CL_IWillDoIt));            
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_I_Can_Do_It_Should_I, GD.PlayerDialog.CL_ICanDoItShouldI));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_I_Cant_Do_That, GD.PlayerDialog.CL_ICantDoThat));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_I_Cant_Place_It_There, GD.PlayerDialog.CL_ICantPlaceItThere));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Ill_Follow_Your_Lead, GD.PlayerDialog.CL_IllFollowYourLead));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Ill_Stay_Close_To_You, GD.PlayerDialog.CL_IllStayCloseToYou));            
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IWillDoIt, GD.PlayerDialog.CL_IWillDoIt));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Will_Do, GD.PlayerDialog.CL_WillDo));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Ill_Stay_Close_To_You, GD.PlayerDialog.CL_IllStayCloseToYou));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IAgree, GD.PlayerDialog.CL_IAgree));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IDisagree, GD.PlayerDialog.CL_IDisagree));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Im_On_My_Way, GD.PlayerDialog.CL_ImOnMyWay));
             return node;
         }
 
@@ -174,11 +175,12 @@ namespace ChatterReborn.Managers
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Be_Right_Back, GD.PlayerDialog.CL_BRB));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Im_Exhausted, GD.PlayerDialog.CL_ImExhausted));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Limited_Vision, GD.PlayerDialog.CL_LimitedVision));
-                extrasNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
+                //extrasNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
                 //extrasNode.m_ChildNodes.Add(GetSecondPersonActionNodes());
                 extrasNode.m_ChildNodes.Add(GetDirectionsNodes());
                 extrasNode.m_ChildNodes.Add(GetResourcesNodes());
                 extrasNode.m_ChildNodes.Add(GetMiscActionNodes());
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(extrasNode);
                 
                 return;
@@ -248,6 +250,16 @@ namespace ChatterReborn.Managers
 
         public override void Update()
         {
+            UpdateVoicComMenu();
+            DebugUpdateResponses();
+        }
+
+        private void DebugUpdateResponses()
+        {
+        }
+
+        private void UpdateVoicComMenu()
+        {
             if (FocusStateManager.CurrentState != eFocusState.FPS_CommunicationDialog)
             {
                 m_isInSneakKillMenu = false;
@@ -302,10 +314,9 @@ namespace ChatterReborn.Managers
                     m_sneakKillMenuExited = true;
                     comDialog.ExectueDialog();
                 }
-                
+
             }
         }
-
 
         public static void AddNodeTo(CommunicationListCategory category, CommunicationNode nodeToAdd)
         {

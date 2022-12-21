@@ -57,7 +57,7 @@ namespace ChatterReborn.Utils
         public static void LoadDevComponents()
         {
 
-            if (!MiscSettings.LoadDevComponents)
+            if (!Settings.Misc.LoadDevComponents)
             {
                 return;
             }

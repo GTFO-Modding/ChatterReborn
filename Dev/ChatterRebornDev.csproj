@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ComponentsDev\ChatterElementDirector.cs" />
     <Compile Include="ComponentsDev\PlayerDialogNodeMenuCom.cs" />
     <Compile Include="ComponentsDev\PUI_CommunicationMenuDebugger.cs" />
     <Compile Include="ComponentsDev\MusicEventTester.cs" />

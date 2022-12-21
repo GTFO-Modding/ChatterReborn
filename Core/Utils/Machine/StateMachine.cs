@@ -38,18 +38,8 @@ namespace ChatterReborn.Utils.Machine
             return instance;
         }
 
-        protected virtual MS AddState(Enum stateEnum, MS stateInstance)
-        {
-            int id = Convert.ToInt32(stateEnum);
-            return this.AddState(id, stateInstance);
-        }
 
 
-
-        public override void ChangeState(Enum state)
-        {
-            this.ChangeState(Convert.ToInt32(state));
-        }
 
         public override void ChangeState(int stateID)
         {
@@ -62,14 +52,14 @@ namespace ChatterReborn.Utils.Machine
 
             if (this.m_last_state != null)
             {
-                this.OnLastState(Convert.ToInt32(this.m_last_state.ENUM_ID));
+                this.OnLastState(m_last_state.ENUM_ID);
             }
             
             this.m_current_state = state;
             this.m_current_state.StateChangeTime = Clock.Time;
             this.m_changeStateTime = Clock.Time;
 
-            this.OnCurrentState(Convert.ToInt32(this.m_current_state.ENUM_ID));
+            this.OnCurrentState(m_current_state.ENUM_ID);
 
             if (this.IsLocallyOwned)
             {
@@ -123,7 +113,11 @@ namespace ChatterReborn.Utils.Machine
             set
             {
                 this.m_start_state = value;
-                this.ChangeState(value);
+                if (value != null)
+                {
+                    this.ChangeState(value);
+                }
+                
             }
         }
 
@@ -142,10 +136,7 @@ namespace ChatterReborn.Utils.Machine
             return this.m_states[id];
         }
 
-        public MS GetState(Enum stateEnum)
-        {
-            return this.m_states[Convert.ToInt32(stateEnum)];
-        }
+
 
 
         public MS[] m_states;

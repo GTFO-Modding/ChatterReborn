@@ -9,6 +9,7 @@ namespace ChatterReborn.Data
     public enum ConfigurationType
     {
         None,
-        Toggle
+        Toggle,
+        KeyBind
     }
 }

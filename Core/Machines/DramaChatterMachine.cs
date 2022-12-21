@@ -17,7 +17,7 @@ namespace ChatterReborn.Machines
     {
         public void Setup(PlayerAgent playerAgent)
         {
-            this.DEBUG_ENABLED = DramaSettings.MachineDebugEnabled;
+            this.DEBUG_ENABLED = Settings.Drama.MachineDebugEnabled;
             this.SetupMachine();
             this.AddState(DRAMA_State.ElevatorIdle, new DRAMA_Chatter_ElevatorIdle());
             this.AddState(DRAMA_State.ElevatorGoingDown, new DRAMA_Chatter_ElevatorGoingDown());
@@ -44,7 +44,7 @@ namespace ChatterReborn.Machines
             ChatterEventListenerHandler<PlayerDamageEvent>.RegisterListener(this);
             ChatterEventListenerHandler<ScoutScreamEvent>.RegisterListener(this);
 
-            if (this.Owner.Owner.IsBot && PlayerBotSettings.EnablePlayerMonitor)
+            if (this.Owner.Owner.IsBot && Settings.PlayerBot.EnablePlayerMonitor)
             {
                 var monitor = this.m_owner.gameObject.AddAbsoluteComponent<PlayerBotAIRootMonitor>();
                 monitor.Setup(this);
@@ -151,7 +151,7 @@ namespace ChatterReborn.Machines
                 DRAMA_State switchState = DRAMA_State.Combat;
 
                 bool timePassed = Clock.Time - this.m_changeStateTime > 10f;
-                if ((DramaSettings.timePassedEnabled || timePassed) && this.Intensity < DramaSettings.enemyScoreForCombatIntensity)
+                if ((Settings.Drama.timePassedEnabled || timePassed) && this.Intensity < Settings.Drama.enemyScoreForCombatIntensity)
                 {
                     switchState = DRAMA_State.Encounter;
                 }
@@ -160,8 +160,96 @@ namespace ChatterReborn.Machines
             }
         }
 
+        private void UpdateDebugRecallDramaState()
+        {
+            var recallData = new pDramaState
+            {
+                dramaState = (int)DRAMA_State.ElevatorIdle,
+                tension = DramaManager.Tension,
+                playerID = this.CharacterID
+            };
 
-        
+            bool hasRecall = false;
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                recallData.dramaState = (int)DRAMA_State.Exploration;
+                hasRecall = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.F2))
+            {
+                recallData.dramaState = (int)DRAMA_State.Sneaking;
+                hasRecall = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                recallData.dramaState = (int)DRAMA_State.Encounter;
+                hasRecall = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.F4))
+            {
+                recallData.dramaState = (int)DRAMA_State.Combat;
+                hasRecall = true;
+            }
+
+            else if (Input.GetKeyDown(KeyCode.F5))
+            {
+                UnityEngine.Debug.Log("My state : " + DramaManager.SyncedPlayerStates[this.CharacterID]);
+            }
+
+            if (hasRecall)
+            {
+                DramaManager.Current.DoRecallDramaState(recallData);
+            }
+            
+        }
+        private void UpdateLocal()
+        {
+            UpdateResponseKeyBinds();
+            CheckResourcePackReceived();
+        }
+
+        private void UpdateResponseKeyBinds()
+        {
+            if (FocusStateManager.CurrentState != eFocusState.FPS)
+            {
+                return;
+            }
+
+            if (CoolDownManager.HasCooldown(CoolDownType.QuickResponse))
+            {
+                return;
+            }
+
+            
+            if (Input.GetKeyDown(ConfigurationManager.QuickAffirmativeResponse))
+            {
+                if (ConfigurationManager.QuickAffirmativeResponse != KeyCode.None)
+                {
+                    WeightHandler<uint> affirmHandler = WeightHandler<uint>.CreateWeightHandler();
+                    affirmHandler.AddValue(GD.PlayerDialog.CL_Yes, 1f);
+                    if (this.Owner.PlayerCharacterFilter != DialogCharFilter.Char_F)
+                    {
+                        affirmHandler.AddValue(GD.PlayerDialog.CL_WillDo, 5f);
+                    }
+                    affirmHandler.AddValue(GD.PlayerDialog.CL_IWillDoIt, 2f);
+
+                    this.Owner.WantToStartDialog(affirmHandler.Best.Value, true);
+                    CoolDownManager.ApplyCooldown(CoolDownType.QuickResponse, 2f);
+                }
+                
+            }
+            else if (Input.GetKeyDown(ConfigurationManager.QuickNegatoryResponse))
+            {
+                if (ConfigurationManager.QuickNegatoryResponse != KeyCode.None)
+                {
+                    this.Owner.WantToStartDialog(GD.PlayerDialog.CL_ICantDoThat, true);
+                    CoolDownManager.ApplyCooldown(CoolDownType.QuickResponse, 2f);
+                }                
+            }
+        }
+
+
+
         private void CheckResourcePackReceived()
         {
             var communicator = this.Owner.m_interactionCommunicator;
@@ -211,7 +299,7 @@ namespace ChatterReborn.Machines
 
             if (this.IsLocallyOwned)
             {
-                this.CheckResourcePackReceived();
+                this.UpdateLocal();
             }
 
             this.UpdateCombatState();

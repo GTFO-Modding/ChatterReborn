@@ -50,17 +50,23 @@ namespace ChatterReborn.Managers
 
         static void LG_WeakDoor__Setup__Postfix(LG_WeakDoor __instance)
         {
-            if (__instance != null)
+            try
             {
-                WeakDialogDoor dialogdoor = new WeakDialogDoor(__instance);
-                __instance.m_sync.add_OnDoorStateChange(new Action<pDoorState, bool>(dialogdoor.OnOpenWeakDoor));
-                __instance.m_sync.add_OnDoorGotDamage(new Action<float, float, bool, bool, SNet_Player>(dialogdoor.OnReceiveDamage));
+                if (__instance != null && __instance.m_sync != null)
+                {
+                    WeakDialogDoor dialogdoor = new WeakDialogDoor(__instance);
+                    __instance.m_sync.add_OnDoorStateChange(new Action<pDoorState, bool>(dialogdoor.OnOpenWeakDoor));
+                    __instance.m_sync.add_OnDoorGotDamage(new Action<float, float, bool, bool, SNet_Player>(dialogdoor.OnReceiveDamage));
+                }
+                else
+                {
+                    Current.DebugPrint("No LG_WeakDoor ???");
+                }
             }
-            else
+            catch(Exception e)
             {
-                Current.DebugPrint("No LG_WeakDoor ???");
+                Current.DebugPrint("Couldn't setup a weak door dialogue ERROR MESSAGE : " + e.Message);
             }
-
         }
 
         public static void AddDoorTakenDamage(WeakDialogDoor weakDialogDoor)

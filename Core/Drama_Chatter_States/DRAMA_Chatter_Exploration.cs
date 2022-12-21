@@ -169,7 +169,7 @@ namespace ChatterReborn.Drama_Chatter_States
                 {
                     handler.AddValue(GD.PlayerDialog.random_comment_combat_potential, 1f);
                     handler.AddValue(GD.PlayerDialog.random_comment_pure_stealth, 1f);
-                    if (MiscSettings.AllowBondingDialogue)
+                    if (Settings.Misc.AllowBondingDialogue)
                     {
                         if (DramaManager.Tension < 60f)
                         {

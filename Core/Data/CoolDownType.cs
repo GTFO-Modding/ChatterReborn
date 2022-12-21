@@ -17,6 +17,7 @@ namespace ChatterReborn.Data
         SeperatedFromGroup,
         FriendlyFireApology,
         IdleLowHealth,
-        HeldByPouncer
+        HeldByPouncer,
+        QuickResponse
     }
 }

@@ -5,5 +5,11 @@
         public V Value;
 
         public float Weight;
+
+        public WeightValue(V value, float weight)
+        {
+            this.Weight = weight;
+            this.Value = value;
+        }
     }
 }

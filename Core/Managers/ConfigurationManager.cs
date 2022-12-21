@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using BepInEx.Configuration;
+using UnityEngine;
 
 namespace ChatterReborn.Managers
 {
@@ -26,7 +27,7 @@ namespace ChatterReborn.Managers
                 if (methodInfo != null)
                 {
                     ConfigurationBaseAttribute custom_attribute = fieldInfo.GetCustomAttribute<ConfigurationBaseAttribute>();
-                    if (custom_attribute != null && custom_attribute.ConfigurationType != ConfigurationType.None)
+                    if (custom_attribute != null && custom_attribute.ConfigType != ConfigurationType.None)
                     {
                         var genericMethod = methodInfo.MakeGenericMethod(custom_attribute.ValueType);
                         if (genericMethod != null)
@@ -38,9 +39,13 @@ namespace ChatterReborn.Managers
                                 custom_attribute.Header,
                                 custom_attribute.Desc
                             };
-                            if (custom_attribute.ConfigurationType == ConfigurationType.Toggle)
+                            if (custom_attribute.ConfigType == ConfigurationType.Toggle)
                             {
                                 args.Add(((ConfigurationToggleAttribute)custom_attribute).Default);
+                            }
+                            else if (custom_attribute.ConfigType == ConfigurationType.KeyBind)
+                            {
+                                args.Add(((ConfigurationKeyCodeAttribute)custom_attribute).DefaultKey);
                             }
                             genericMethod.Invoke(null, args.ToArray());
                         }
@@ -67,6 +72,14 @@ namespace ChatterReborn.Managers
         //public static readonly string CONFIG_PATH = Path.Combine(Paths.ConfigPath, "ChatterRebornDev.cfg");
 
         public static ConfigFile Config;
+
+
+        [ConfigurationKeyCode("Quick Yes", "Say yes quickly!", KeyCode.None)]
+        public static KeyCode QuickAffirmativeResponse;
+
+
+        [ConfigurationKeyCode("Quick No", "Say no quickly!", KeyCode.None)]
+        public static KeyCode QuickNegatoryResponse;
 
 
         [ConfigurationToggle("Stealth Commands Shortcut", "When close to a hibernating sleeper, a prompt will appear at the buttom to announce stealth commands to your teammates..", true)]

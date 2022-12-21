@@ -12,6 +12,9 @@ namespace ChatterReborn.Managers
         {
         }
 
+        public virtual void OnGUI()
+        {
+        }
 
         protected virtual void PostSetup()
         {

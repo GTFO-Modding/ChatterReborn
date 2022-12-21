@@ -28,9 +28,19 @@ namespace ChatterReborn.Drama_Chatter_States
             }
         }
 
+
+        public virtual void OnEnemyDetected()
+        {
+
+        }
+
+        public virtual void OnEnemyUnDetected()
+        {
+        }
+
         protected void TryToOrderBackPlayer()
         {
-            if (MiscSettings.AllowOrderBioScan_Drama_State)
+            if (Settings.Misc.AllowOrderBioScan_Drama_State)
             {
                 if (!this.m_shout_triggered || this.m_next_shout_trigger_time < Time.time)
                 {

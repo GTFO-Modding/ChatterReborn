@@ -14,11 +14,11 @@ namespace ChatterReborn.Attributes
             this.Default = defaultValue;
         }
 
-        public override ConfigurationType ConfigurationType => ConfigurationType.Toggle;
+        public override ConfigurationType ConfigType => ConfigurationType.Toggle;
 
         public override string Header => "Enabled";
 
         public override Type ValueType => typeof(bool);
-        public bool Default { get; set; }
+        public bool Default;
     }
 }

@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace ChatterReborn
 {
-    [BepInEx.BepInPlugin(ChatterEntrySettings.Plugin_GUI, ChatterEntrySettings.Plugin_Name, ChatterEntrySettings.Plugin_Version)]
+    [BepInEx.BepInPlugin(Settings.Plugin.Plugin_GUI, Settings.Plugin.Plugin_Name, Settings.Plugin.Plugin_Version)]
     public class ChatterRebornEntry : BasePlugin
     {         
 
@@ -26,7 +26,7 @@ namespace ChatterReborn
         private void InitiateEntryPatches()
         {
             m_init_patcher = new ChatterPatcher<ChatterRebornEntry>("ChatterEntry");
-            m_init_patcher.Patch<StartMainGame>(new MethodToken(nameof(StartMainGame.Start), ChatterRebornTokens.ChatterMethodTokens.StartMainGame__Start__Postfix), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            m_init_patcher.Patch<StartMainGame>(new MethodToken(nameof(StartMainGame.Start), Settings.ChatterMethodTokens.StartMainGame__Start__Postfix), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
         }
 
 

@@ -15,7 +15,7 @@ namespace ChatterReborn.Managers
         }
 
 
-        private bool allowLogComponents = MiscSettings.Debug_DevToolLogger;
+        private bool allowLogComponents = Settings.Misc.Debug_DevToolLogger;
         public static void LogComponents(GameObject targetGameObject)
         {
             if (!Current.allowLogComponents)

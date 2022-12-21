@@ -1,7 +1,5 @@
 ﻿using ChatterReborn.Attributes;
 using ChatterReborn.Managers;
-using ChatterReborn.Utils;
-using Globals;
 using Il2CppInterop.Runtime.Attributes;
 using LevelGeneration;
 using Player;
@@ -31,6 +29,14 @@ namespace ChatterReborn.Components
             for (int i = 0; i < _managers.Count; i++)
             {
                 _managers[i].Update();
+            }
+        }
+
+        void OnGUI()
+        {
+            for (int i = 0; i < _managers.Count; i++)
+            {
+                _managers[i].OnGUI();
             }
         }
 

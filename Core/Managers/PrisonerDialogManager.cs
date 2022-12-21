@@ -86,7 +86,7 @@ namespace ChatterReborn.Managers
 
         protected override void Setup()
         {
-            if (MiscSettings.DialogCastingDebugEnabled)
+            if (Settings.Misc.DialogCastingDebugEnabled)
             {
                 PlayerDialogManager.Current.m_dialogCastingDirector.DEBUG_ENABLED = true;
             }

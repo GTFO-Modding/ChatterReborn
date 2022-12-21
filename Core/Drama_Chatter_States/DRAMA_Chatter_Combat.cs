@@ -68,6 +68,7 @@ namespace ChatterReborn.Drama_Chatter_States
             }
         }
 
+
         private void CheckHeatSituation()
         {
             if (EnemyDetectionManager.EnemiesAlerted == 1)
@@ -216,7 +217,7 @@ namespace ChatterReborn.Drama_Chatter_States
         {
             this.m_start_idle_dialog = new CallBackUtils.CallBack(this.TriggerStartCombat);
             this.m_end_dialog = new CallBackUtils.CallBack<bool>(TriggerEndCombatDialogue);
-            this.m_idle_combat = new CallBackUtils.CallBack(this.TriggerAmmoLowCombat);
+            this.m_idle_combat = new CallBackUtils.CallBack(this.TriggerIdleCobmatDialog);
             this.m_hear_hunter_group = new CallBackUtils.CallBack(this.TriggerHordeDialog);
             this.killed_single_monster = new CallBackUtils.CallBack(this.TriggerSingleEnemyKilled);
             base.Setup();
@@ -234,7 +235,8 @@ namespace ChatterReborn.Drama_Chatter_States
         }
 
         private void CommonEnter()
-        {            
+        {
+
             this.m_start_idle_dialog.QueueCallBack(UnityEngine.Random.Range(2f, 3f));
             this.m_accumulatedTeamDamage = 0f;
             this.m_triggerEndCombatDialog = false;
@@ -245,7 +247,7 @@ namespace ChatterReborn.Drama_Chatter_States
             this.LoadLastCombatData();
         }
 
-        private void TriggerAmmoLowCombat()
+        private void TriggerIdleCobmatDialog()
         {
             if (this.HasOwner && this.Owner.Alive)
             {
@@ -265,9 +267,9 @@ namespace ChatterReborn.Drama_Chatter_States
                     combatComs.AddValue(GD.PlayerDialog.CL_INeedAmmo, 1f);
                 }
 
-                if (combatComs.HasAny)
+                if (combatComs.TryToGetBestValue(out WeightValue<uint> val))
                 {
-                    PlayerDialogManager.WantToStartDialog(combatComs.Best.Value, this.m_owner);
+                    PlayerDialogManager.WantToStartDialog(val.Value, this.m_owner);
                 }
             }
 
@@ -511,14 +513,7 @@ namespace ChatterReborn.Drama_Chatter_States
                     {
                         if (this.m_machine.AllowedToParticipate)
                         {
-                            bool success = true;
-                            if (this.m_machine.m_last_state != null)
-                            {
-                                if (this.IsStillInCombat)
-                                {
-                                    success = false;
-                                }
-                            }
+                            bool success = this.IsStillInCombat;
                             if (success)
                             {
                                 this.m_owner.WantToStartDialog(GD.PlayerDialog.combat_start, false);

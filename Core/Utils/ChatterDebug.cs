@@ -12,7 +12,7 @@ namespace ChatterReborn.Utils
 
         public static void Verbose(object msg)
         {
-            if (ChatterEntrySettings.DebugLogsEnabled)
+            if (Settings.Plugin.DebugLogsEnabled)
             {
                 ChatterDebug.logger.LogInfo(msg);
             }
@@ -21,29 +21,29 @@ namespace ChatterReborn.Utils
 
         public static void LogDebug(object msg)
         {
-            if (ChatterEntrySettings.DebugLogsEnabled)
+            if (Settings.Plugin.DebugLogsEnabled)
                 ChatterDebug.logger.LogDebug(msg);
         }
 
         public static void LogMessage(object msg)
         {
-            if (ChatterEntrySettings.DebugLogsEnabled)
+            if (Settings.Plugin.DebugLogsEnabled)
                 ChatterDebug.logger.LogMessage(msg);
         }
 
         public static void LogError(object msg)
         {
-            if (ChatterEntrySettings.DebugLogsEnabled)
+            if (Settings.Plugin.DebugLogsEnabled)
                 ChatterDebug.logger.LogError(msg);
         }
 
         public static void LogWarning(object msg)
         {
-            if (ChatterEntrySettings.DebugLogsEnabled)
+            if (Settings.Plugin.DebugLogsEnabled)
                 ChatterDebug.logger.LogWarning(msg);
         }
 
-        private static readonly ManualLogSource logger = new ManualLogSource(ChatterEntrySettings.Plugin_Name);
+        private static readonly ManualLogSource logger = new ManualLogSource(Settings.Plugin.Plugin_Name);
 
     }
 }

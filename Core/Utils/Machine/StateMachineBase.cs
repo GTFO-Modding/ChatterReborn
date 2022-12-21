@@ -6,9 +6,7 @@ namespace ChatterReborn.Utils.Machine
     {
         public abstract bool DEBUG_ENABLED { get; set; }
         public abstract void ChangeState(int id);
-        public abstract void ChangeState(Enum enumId);
         public abstract void Reset();
-
         public abstract void OnCurrentState(int id);
         public abstract void OnLastState(int id);
 
@@ -23,7 +21,6 @@ namespace ChatterReborn.Utils.Machine
         protected float m_localDeltaRef;
 
         public float m_localDelta;
-
 
     }
 }

@@ -15,93 +15,143 @@ namespace ChatterReborn.Managers
         private DictionaryExtended<ItemType, ItemPingDescriptor> m_itemsDescriptor;
 
 
+
+
         protected override void Setup()
         {
             m_itemsDescriptor = new DictionaryExtended<ItemType, ItemPingDescriptor>();
             m_itemsDescriptor.Add(ItemType.Ammo, new ResourcePackPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.found_ammo,
-                m_dialogID_Low = GD.PlayerDialog.found_ammo_little,
-                m_dialogID_Unique = GD.PlayerDialog.CL_AmmoHere,
-                m_dialogID_AlreadyCarrying = GD.PlayerDialog.CL_IGotAmmoSomeoneElseCarryThis,
-                m_dialogID_UniqueChance = 0.2f,
-                m_style = eNavMarkerStyle.PlayerPingAmmo,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.found_ammo, 8f),
+                    new WeightValue<uint>(GD.PlayerDialog.CL_AmmoHere, 1f),
+                }),
+                DialogIDs_LowAmmo = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.found_ammo_little, 1f)
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingAmmo
             });
             m_itemsDescriptor.Add(ItemType.MedPack, new ResourcePackPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.found_meds,
-                m_dialogID_Low = GD.PlayerDialog.found_meds_little,
-                m_dialogID_Unique = GD.PlayerDialog.CL_MedPackHere,
-                m_dialogID_UniqueChance = 0.2f,
-                m_style = eNavMarkerStyle.PlayerPingHealth,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.found_meds, 8f),
+                    new WeightValue<uint>(GD.PlayerDialog.CL_MedPackHere, 1f),
+                }),
+                DialogIDs_LowAmmo = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.found_meds_little, 1f)
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingHealth,
             });
             m_itemsDescriptor.Add(ItemType.Tool, new ResourcePackPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ToolRefillHere,
-                m_style = eNavMarkerStyle.PlayerPingAmmo,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ToolRefillHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingAmmo,
             });
 
             m_itemsDescriptor.Add(ItemType.DisInfect, new ResourcePackPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_DisinfectionHere,
-                m_style = eNavMarkerStyle.PlayerPingDisinfection,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_DisinfectionHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingDisinfection,
             });
 
             m_itemsDescriptor.Add(ItemType.BuffSyringe, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsAYellowSyringeHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsAYellowSyringeHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
 
             m_itemsDescriptor.Add(ItemType.FogRepeller, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsAFogRepellerHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsAFogRepellerHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.GlowStick, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereAreGlowSticksHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereAreGlowSticksHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.GlowStick_Halloween, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereAreGlowSticksHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereAreGlowSticksHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.GlowStick_Yellow, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereAreGlowSticksHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereAreGlowSticksHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.GlowStick_Christmas, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereAreGlowSticksHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereAreGlowSticksHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.GlueGrenade, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsAFoamGrenadeHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsAFoamGrenadeHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.HealthSyringe, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsARedSyringeHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsARedSyringeHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.LongRangeFlashLight, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsALongRangeFlashlightHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsALongRangeFlashlightHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.Tripmine_Explosive, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsATripMineHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsATripMineHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
             m_itemsDescriptor.Add(ItemType.Tripmine_Glue, new ItemPingDescriptor
             {
-                m_dialogID = GD.PlayerDialog.CL_ThereIsAFoamMineHere,
-                m_style = eNavMarkerStyle.PlayerPingCarryItem,
+                DialogIDs = WeightHandler<uint>.CreateWeightHandler(new List<WeightValue<uint>>
+                {
+                    new WeightValue<uint>(GD.PlayerDialog.CL_ThereIsAFoamMineHere, 1f),
+                }),
+                PingStyle = eNavMarkerStyle.PlayerPingCarryItem,
             });
         }
 
@@ -167,7 +217,7 @@ namespace ChatterReborn.Managers
 
         private void UpdateDebugItems()
         {
-            if (MiscSettings.Debug_SpecifigPingManager)
+            if (Settings.Misc.Debug_SpecifigPingManager)
             {
                 if (Input.GetKeyDown(KeyCode.L) && PlayerManager.TryGetLocalPlayerAgent(out PlayerAgent playerAgent) && playerAgent.CourseNode != null)
                 {

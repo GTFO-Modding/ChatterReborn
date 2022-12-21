@@ -208,7 +208,7 @@ namespace ChatterReborn.Managers
 
         public static void EnableParticipation(int characterID, bool enabled)
         {
-            if (DramaSettings.AllowParticipation)
+            if (Settings.Drama.AllowParticipation)
             {
                 Current._allow_participation[characterID] = enabled;
             }            

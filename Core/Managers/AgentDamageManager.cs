@@ -3,7 +3,7 @@ using ChatterReborn.Attributes;
 using ChatterReborn.ChatterEvent;
 using ChatterReborn.Data;
 using ChatterReborn.Utils;
-using ChatterRebornTokens;
+using ChatterRebornSettings;
 using GameData;
 using HarmonyLib;
 using Player;

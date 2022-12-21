@@ -1,13 +1,14 @@
-﻿using Player;
+﻿using ChatterReborn.Utils;
+using Player;
 
 namespace ChatterReborn.Extra
 {
     public class ItemPingDescriptor
     {
 
-        public uint m_dialogID;
+        public WeightHandler<uint> DialogIDs; 
 
-        public eNavMarkerStyle m_style;
+        public eNavMarkerStyle PingStyle;
 
 
         public virtual void TryToApplyAmmo(Item item)
@@ -17,8 +18,14 @@ namespace ChatterReborn.Extra
 
         public virtual void PlayPingDialog(PlayerAgent playerAgent)
         {
-            PlayerDialogManager.WantToStartDialogForced(this.m_dialogID, playerAgent);
+            if (this.DialogIDs.TryToGetBestValue(out WeightValue<uint> best))
+            {
+                playerAgent.WantToStartDialog(best.Value, true);
+            }
+            
         }
+
+
 
 
 

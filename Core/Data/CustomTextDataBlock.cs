@@ -18,6 +18,6 @@ namespace ChatterReborn.Data
         Resources,
         PingResources,
         PingConsumables,
-        Exploration
+        Exploration,
     }
 }

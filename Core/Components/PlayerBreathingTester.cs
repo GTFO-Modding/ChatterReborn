@@ -1,8 +1,5 @@
 ﻿using ChatterReborn.Attributes;
-using ChatterReborn.Utils;
-using Player;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChatterReborn.Components

@@ -2,6 +2,7 @@
 using ChatterRebornSettings;
 using GameData;
 using LevelGeneration;
+using UnityEngine;
 
 namespace ChatterReborn.WieldingItemStates
 {
@@ -13,7 +14,7 @@ namespace ChatterReborn.WieldingItemStates
         public override void Enter()
         {
             this.m_scanningQueue = 0f;
-            this.m_scanningGoal = EnemyScannerSettings.ScanningGoal_No_Enemies;
+            this.m_scanningGoal = Settings.EnemyScanner.ScanningGoal_No_Enemies;
             m_enemyFound = false;
             Results_State.ResetEnemyCount();            
         }
@@ -70,17 +71,19 @@ namespace ChatterReborn.WieldingItemStates
                 return;
             }
 
-            this.m_scanningQueue += Clock.Delta;
-            int enemiesDetectedCount = this.GetEnemiesDetected(DramaManager.CurrentStateEnum == DRAMA_State.Combat);
+            this.m_scanningQueue += Time.deltaTime;
+            int enemiesDetectedCount = this.GetEnemiesDetected();
+
             if (this.GetSecurityActiveEnemyWaveData(out float possibleScore))
             {
                 enemiesDetectedCount += (int)possibleScore;
             }
+
             if (Results_State.IsCountHigher(enemiesDetectedCount) && !m_enemyFound)
             {
                 m_enemyFound = true;
                 this.m_scanningQueue = 0f;
-                this.m_scanningGoal = EnemyScannerSettings.ScanningGoal_Max;
+                this.m_scanningGoal = Settings.EnemyScanner.ScanningGoal_Max;
                 return;
             }         
 

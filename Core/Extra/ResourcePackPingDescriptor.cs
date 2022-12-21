@@ -1,29 +1,18 @@
-﻿using ChatterReborn.Data;
-using GameData;
+﻿using ChatterReborn.Utils;
 using Gear;
 using Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ChatterReborn.Extra
 {
     public class ResourcePackPingDescriptor : ItemPingDescriptor
     {
 
-        public uint m_dialogID_Low;
+        public WeightHandler<uint> DialogIDs_LowAmmo;
 
-        public uint m_dialogID_Unique;
 
-        public float m_dialogID_UniqueChance;
+        private bool m_hasAmmo = false;
 
-        public uint m_dialogID_AlreadyCarrying;
-
-        public bool m_hasAmmo = false;
-
-        public float m_ammo = 0f;
+        private float m_ammo = 0f;
 
         public override void TryToApplyAmmo(Item item)
         {
@@ -44,24 +33,16 @@ namespace ChatterReborn.Extra
         {
             if (this.m_hasAmmo && this.m_ammo <= 40f)
             {
-                if (this.m_dialogID_Low > 0U)
+                if (DialogIDs_LowAmmo != null && DialogIDs_LowAmmo.TryToGetBestValue(out WeightValue<uint> best))
                 {
-                    PlayerDialogManager.WantToStartDialogForced(this.m_dialogID_Low, playerAgent);
-                    return;
-                }
-            }
-
-            if (m_dialogID_Unique > 0U && m_dialogID_UniqueChance > 0f)
-            {
-                if (m_dialogID_UniqueChance == 1f || UnityEngine.Random.value < m_dialogID_UniqueChance)
-                {
-                    PlayerDialogManager.WantToStartDialogForced(this.m_dialogID_Unique, playerAgent);
+                    playerAgent.WantToStartDialog(best.Value, true);
                     return;
                 }
             }
 
             base.PlayPingDialog(playerAgent);
         }
+
 
     }
 }

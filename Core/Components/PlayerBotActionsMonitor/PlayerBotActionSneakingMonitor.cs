@@ -1,11 +1,7 @@
-﻿using ChatterReborn.Utils;
+﻿using ChatterReborn.Managers;
+using ChatterReborn.Utils;
 using Enemies;
 using GameData;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ChatterReborn.Components.PlayerBotActionsMonitor
@@ -66,7 +62,7 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
                 return;
             }
 
-            if (this.Bot.m_hasSleeperNearby)
+            if (this.Bot.m_hasSleeperNearby && !EnemyDetectionManager.AnyEnemiesAlerted)
             {
                 if (this.GetSleeperFromPosition(this.Bot.m_lastSleeperCheckPosition, out PlayerBotSneakingCallOutOption targetOption))
                 {
@@ -93,9 +89,9 @@ namespace ChatterReborn.Components.PlayerBotActionsMonitor
 
         private struct PlayerBotSneakingCallOutOption
         {
-            public EnemyAgent Enemy { get; set; }
-            public int Prio { get; set; }
-            public uint CallOutID { get; set; }
+            public EnemyAgent Enemy;
+            public int Prio;
+            public uint CallOutID;
         }
     }
 }

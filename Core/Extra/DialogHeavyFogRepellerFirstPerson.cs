@@ -33,7 +33,7 @@ namespace ChatterReborn.Extra
 
             if (this.DataBlockID == GD.Item.Carry_HeavyFogRepeller && ConfigurationManager.HeavyFogRepellerCommmentEnabled && StaticGlobalManager.HeavyFogRepellerDialogEnabled)
             {
-                this.m_item_pickup.Owner.WantToStartDialog(GD.PlayerDialog.decon_unit_stay_close_reminder);
+                this.m_item_pickup.Owner.WantToStartDialog(GD.PlayerDialog.decon_unit_stay_close_reminder, true);
             }
 
         }

@@ -1,6 +1,7 @@
 ﻿using ChatterReborn.Data;
 using GameData;
 using Localization;
+using System;
 using System.Collections.Generic;
 
 namespace ChatterReborn.Managers
@@ -70,15 +71,63 @@ namespace ChatterReborn.Managers
         }
 
 
-        private void AddNewBlock(string name, string text,CustomTextDataBlock type)
+        private string InspectBlockName(string originalName)
         {
-            var block = TextDataBlock.AddNewBlock();
+            string newName = originalName;
+            bool first = true;
+            uint uniqueID = 0;
+            bool hasNameAlready = true;
+            do
+            {
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    uniqueID++;
+                    string prevName = newName;
+                    newName = originalName + "_" + uniqueID;
+
+                    this.DebugPrint("TextBlock " + prevName + " already exists! Let's check if this one exists -> " + newName, eLogType.Warning);
+                }
+
+                hasNameAlready = TextDataBlock.HasBlock(newName);
+                
+            } while (hasNameAlready);
+
+            this.DebugPrint("TextBlock name is a non-duplicate -> " + newName + ", we are good!", eLogType.Message);
+
+            return newName;
+        }
+
+        private void CheckLastPersistentID()
+        {
+            m_latestID = 0;
+            foreach (var block in TextDataBlock.GetAllBlocks())
+            {
+                m_latestID = Math.Max(m_latestID, block.persistentID);
+            }
+
+            this.DebugPrint("Latest Persistent ID for TextDbs -> " + m_latestID, eLogType.Message);
+        }
+
+        private uint m_latestID = 0;
+
+        private void AddNewBlock(string name, string text, CustomTextDataBlock type)
+        {
+            TextDataBlock block = new TextDataBlock();
             block.English = text;
-            TextDataBlock.RenameBlock(block, name);
+            block.name = InspectBlockName(name);         
             block.SkipLocalization = true;
             block.internalEnabled = true;
-            m_customTextBlocks.Add(type, block);
+            block.persistentID = 0;
+
             this.DebugPrint("Now adding custom dataBlock " + block.name);
+
+            TextDataBlock.AddBlock(block, -1);
+            m_customTextBlocks.Add(type, block);
+            
         }
 
 

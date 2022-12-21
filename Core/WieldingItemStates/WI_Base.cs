@@ -11,7 +11,7 @@ namespace ChatterReborn.WieldingItemStates
 {
     public class WI_Base : MachineState<WieldingItemMachine>
     {
-        protected int GetEnemiesDetected(bool onlyTrackAggressives = false)
+        protected int GetEnemiesDetected()
         {
             int count = 0;
             if (Machine.GetWieldingItem<EnemyScanner>(out var enemyScanner) && enemyScanner.m_enemiesDetected != null)
@@ -20,7 +20,7 @@ namespace ChatterReborn.WieldingItemStates
                 for (int i = 0; i < enemiesDetected.Count; i++)
                 {
                     EnemyAgent enemy = enemiesDetected[i];
-                    if (enemy.Alive && (!onlyTrackAggressives || enemy.AI.Mode == AgentMode.Agressive))
+                    if (enemy.Alive)
                     {
                         float dis = (enemy.transform.position - this.Owner.transform.position).magnitude;
                         if (dis < m_bioTrackerRange)

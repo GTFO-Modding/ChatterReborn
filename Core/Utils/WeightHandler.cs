@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace ChatterReborn.Utils
 {
     public partial class WeightHandler<T>
@@ -16,10 +15,14 @@ namespace ChatterReborn.Utils
             });
         }
 
-        public static WeightHandler<T> CreateWeightHandler()
+        public static WeightHandler<T> CreateWeightHandler(List<WeightValue<T>> weightValues = null)
         {
             var newhandler = new WeightHandler<T>();
             newhandler.m_list = new List<WeightValue<T>>();
+            if (weightValues != null)
+            {
+                newhandler.m_list.AddRange(weightValues);
+            }
             return newhandler;
         }
 
@@ -33,6 +36,18 @@ namespace ChatterReborn.Utils
         }
 
         private List<WeightValue<T>> m_list;
+
+        public List<WeightValue<T>> List
+        {
+            get
+            {
+                return m_list;
+            }
+            set
+            {
+                m_list = value;
+            }
+        }
 
         public static void DebugLog(object o)
         {

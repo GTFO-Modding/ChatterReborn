@@ -16,7 +16,7 @@ namespace ChatterReborn.Attributes
         public string Desc { get; set; }
         public abstract Type ValueType { get; }
 
-        public abstract ConfigurationType ConfigurationType { get; }
+        public abstract ConfigurationType ConfigType { get; }
 
         public ConfigurationBaseAttribute(string title, string desc)
         {

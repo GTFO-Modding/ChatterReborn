@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\ConfigurationBaseAttribute.cs" />
+    <Compile Include="Attributes\ConfigurationKeyCodeAttribute.cs" />
     <Compile Include="Attributes\ConfigurationToggleAttribute.cs" />
     <Compile Include="Attributes\MethodDecoderTokenAttribute.cs" />
     <Compile Include="ChatterEvent\ChatterEventListenerHandler.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Extra\PlayerBotMonitorCollection.cs" />
     <Compile Include="Extra\PlayerDialogNodeMenu.cs" />
     <Compile Include="Managers\AgentDamageManager.cs" />
+    <Compile Include="Managers\DecontaminationUnitBriefingManager.cs" />
     <Compile Include="Managers\ExtraTextDataBlockManager.cs" />
     <Compile Include="Managers\PlayerAgentStateManager.cs" />
     <Compile Include="Managers\TextDataBlockExtendedManager.cs" />
@@ -241,7 +243,7 @@
     </Reference>
     <Reference Include="Modules-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\interop\Modules-ASM.dll</HintPath>
+      <HintPath>..\..\Core Dependencies\interop\Modules-ASM.dll</HintPath>
     </Reference>
     <Reference Include="SNet_ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
