@@ -9,7 +9,6 @@ namespace GameData
 			public const uint BullpupSemi = 33;
 			public const uint DMRAuto = 17;
 			public const uint DMRBurst = 16;
-			public const uint DMRSemi = 35;
 			public const uint DMRSemi_v2 = 7;
 			public const uint GaussRifle = 41;
 			public const uint GlueGun = 11;
@@ -24,9 +23,7 @@ namespace GameData
 			public const uint PrecisionRifleAuto = 49;
 			public const uint RevolverAuto = 23;
 			public const uint RevolverBurst = 22;
-			public const uint RevolverSemi = 38;
 			public const uint RevolverSemi_v2 = 5;
-			public const uint RifleAuto = 39;
 			public const uint RifleAuto_v2 = 13;
 			public const uint RifleBurst = 8;
 			public const uint RifleCQB = 45;
@@ -39,17 +36,14 @@ namespace GameData
 			public const uint ShotgunAuto = 21;
 			public const uint ShotgunHELAuto = 46;
 			public const uint ShotgunRanged = 20;
-			public const uint ShotgunSemi = 36;
 			public const uint ShotgunSemi_v2 = 6;
 			public const uint SMG_PDW = 48;
-			public const uint SMGAuto = 40;
 			public const uint SMGAuto_v2 = 2;
 			public const uint SMGBurst = 14;
 			public const uint SMGHeavyAuto = 43;
 			public const uint SMGSemi = 15;
 			public const uint SniperAuto = 27;
 			public const uint SniperBurst = 26;
-			public const uint SniperSemi = 37;
 			public const uint SniperSemi_v2 = 9;
 			public const uint Test = 1;
 		}

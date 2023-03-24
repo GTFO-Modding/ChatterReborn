@@ -22,6 +22,7 @@ namespace GameData
 			public const uint CentralPowerGeneratorCluster_4_R4 = 42;
 			public const uint CentralPowerGeneratorCluster_4_R4_D2 = 57;
 			public const uint CentralPowerGeneratorCluster_5_C2 = 91;
+			public const uint CentralPowerGeneratorCluster_5_R5C2_L1 = 242;
 			public const uint CentralPowerGeneratorCluster_5_R7C2 = 144;
 			public const uint ClearAPath_Boss = 76;
 			public const uint ClearAPath_Default = 12;
@@ -88,11 +89,13 @@ namespace GameData
 			public const uint Reactor_Startup_Waves_6_EASY_Copy = 39;
 			public const uint Reactor_Startup_Waves_6_EASY_L2 = 37;
 			public const uint Reactor_Startup_Waves_6_L2_FAST = 65;
+			public const uint Reactor_Startup_Waves_6_R5C2_L2 = 243;
 			public const uint Reactor_Startup_Waves_7_only_defend = 93;
 			public const uint Reactor_Startup_Waves_8 = 7;
 			public const uint Retrieve_Essential_Items__1_MWP = 106;
 			public const uint Retrieve_Essential_Items__1_R6_C2 = 123;
 			public const uint Retrieve_Essential_Items__1_R8_A1 = 193;
+			public const uint Retrieve_Essential_Items__1_R8_B4 = 238;
 			public const uint Retrieve_Essential_Items_1_Cargo = 56;
 			public const uint Retrieve_Essential_Items_1_Cargo_R5 = 75;
 			public const uint Retrieve_Essential_Items_1_Cargo_R7B3 = 135;
@@ -165,6 +168,17 @@ namespace GameData
 			public const uint Rundown005_A2_L1_Retrieve_Essential_Items_1_Cargo = 227;
 			public const uint Rundown005_A2_L2_SpecialTerminalCommand_Blackout = 228;
 			public const uint Rundown005_A2_L3_Gather_Harddrive = 230;
+			public const uint Rundown005_A3_L1_TerminalGather_3 = 232;
+			public const uint Rundown005_A3_L2_HSU_DNA = 233;
+			public const uint Rundown005_A3_L3_CentralPowerGeneratorCluster_3 = 234;
+			public const uint Rundown005_B1_L1_HSU_DNA = 235;
+			public const uint Rundown005_B1_L2_Distribute_PowerCells_3 = 236;
+			public const uint Rundown005_B1_L3_Reactor_Startup_Waves_7_only_defend = 237;
+			public const uint Rundown005_B2_L1_Gather_GLP_9 = 239;
+			public const uint Rundown005_B2_L2_TerminalUplink_Two_Terminals_Open_Door = 240;
+			public const uint Rundown005_B2_L3_Gather_OSIPs_5 = 241;
+			public const uint Rundown005_C3_L1_CorruptedUplink_Two_Terminals = 245;
+			public const uint Rundown005_C3_L2_Activate_DataSphere = 246;
 			public const uint SpecialTerminalCommand_A3_rapids_at_end = 61;
 			public const uint SpecialTerminalCommand_Activate_All_HSUs = 104;
 			public const uint SpecialTerminalCommand_B2 = 51;
@@ -192,6 +206,7 @@ namespace GameData
 			public const uint SpecialTerminalCommand_unused = 147;
 			public const uint SpecialTerminalCommand_ZoneScan = 92;
 			public const uint SpecialTerminalCommand_ZoneScan_V2 = 95;
+			public const uint SpecialTerminalCommand_ZoneScan_V2_R5C2_L3 = 244;
 			public const uint Survival_R5_5_B4 = 98;
 			public const uint Survival_R6_B3 = 128;
 			public const uint Survival_R6_C3 = 111;

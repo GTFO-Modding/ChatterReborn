@@ -18,6 +18,7 @@ namespace ChatterReborn.Data
         FriendlyFireApology,
         IdleLowHealth,
         HeldByPouncer,
-        QuickResponse
+        QuickResponse,
+        StartEnemyScanningEnterDialog
     }
 }

@@ -6,13 +6,10 @@ namespace GameData
 		{
 			public const uint Birther_Boss_Children = 38;
 			public const uint Birther_Children = 37;
-			public const uint Bullrush = 25;
-			public const uint detect_hard_scout = 24;
 			public const uint Detect_Lurker_Bullrush_Striker = 23;
 			public const uint Detect_Lurker_Hard_Large_Bullrush_Bigs = 73;
 			public const uint Detect_Lurker_Hard_Small_Bullrush_Bigs = 34;
 			public const uint Detect_Lurker_Medium_Bullrush_Striker = 43;
-			public const uint Detect_Lurker_Miniboss_ = 53;
 			public const uint Detect_Lurker_Small_Bullrush_Striker = 67;
 			public const uint Hibernate_Biss_Large_Melee_Shadows = 7;
 			public const uint Hibernate_Biss_Melee_Shadows = 60;
@@ -21,7 +18,6 @@ namespace GameData
 			public const uint Hibernate_Boss_Boss_BirtherBoss_Align_1 = 41;
 			public const uint Hibernate_Buss_Melee_Big_Shadows = 63;
 			public const uint Hibernate_Buss_Small_Melee_Big_Shadows = 64;
-			public const uint Hibernate_Easy_Large_Melee = 42;
 			public const uint Hibernate_Easy_Mix = 1;
 			public const uint Hibernate_Easy_Small_Mix_A = 8;
 			public const uint Hibernate_Easy_Small_Mix_B = 9;
@@ -30,16 +26,13 @@ namespace GameData
 			public const uint Hibernate_Easy_Tiny_Mix_B = 11;
 			public const uint Hibernate_Hard_Large_Mix = 57;
 			public const uint Hibernate_Hard_Large_Mix_Scout = 19;
-			public const uint Hibernate_Hard_Large_Scout = 2;
 			public const uint Hibernate_Hard_Mix_Scout = 17;
 			public const uint Hibernate_Hard_Small_Mix_A = 58;
 			public const uint Hibernate_Hard_Small_Mix_B = 59;
 			public const uint Hibernate_Hard_Small_Mix_Scout = 18;
-			public const uint Hibernate_Medium_Mix_A = 6;
 			public const uint Hibernate_Medium_Mix_B = 16;
 			public const uint Hibernate_Medium_Small_Mix_A = 13;
 			public const uint Hibernate_Medium_Small_Mix_B = 55;
-			public const uint Hibernate_Medium_Tiny_Melee = 56;
 			public const uint Hibernate_Medium_Tiny_Mix_A = 14;
 			public const uint Hibernate_Medium_Tiny_Mix_B = 15;
 			public const uint Hibernate_Miniboss_Megaboss_Tank_Align_0 = 44;

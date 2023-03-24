@@ -9,7 +9,6 @@ namespace GameData
 			public const uint CuttingTorchMockupModel = 150;
 			public const uint Detonator = 62;
 			public const uint EmptyPart = 13;
-			public const uint FlashlightBigToolSpotlightLong = 63;
 			public const uint FlashlightSmallToolSpotlightLong = 65;
 			public const uint FlashlightSmallToolSpotlightWide = 66;
 			public const uint Grip_Angled_a = 113;

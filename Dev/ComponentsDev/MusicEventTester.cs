@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ChatterRebornDev.ComponentsDev
 {
-    [IL2CPPType(AddComponentOnStart = true, DontDestroyOnLoad = true)]
+    [IL2CPPType(AddComponentOnStart = false, DontDestroyOnLoad = true)]
     public class MusicEventTester : MonoBehaviour
     {
 

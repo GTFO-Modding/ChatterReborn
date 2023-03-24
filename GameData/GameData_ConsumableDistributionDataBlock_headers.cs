@@ -12,6 +12,7 @@ namespace GameData
 			public const uint Baseline_Alt = 62;
 			public const uint Baseline_c1_r3 = 15;
 			public const uint Baseline_c1_r3_Alt = 42;
+			public const uint Baseline_c1_r3_Alt_fog = 82;
 			public const uint Baseline_c2_r6 = 31;
 			public const uint Baseline_c2_r6_Alt = 64;
 			public const uint Baseline_Fog = 41;

@@ -87,6 +87,8 @@ namespace ChatterReborn.Machines
         public override bool IsLocallyOwned => this.Owner.IsLocallyOwned;
 
 
+
+
         public void WantToSyncDramaState(DRAMA_State state, bool force = false)
         {
             bool canSync = false;
@@ -290,18 +292,54 @@ namespace ChatterReborn.Machines
             }
         }
 
+        private void UpdateCheckHealth()
+        {
+            float currentHealth = this.Owner.Damage.GetHealthRel();
+            if (!m_firstHealthCheck)
+            {
+                m_firstHealthCheck = true;
+                this.m_lastKnownHealth = currentHealth;
+                return;
+            }
+
+
+            if (currentHealth != this.m_lastKnownHealth)
+            {                
+                if (currentHealth < this.m_lastKnownHealth)
+                {
+                    float damage = this.m_lastKnownHealth - currentHealth;
+                    ChatterEventListenerHandler<PlayerDamageEvent>.PostEvent(new PlayerDamageEvent
+                    {
+                        damageAmount = damage,
+                        damageReceiver = this.Owner,
+                    });
+                }
+
+                this.m_lastKnownHealth = currentHealth;
+            }
+
+        }
+
+
+        private float m_lastKnownHealth;
+
+        private bool m_firstHealthCheck;
+
         public void Update()
         {
             if (!this.m_IsSetup)
             {
                 return;
-            }        
+            }
+
+            this.UpdateCheckHealth();
 
             if (this.IsLocallyOwned)
             {
                 this.UpdateLocal();
             }
 
+            
             this.UpdateCombatState();
             this.UpdateIntensity();
             this.UpdateVoiceIntensity();            

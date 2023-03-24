@@ -7,7 +7,7 @@ using Il2CPPGeneric = Il2CppSystem.Collections.Generic;
 
 namespace ChatterRebornDev.ComponentsDev
 {
-    [IL2CPPType(AddComponentOnStart = true, DontDestroyOnLoad = true)]
+    [IL2CPPType(AddComponentOnStart = false, DontDestroyOnLoad = true)]
     public class PUI_CommunicationMenuDebugger : MonoBehaviour
     {
 
@@ -101,6 +101,7 @@ namespace ChatterRebornDev.ComponentsDev
                 {
                     m_information += m_information + "\n" + tabs + "\t" + "Icon PackageRotation: " + node.Icon.packingRotation;
                     m_information += m_information + "\n" + tabs + "\t" + "Icon Name: " + node.Icon.name;
+                    m_information += m_information + "\n" + tabs + "\t" + "Icon Texture: " + node.Icon.texture;
 
                     if (node.Icon.associatedAlphaSplitTexture != null)
                     {
@@ -110,7 +111,7 @@ namespace ChatterRebornDev.ComponentsDev
                     
                 }
 
-                if (node.m_ChildNodes != null && node.m_ChildNodes.Count > 0)
+                if (node.m_ChildNodes != null && node.m_ChildNodes.Count > 0 && !node.IsLastNode)
                 {
                     m_information += "\n" + tabs + "ChildNodes";
                     m_information += "\n" + tabs + "[";

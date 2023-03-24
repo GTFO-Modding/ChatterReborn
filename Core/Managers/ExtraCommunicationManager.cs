@@ -45,7 +45,7 @@ namespace ChatterReborn.Managers
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Ill_Stay_Close_To_You, GD.PlayerDialog.CL_IllStayCloseToYou));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IAgree, GD.PlayerDialog.CL_IAgree));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IDisagree, GD.PlayerDialog.CL_IDisagree));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Im_On_My_Way, GD.PlayerDialog.CL_ImOnMyWay));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_IUnderstand, GD.PlayerDialog.CL_IUnderstand));
             return node;
         }
 
@@ -107,19 +107,21 @@ namespace ChatterReborn.Managers
             return node;
         }
 
-        private CommunicationNode GetMiscActionNodes()
+        private CommunicationNode GetCombatNodes()
         {
             var node = CreateNode(CustomTextDataBlock.Combat, false);
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Anyone, GD.PlayerDialog.CL_Anyone));
-            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Everyone, GD.PlayerDialog.CL_Everyone));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_GoLoud, GD.PlayerDialog.CL_GoLoud));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Attack, GD.PlayerDialog.CL_Attack));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialog_CommunicationList_Hurry, GD.PlayerDialog.CL_Hurry));
+            node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_StayBack, GD.PlayerDialog.CL_StayBack));
+            
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Defend, GD.PlayerDialog.CL_Defend));            
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_BackUp, GD.PlayerDialog.CL_BackUp));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Flashlights, GD.PlayerDialog.CL_Flashlights));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Lets_Get_The_Fuck_Out, GD.PlayerDialog.CL_LetsGTFO));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Scan, GD.PlayerDialog.CL_Scan));
             node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Tag_Them, GD.PlayerDialog.CL_TagThem));
-            //node.m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Pick_This_Up, GD.PlayerDialog.CL_PickThisUp));
+
             return node;
         }
 
@@ -165,23 +167,25 @@ namespace ChatterReborn.Managers
             {
 
                 this.DebugPrint("Found the PUI_CommunicationMenu, now adding more nodes!!", eLogType.Message);
-                var extrasNode = CreateNode(CustomTextDataBlock.MoreResponses, 0, false);
 
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Deployables].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Scan, GD.PlayerDialog.CL_Scan, CommunicationNode.ScriptType.UseTool, true));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Shh, GD.PlayerDialog.CL_Shh));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Insert(2, CreateNode(GD.Text.PlayerDialogData_CommunicationList_AreYouReady, GD.PlayerDialog.CL_AreYouReady));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Sneaking].m_ChildNodes.Add(GetSecondPersonActionNodes());
-                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Secure_This_Room, GD.PlayerDialog.CL_SecureThisRoom));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Insert(4, CreateNode(GD.Text.PlayerDialogData_CommunicationList_Secure_This_Room, GD.PlayerDialog.CL_SecureThisRoom));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Insert(4, CreateNode(GD.Text.PlayerDialogData_CommunicationList_Pick_This_Up, GD.PlayerDialog.CL_PickThisUp));
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Objective].m_ChildNodes.Insert(4, CreateNode(GD.Text.PlayerDialogData_CommunicationList_Weld_This, GD.PlayerDialog.CL_WeldThis));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Be_Right_Back, GD.PlayerDialog.CL_BRB));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Im_Exhausted, GD.PlayerDialog.CL_ImExhausted));
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Limited_Vision, GD.PlayerDialog.CL_LimitedVision));
-                //extrasNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
-                //extrasNode.m_ChildNodes.Add(GetSecondPersonActionNodes());
-                extrasNode.m_ChildNodes.Add(GetDirectionsNodes());
-                extrasNode.m_ChildNodes.Add(GetResourcesNodes());
-                extrasNode.m_ChildNodes.Add(GetMiscActionNodes());
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Responses].m_ChildNodes.Add(CreateNode(GD.Text.PlayerDialogData_CommunicationList_Im_On_My_Way, GD.PlayerDialog.CL_ImOnMyWay));
+                //CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Teamwork].m_ChildNodes.Insert(4, CreateNode(GD.Text.InGame_CommunicationList_Category_Exploring, GD.PlayerDialog.random_comment_pure_stealth));
+                //CurrentMenu.m_menu.CurrentNode.m_ChildNodes[(int)CommunicationListCategory.Teamwork].m_ChildNodes.Insert(4, CreateNode(GD.Text.InGame_CommunicationList_Category_Exploring, GD.PlayerDialog.random_comment_combat_potential));
+
+
                 CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(GetFirstPersonActionNodes());
-                CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(extrasNode);
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(GetCombatNodes());
+                CurrentMenu.m_menu.CurrentNode.m_ChildNodes.Add(GetResourcesNodes());
                 
                 return;
             }
@@ -220,6 +224,7 @@ namespace ChatterReborn.Managers
             m_node3.DialogID = dialogID;
             m_node3.Script = scriptType;
             m_node3.Icon = new Sprite();
+
             m_node3.m_ChildNodes = new Il2CppSystem.Collections.Generic.List<CommunicationNode>();
             m_node3.IsLastNode = isLastNode;
             return m_node3;

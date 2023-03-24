@@ -9,7 +9,6 @@ namespace GameData
 			public const uint Apex_Diminished_SpawnPoints = 144;
 			public const uint Apex_Diminished_SSp = 57;
 			public const uint Apex_Diminished_SSp_Delayed = 211;
-			public const uint Apex_duplicate = 19;
 			public const uint Apex_Even_More_Diminished_SSp = 126;
 			public const uint Apex_Fast_from_elevator = 112;
 			public const uint Apex_hack_SSpM = 125;
@@ -23,6 +22,7 @@ namespace GameData
 			public const uint Apex_No_Bigs = 90;
 			public const uint Apex_No_Bigs_Slow = 146;
 			public const uint Apex_R1D1 = 235;
+			public const uint Apex_Rapid_shooters_R5C2 = 237;
 			public const uint Apex_Reduced = 12;
 			public const uint Apex_Reduced_Hybrids_Mod_WSSpM = 31;
 			public const uint Apex_Reduced_R7d1 = 224;
@@ -38,10 +38,7 @@ namespace GameData
 			public const uint Apex_WSSpM = 99;
 			public const uint Apex_WSSpM_increased_Spawnpoints = 169;
 			public const uint Boss_Spawn_Flyer = 94;
-			public const uint Decontamination = 2;
-			public const uint Door_wave = 18;
 			public const uint Exit_Trickle_1_8_S = 11;
-			public const uint Exit_Trickle_1_8_S_duplicate = 60;
 			public const uint Exit_Trickle_10__40_M = 135;
 			public const uint Exit_Trickle_2_12_S = 20;
 			public const uint Exit_Trickle_2_12_SSpM = 35;
@@ -53,6 +50,7 @@ namespace GameData
 			public const uint Exit_Trickle_4_10_WSM = 39;
 			public const uint Exit_Trickle_5_10_Rundown002_C1 = 231;
 			public const uint Exit_Trickle_5_8 = 34;
+			public const uint Exit_trickle_R3C1 = 236;
 			public const uint Finite_1_1_90_B = 56;
 			public const uint Finite_1_M = 54;
 			public const uint Finite_1_M_Spawnpoints = 164;
@@ -111,6 +109,7 @@ namespace GameData
 			public const uint Reactor_12_SSpMB = 23;
 			public const uint Reactor_12_SSpMB_Spawnpoints = 128;
 			public const uint Reactor_24_SSpMB = 7;
+			public const uint Reactor_24_SSpMB_R3A3 = 238;
 			public const uint Reactor_24_SSpMB_Spawnpoints = 196;
 			public const uint Reactor_3_MB = 22;
 			public const uint Reactor_3_MB_LessPop_R2D2 = 232;
@@ -121,7 +120,6 @@ namespace GameData
 			public const uint Reactor_6_SSpMB_Spawnpoints = 129;
 			public const uint Reactor_8_SSpMB = 40;
 			public const uint Reactor_8_SSpMB_Spawnpoints = 197;
-			public const uint Reactor_infiite = 10;
 			public const uint Rundown001_C1_Exit_Trickle = 234;
 			public const uint Rundown001_C1_Reactor_Original = 233;
 			public const uint Scout_Halved_and_Reduced_S = 131;
@@ -200,6 +198,7 @@ namespace GameData
 			public const uint Trickle_3_30_SSpB_R2E1 = 229;
 			public const uint Trickle_3_45_SSpB = 43;
 			public const uint Trickle_3_52_SSpB = 32;
+			public const uint Trickle_3_52_SSpB_R4B2_L2_ALT = 240;
 			public const uint Trickle_3_70_SSpB = 123;
 			public const uint Trickle_4_20__M = 52;
 			public const uint Trickle_4_28_SSpM = 121;
@@ -218,6 +217,7 @@ namespace GameData
 			public const uint Trickle_6_20_S = 49;
 			public const uint Trickle_6_20_S_Not_From_Elevator = 208;
 			public const uint Trickle_6_20_SSpMb_From_Elevator = 109;
+			public const uint Trickle_6_30_R3C1 = 239;
 			public const uint Trickle_6_30_SSp = 24;
 			public const uint Trickle_6_30_SSpB = 136;
 			public const uint Trickle_8_10_S_Spawnpoints = 108;

@@ -76,7 +76,6 @@ namespace ChatterReborn.Managers
             string newName = originalName;
             bool first = true;
             uint uniqueID = 0;
-            bool hasNameAlready = true;
             do
             {
                 if (first)
@@ -91,10 +90,8 @@ namespace ChatterReborn.Managers
 
                     this.DebugPrint("TextBlock " + prevName + " already exists! Let's check if this one exists -> " + newName, eLogType.Warning);
                 }
-
-                hasNameAlready = TextDataBlock.HasBlock(newName);
                 
-            } while (hasNameAlready);
+            } while (TextDataBlock.HasBlock(newName));
 
             this.DebugPrint("TextBlock name is a non-duplicate -> " + newName + ", we are good!", eLogType.Message);
 

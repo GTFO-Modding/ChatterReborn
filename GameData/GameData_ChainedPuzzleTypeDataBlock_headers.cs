@@ -8,6 +8,8 @@ namespace GameData
 			public const uint SecurityScan_Big_Moving = 22;
 			public const uint SecurityScan_Big_Moving_R6D2 = 31;
 			public const uint SecurityScan_Big_Moving_R7B1 = 38;
+			public const uint SecurityScan_Big_Moving_R8B4 = 42;
+			public const uint SecurityScan_Big_Moving_R8B4_v2 = 43;
 			public const uint SecurityScan_Big_RequireAll = 6;
 			public const uint SecurityScan_Big_RequireAll_Moving_3_random = 24;
 			public const uint SecurityScan_Big_RequireAll_Moving1 = 21;

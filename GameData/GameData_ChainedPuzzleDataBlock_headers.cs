@@ -31,6 +31,7 @@ namespace GameData
 			public const uint Mixed_Big_Cluster_Separated_x5___Alarm_Hybrids_R2D1 = 206;
 			public const uint Mixed_Big_x3___Alarm_Reduced_Bullrush_Mix = 58;
 			public const uint Mixed_Bigs_Separated_x4___Alarm_Hybrids = 92;
+			public const uint Mixed_Bigs_Separated_x4___Alarm_Hybrids_R5C2_L1 = 215;
 			public const uint Mixed_Bigs_Separated_x6___Alarm_Hybrids_Modified = 49;
 			public const uint Mixed_Bundled_No_Req_All_x4___Alarm_Shadows_Rundown001_C1 = 200;
 			public const uint Mixed_Bundled_x3___Alarm = 48;
@@ -92,16 +93,16 @@ namespace GameData
 			public const uint Mixed_x5_Bundled___Alarm = 9;
 			public const uint Mixed_x6___Alarm_Shadows_Mixed = 43;
 			public const uint Mixed_x6_alarm = 150;
-			public const uint OLD_Chained_bioscan_mix = 2;
 			public const uint Rundown002_B2_Mixed_x5_Bundled___Alarm = 207;
 			public const uint SecurityScan_Bulkhead_Select_Layer_Main = 59;
 			public const uint SecurityScan_Bulkhead_Select_Layer_Secondary = 60;
 			public const uint SecurityScan_Bulkhead_Select_Layer_Third = 61;
-			public const uint Single_Big_RequireAll_x3___Alarm_Surge_Hybrids = 196;
+			public const uint Single_Big_RequireAll_x3___Alarm_Surge___R2E1___z597 = 196;
+			public const uint Single_Big_RequireAll_x4___Alarm_Surge___R2E1___z603 = 212;
+			public const uint Single_Big_RequireAll_x4___Alarm_Surge_Hybrids___R2E1___z600 = 211;
 			public const uint Single_Big_x6___Alarm_with_flyers = 168;
 			public const uint Single_Bigger_Separated_x2_Alarm = 65;
 			public const uint Single_Bigger_x1 = 45;
-			public const uint Single_bigger_x1___Alarm_Trickle_2_5 = 62;
 			public const uint Single_Bigger_x1_Alarm = 63;
 			public const uint Single_bigger_x2_Far___Alarm_Halved = 70;
 			public const uint Single_bigger_x3_Far___Alarm = 95;
@@ -111,6 +112,7 @@ namespace GameData
 			public const uint Single_bigger_x5____Alarm = 96;
 			public const uint Single_bigger_x5____Alarm_Shadows = 129;
 			public const uint Single_Bundled_x3___Alarm = 47;
+			public const uint Single_Bundled_x4___Alarm = 214;
 			public const uint Single_D10_req_all_x1 = 124;
 			public const uint Single_Far_Separated_More_x3___Alarm_Surge_Hybrids = 37;
 			public const uint Single_Far_Separated_x4___Alarm_Surge = 40;
@@ -120,6 +122,7 @@ namespace GameData
 			public const uint Single_red_x1_No_alarm = 137;
 			public const uint Single_Small_x1 = 36;
 			public const uint Single_small_x1___Error_Alarm_Bullrush_Trickle_6_30_Build_up = 42;
+			public const uint Single_small_x1___Error_Alarm_Bullrush_Trickle_6_30_Build_up_R3C1 = 216;
 			public const uint Single_Sustained_Defend_Far_x1___Alarm_Diminished = 121;
 			public const uint Single_Sustained_Defend_Far_x1___Alarm_Hybrids_Modifier = 88;
 			public const uint Single_Sustained_Defend_Far_x1___Alarm_Increased_Hybrids = 69;
@@ -131,6 +134,7 @@ namespace GameData
 			public const uint Single_Sustained_Defend_x1___Alarm_Increased = 85;
 			public const uint Single_Sustained_Defend_x1___Alarm_Increased_BioscanPoint = 156;
 			public const uint Single_Sustained_Defend_x1___Alarm_Increased_Further = 144;
+			public const uint Single_Sustained_Defend_x1___Easy_alarm_R5A3_L1 = 209;
 			public const uint Single_Sustained_Far_Bundled_x5___Alarm_Hybrids_Modified = 89;
 			public const uint Single_Sustained_Far_Separated_x4___Alarm_Surge_Hybrids = 113;
 			public const uint Single_Sustained_Far_x3___Alarm = 76;
@@ -145,7 +149,7 @@ namespace GameData
 			public const uint Single_Sustained_Zone_Scan___Alarm_R7D1 = 185;
 			public const uint Single_Sustained_Zone_Scan___PouncerWaves = 180;
 			public const uint Single_Sustained_Zone_Scan_No_Graphics__Alarm = 160;
-			public const uint Single_to_Big_RequireAll_x3___Alarm_Surge_R2E1_Z601 = 198;
+			public const uint Single_to_Big_RequireAll_x3___Alarm_Surge___R2E1___z607 = 198;
 			public const uint Single_x1 = 4;
 			public const uint Single_x1___Alarm = 7;
 			public const uint Single_x1___Alarm_Birther = 141;
@@ -161,6 +165,7 @@ namespace GameData
 			public const uint Single_x1___Error_Alarm_Trickle_3_30_Hybrids_Modified = 110;
 			public const uint Single_x1___Error_Alarm_Trickle_3_45_Bullrush_Bigs = 87;
 			public const uint Single_x1___Error_Alarm_Trickle_3_52 = 67;
+			public const uint Single_x1___Error_Alarm_Trickle_3_52_R4B2_L2_ALT = 219;
 			public const uint Single_x1___Error_Alarm_Trickle_4_20_Bullrush = 111;
 			public const uint Single_x1___Error_Alarm_Trickle_4_40_Bigs = 112;
 			public const uint Single_x1___Error_Alarm_Trickle_4_6_Bullrush_Bigs = 79;
@@ -171,11 +176,12 @@ namespace GameData
 			public const uint Single_x1___Error_Alarm_Trickle_6_30_Shadows = 155;
 			public const uint Single_x1___Error_Alarm_Trickle_R2E1 = 197;
 			public const uint Single_x1___Error_Alarm_wave_Mainframe = 189;
-			public const uint Single_x1___No_alarm = 119;
 			public const uint Single_x1_Moving_11_static_points___Alarm = 181;
 			public const uint Single_x1_Moving_22_static_points___Alarm = 152;
+			public const uint Single_x1_Moving_24_static_points___Alarm = 213;
 			public const uint Single_x1_Moving_3_random_points___Alarm_Bullrush_mix = 143;
 			public const uint Single_x1_Moving_58_static_points___Alarm = 125;
+			public const uint Single_x1_Moving_59_static_points___Alarm = 210;
 			public const uint Single_x1_No_close_HUD = 173;
 			public const uint single_x1_R6A1_Narrative_lock = 145;
 			public const uint single_x1_R6C1_Narrative_lock_1 = 146;
@@ -188,7 +194,6 @@ namespace GameData
 			public const uint Single_x2___Alarm_Tutorial = 183;
 			public const uint Single_x4___Alarm = 136;
 			public const uint Small_Cluster_Bundled_x3___Alarm = 13;
-			public const uint Small_Cluster_Bundled_x3___Alarm_duplicate = 46;
 			public const uint Small_Cluster_Bundled_x3___Original_Distance = 194;
 			public const uint Small_Cluster_Separated_x3___Alarm_Bullrush = 22;
 			public const uint Small_Cluster_Separated_x3___Alarm_Bullrush_Only_R1C2 = 201;
@@ -204,9 +209,11 @@ namespace GameData
 			public const uint Small_Cluster_x2___Alarm_Shooters = 18;
 			public const uint Small_Cluster_x2___No_Alarm_Stealth = 142;
 			public const uint Small_Cluster_x3___Alarm_Bullrush___R1C2 = 195;
+			public const uint Small_Cluster_x3___Alarm_R4A2 = 217;
 			public const uint Small_Cluster_x3___Alarm_Shooters = 17;
 			public const uint Small_Cluster_x3___No_Alarm_Stealth = 77;
 			public const uint Small_Cluster_x3___No_Alarm_Stealth_Far = 159;
+			public const uint Small_Cluster_x4___Alarm_R4A2 = 218;
 			public const uint Team_req_all_x1 = 184;
 		}
 	}

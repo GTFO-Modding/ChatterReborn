@@ -51,7 +51,6 @@ namespace GameData
 			public const uint wpn_knife_hit_normal = 52;
 			public const uint wpn_melee_hit_hard = 51;
 			public const uint wpn_melee_hit_normal = 50;
-			public const uint wpn_meleehit = 3;
 			public const uint wpn_muzzleflash = 4;
 			public const uint wpn_pipe_bomb = 40;
 			public const uint wpn_pistol_muzzle = 28;

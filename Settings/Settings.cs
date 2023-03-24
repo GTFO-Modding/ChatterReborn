@@ -12,7 +12,7 @@
         {
             public const string Plugin_GUI = "CHTR";
             public const string Plugin_Name = "chatter-reborn";
-            public const string Plugin_Version = "0.3.4";
+            public const string Plugin_Version = "0.3.5";
             public const bool DebugLogsEnabled = false;
         }
 
@@ -37,15 +37,6 @@
             public const uint Dam_PlayerDamageBase__ReceiveMeleeDamage__Postfix = 7168294;
         }
 
-        public static class EnemyScanner
-        {
-            public const float ScanningGoal_Max = 1f;
-            public const float ScanningGoal_Min = 0.5f;
-            public const float ScanningGoal_No_Enemies = 4f;
-            public const bool DebugScanningPrintEnabled = false;
-            public const int MaxEnemiesCount = 8;
-
-        }
 
         public static class Misc
         {

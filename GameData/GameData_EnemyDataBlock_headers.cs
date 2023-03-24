@@ -9,7 +9,6 @@ namespace GameData
 			public const uint Cocoon = 22;
 			public const uint Flyer = 42;
 			public const uint Flyer_Big = 45;
-			public const uint Immortal = 8;
 			public const uint Pouncer = 46;
 			public const uint Scout = 20;
 			public const uint Scout_Bullrush = 41;

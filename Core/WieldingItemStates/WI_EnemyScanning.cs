@@ -1,4 +1,6 @@
-﻿using ChatterReborn.Utils;
+﻿using ChatterReborn.Data;
+using ChatterReborn.Managers;
+using ChatterReborn.Utils;
 using ChatterRebornSettings;
 using GameData;
 using LevelGeneration;
@@ -10,11 +12,29 @@ namespace ChatterReborn.WieldingItemStates
     {
         private WI_EnemyScanResults Results_State => (WI_EnemyScanResults)this.m_machine.GetState(WI_State.EnemyScanResults);
 
+        private CallBackUtils.CallBack m_startScanningCallback;
+        public override void Setup()
+        {
+            m_startScanningCallback = new CallBackUtils.CallBack(() =>
+            {
+                if (!EnemyDetectionManager.AnyEnemiesAlerted && !CoolDownManager.HasCooldown(CoolDownType.StartEnemyScanningEnterDialog))
+                {
+                    this.StartEnemyScannerDialog(GD.PlayerDialog.on_mapping_finished);
+                    CoolDownManager.ApplyCooldown(CoolDownType.StartEnemyScanningEnterDialog, new MinMaxTimer(8f, 12f));
+                }                
+            });
+        }
+
+        public override void Exit()
+        {
+            m_startScanningCallback.RemoveCallBack();
+        }
+
 
         public override void Enter()
         {
             this.m_scanningQueue = 0f;
-            this.m_scanningGoal = Settings.EnemyScanner.ScanningGoal_No_Enemies;
+            this.m_scanningGoal = 4f;
             m_enemyFound = false;
             Results_State.ResetEnemyCount();            
         }
@@ -83,7 +103,7 @@ namespace ChatterReborn.WieldingItemStates
             {
                 m_enemyFound = true;
                 this.m_scanningQueue = 0f;
-                this.m_scanningGoal = Settings.EnemyScanner.ScanningGoal_Max;
+                this.m_scanningGoal = 1f;
                 return;
             }         
 
@@ -117,5 +137,6 @@ namespace ChatterReborn.WieldingItemStates
         private float m_scanningGoal = 0f;
 
         private bool m_enemyFound;
+
     }
 }

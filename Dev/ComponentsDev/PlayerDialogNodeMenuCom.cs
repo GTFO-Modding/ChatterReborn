@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace ChatterReborn.ComponentsDev
 {
-    [IL2CPPType(AddComponentOnStart = false, DontDestroyOnLoad = true)]
+    [IL2CPPType(AddComponentOnStart = true, DontDestroyOnLoad = true)]
     public class PlayerDialogNodeMenuCom : MonoBehaviour
     {
         public PlayerDialogNodeMenuCom(IntPtr pointer) : base(pointer)
@@ -196,6 +196,12 @@ namespace ChatterReborn.ComponentsDev
                 Label = "Damage Grunt (Low Health)",
                 DialogID = GD.PlayerDialog.low_health_limit
             });
+
+            m_combat_menu.AddNode(new PlayerDialogNode
+            {
+                Label = "Sentry Deployed",
+                DialogID = GD.PlayerDialog.sentry_gun_deploy
+            });
         }
 
         private void SetupMasterMenu()
@@ -275,6 +281,11 @@ namespace ChatterReborn.ComponentsDev
             {
                 Label = "We are Lost",
                 DialogID = GD.PlayerDialog.idle_no_progress
+            });
+            m_exploration_menu.AddNode(new PlayerDialogNode
+            {
+                Label = "Big Space Enter",
+                DialogID = GD.PlayerDialog.big_space_enter
             });
         }
 

@@ -51,7 +51,6 @@ namespace GameData
 			public const uint Gardens_Dirt_Submarker_120x120x240 = 88;
 			public const uint Gardens_Dirt_Submarker_800x400x400 = 55;
 			public const uint Gardens_Dirt_T_2200x2200x2000 = 51;
-			public const uint Gardens_Dirt_Wall_1800x900x2000 = 48;
 			public const uint Gardens_Dirt_Wall_2200x2200x2000 = 47;
 			public const uint Gardens_Dirt_Wall_400x200x400 = 82;
 			public const uint Gardens_Dirt_Wall_600x400x400 = 54;
@@ -66,7 +65,6 @@ namespace GameData
 			public const uint Gardens_Lab_Submarker_Desk_240x120x240 = 68;
 			public const uint Gardens_Lab_Submarker_Desk_Top_200x120x120 = 69;
 			public const uint Gardens_Lab_Submarker_NoCeiling_800x500x450 = 87;
-			public const uint Gardens_Lab_T_1600x1200x500 = 58;
 			public const uint Gardens_Lab_Wall_600x400x400 = 62;
 			public const uint Gardens_Submarker_120x120x120 = 71;
 			public const uint Gardens_Submarker_120x60x60 = 72;

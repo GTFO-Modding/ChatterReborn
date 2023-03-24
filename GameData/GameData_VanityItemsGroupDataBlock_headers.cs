@@ -22,6 +22,9 @@ namespace GameData
 			public const uint OverloadCompletedDrops = 20;
 			public const uint OverloadDrops = 16;
 			public const uint R1Completion = 37;
+			public const uint R2Completion = 38;
+			public const uint R3Completion = 39;
+			public const uint R4Completion = 40;
 			public const uint R7MainCompletedDrops = 28;
 			public const uint R7MainStoryDrops = 24;
 			public const uint R7OverloadCompletedDrops = 30;

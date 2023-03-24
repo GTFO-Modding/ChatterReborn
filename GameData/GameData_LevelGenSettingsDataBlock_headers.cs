@@ -4,7 +4,6 @@ namespace GameData
 	{
 		public class LevelGenSettings
 		{
-			public const uint GPTrailerShort = 4;
 			public const uint Long = 3;
 			public const uint Medium = 2;
 			public const uint Short = 1;

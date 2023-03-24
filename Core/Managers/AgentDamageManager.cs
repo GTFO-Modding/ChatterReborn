@@ -46,17 +46,20 @@ namespace ChatterReborn.Managers
             };
             this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.BulletDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, bulletDmgTypes);
             this.m_patcher.Patch<Dam_EnemyDamageBase>(nameof(Dam_EnemyDamageBase.MeleeDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance, meleeDmgTypes);
+            /* This crap is broken with ALT R3!!
             this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.OnIncomingDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
             this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveTentacleAttackDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
             this.m_patcher.Patch<Dam_SyncedDamageBase>(nameof(Dam_SyncedDamageBase.ShooterProjectileDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
-            this.m_patcher.Patch<Dam_PlayerDamageBase>(nameof(Dam_PlayerDamageBase.ReceiveMeleeDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            this.m_patcher.Patch<Dam_SyncedDamageBase>(nameof(Dam_SyncedDamageBase.ReceiveMeleeDamage), HarmonyPatchType.Postfix, BindingFlags.Public | BindingFlags.Instance);
+            */
+            
             this.m_patcher.Patch<Dam_PlayerDamageLocal>(nameof(Dam_PlayerDamageLocal.ReceiveBulletDamage), HarmonyPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
             this.m_patcher.Patch<PlayerVoice>(nameof(PlayerVoice.VoiceCallback), HarmonyPatchType.Prefix, BindingFlags.Public | BindingFlags.Instance);
         }
 
 
         [MethodDecoderToken]
-        private static void Dam_EnemyDamageBase__BulletDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent, Vector3 position, Vector3 direction, Vector3 normal, bool allowDirectionalBonus = false, int limbID = 0, float staggerMulti = 1f, float precisionMulti = 1f)
+        private static void Dam_EnemyDamageBase__BulletDamage__Postfix(Dam_EnemyDamageBase __instance, float dam, Agent sourceAgent)
         {
             ChatterEventListenerHandler<EnemyDamageEvent>.PostEvent(new EnemyDamageEvent
             {
@@ -71,8 +74,11 @@ namespace ChatterReborn.Managers
         [MethodDecoderToken]
         static void Dam_PlayerDamageLocal__ReceiveBulletDamage__Prefix(Dam_PlayerDamageLocal __instance)
         {
-            __instance.Owner.WantToStartDialog(GD.PlayerDialog.friendly_fire_outburst, true);
-            __instance.m_damageVoiceTimer = Clock.Time + 2f;
+            if (__instance.m_damageVoiceTimer < Time.time)
+            {
+                __instance.Owner.WantToStartDialog(GD.PlayerDialog.friendly_fire_outburst, true);
+                __instance.m_damageVoiceTimer = Time.time + 2f;
+            }            
         }
 
         [MethodDecoderToken]
@@ -111,7 +117,7 @@ namespace ChatterReborn.Managers
 
 
         [MethodDecoderToken]
-        private static void Dam_PlayerDamageBase__ReceiveTentacleAttackDamage__Postfix(Dam_PlayerDamageBase __instance, pMediumDamageData data)
+        private static void Dam_PlayerDamageBase__ReceiveTentacleAttackDamage__Postfix(Dam_PlayerDamageBase __instance)
         {
 
             if (__instance.Owner.IsBotOwned())
@@ -127,16 +133,25 @@ namespace ChatterReborn.Managers
 
 
         [MethodDecoderToken]
-        private static void Dam_SyncedDamageBase__ShooterProjectileDamage__Postfix(Dam_PlayerDamageBase __instance, float dam, Vector3 position)
+        private static void Dam_SyncedDamageBase__ShooterProjectileDamage__Postfix(Dam_SyncedDamageBase __instance)
         {
-            OnHitReactBot(__instance.Owner);
+            PlayerAgent playerAgent = __instance.GetBaseAgent().TryCast<PlayerAgent>();
+            if (playerAgent != null)
+            {
+                OnHitReactBot(playerAgent);
+            }
+            
         }
 
 
         [MethodDecoderToken]
-        private static void Dam_PlayerDamageBase__ReceiveMeleeDamage__Postfix(Dam_PlayerDamageBase __instance, pMediumDamageData data)
+        private static void Dam_SyncedDamageBase__ReceiveMeleeDamage__Postfix(Dam_SyncedDamageBase __instance)
         {
-            OnHitReactBot(__instance.Owner);
+            PlayerAgent playerAgent = __instance.GetBaseAgent().TryCast<PlayerAgent>();
+            if (playerAgent != null)
+            {
+                OnHitReactBot(playerAgent);
+            }
         }
 
         private static void OnHitReactBot(PlayerAgent playerAgent)

@@ -12,7 +12,6 @@ namespace GameData
 			public const uint apex_door_fight_anticipation = 137;
 			public const uint apex_door_to_checkpoint_spot = 135;
 			public const uint apex_door_to_elevator_spot = 136;
-			public const uint ask_for_objective_reminder = 29;
 			public const uint attracted_monsters_accident = 45;
 			public const uint attracted_monsters_intentional = 46;
 			public const uint big_space_enter = 112;
@@ -168,12 +167,6 @@ namespace GameData
 			public const uint expedition_start_datamining = 89;
 			public const uint expedition_start_generic = 87;
 			public const uint expedition_start_scavenge = 88;
-			public const uint find_scav_0 = 30;
-			public const uint find_scav_1_49 = 31;
-			public const uint find_scav_100 = 35;
-			public const uint find_scav_50 = 32;
-			public const uint find_scav_51_79 = 33;
-			public const uint find_scav_80_99 = 34;
 			public const uint found_ammo = 190;
 			public const uint found_ammo_little = 191;
 			public const uint found_armory = 40;
@@ -182,8 +175,6 @@ namespace GameData
 			public const uint found_encryption_key_3_of_5 = 166;
 			public const uint found_encryption_key_4_of_5 = 167;
 			public const uint found_encryption_key_final = 168;
-			public const uint found_encryption_key_generic = 157;
-			public const uint found_encryption_key_succeeding = 158;
 			public const uint found_generic_item_1_of_5 = 159;
 			public const uint found_generic_item_2_of_5 = 162;
 			public const uint found_generic_item_3_of_5 = 160;
@@ -192,7 +183,6 @@ namespace GameData
 			public const uint found_health_station = 39;
 			public const uint found_health_station_response = 100;
 			public const uint found_item_generic = 155;
-			public const uint found_item_succeeding = 156;
 			public const uint found_meds = 188;
 			public const uint found_meds_little = 189;
 			public const uint found_node_door = 43;
@@ -327,7 +317,6 @@ namespace GameData
 			public const uint see_way_to_objective = 47;
 			public const uint sentry_gun_deploy = 109;
 			public const uint shoot_parasite_nest = 60;
-			public const uint shot_yourself_free_from_ceiling_tentacle = 95;
 			public const uint shot_yourself_free_from_snatcher = 141;
 			public const uint sneeze = 172;
 			public const uint spot_idle_guard_group = 50;

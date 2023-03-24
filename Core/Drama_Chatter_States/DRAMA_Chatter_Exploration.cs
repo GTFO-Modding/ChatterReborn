@@ -169,19 +169,6 @@ namespace ChatterReborn.Drama_Chatter_States
                 {
                     handler.AddValue(GD.PlayerDialog.random_comment_combat_potential, 1f);
                     handler.AddValue(GD.PlayerDialog.random_comment_pure_stealth, 1f);
-                    if (Settings.Misc.AllowBondingDialogue)
-                    {
-                        if (DramaManager.Tension < 60f)
-                        {
-                            handler.AddValue(GD.PlayerDialog.ask_for_objective_reminder, 1f);
-                            handler.AddValue(GD.PlayerDialog.idle_surroundings, 1f);
-                            if (Clock.Time - DramaManager.Current.m_machine.m_changeStateTime > 120f)
-                            {
-                                handler.AddValue(GD.PlayerDialog.idle_group_bonding, 1f);
-                            }
-                        }
-                    }
-
                     if (DramaManager.PlayersSeparated)
                     {
                         handler.AddValue(GD.PlayerDialog.group_is_not_together, 1f);

@@ -200,7 +200,7 @@
     </Reference>
     <Reference Include="Addons-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CoreReferences\interop\Addons-ASM.dll</HintPath>
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\Default\BepInEx\interop\Addons-ASM.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Core, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -243,11 +243,11 @@
     </Reference>
     <Reference Include="Modules-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Core Dependencies\interop\Modules-ASM.dll</HintPath>
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\Default\BepInEx\interop\Modules-ASM.dll</HintPath>
     </Reference>
     <Reference Include="SNet_ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\interop\SNet_ASM.dll</HintPath>
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\Default\BepInEx\interop\SNet_ASM.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -283,7 +283,7 @@
     </Reference>
     <Reference Include="Utils-ASM, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\MOD Rebellion\BepInEx\interop\Utils-ASM.dll</HintPath>
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\GTFO\profiles\Default\BepInEx\interop\Utils-ASM.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

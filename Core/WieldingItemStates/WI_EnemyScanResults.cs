@@ -41,6 +41,6 @@ namespace ChatterReborn.WieldingItemStates
 
         private int enemiesFound;
 
-        public bool MaxReached => enemiesFound > Settings.EnemyScanner.MaxEnemiesCount;
+        public bool MaxReached => enemiesFound > 8;
     }
 }

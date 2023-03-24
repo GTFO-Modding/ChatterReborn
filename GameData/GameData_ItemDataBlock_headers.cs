@@ -8,6 +8,7 @@ namespace GameData
 			public const uint AmmoPackWeapon = 101;
 			public const uint ARTIFACT_Base_ItemData = 152;
 			public const uint Carry_CargoCrate_Generic = 138;
+			public const uint Carry_CargoCrate_Generic_R2A1 = 176;
 			public const uint Carry_CargoCrate_HighSecurity = 154;
 			public const uint Carry_CargoCrate_HighSecurity_Open = 155;
 			public const uint Carry_Cryo_Hardcase = 148;
@@ -19,6 +20,7 @@ namespace GameData
 			public const uint Carry_HSU_Small_Stage_3 = 143;
 			public const uint Carry_HSU_Small_Stage_4 = 145;
 			public const uint Carry_HSU_Small_Stage_4_R3D1 = 175;
+			public const uint Carry_HSU_Small_Stage_4_R3D1_Static = 177;
 			public const uint Carry_HSU_Small_Stage_5 = 170;
 			public const uint Carry_MWP = 164;
 			public const uint Carry_PortalKey = 166;

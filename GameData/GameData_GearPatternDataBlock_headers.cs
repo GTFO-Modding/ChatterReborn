@@ -4,15 +4,9 @@ namespace GameData
 	{
 		public class GearPattern
 		{
-			public const uint Checkers = 1;
-			public const uint Concrete_A = 2;
-			public const uint Concrete_B = 3;
 			public const uint Crystal_A = 10;
 			public const uint Flame_A = 9;
 			public const uint Flame_Gradient = 15;
-			public const uint FlameParticle = 4;
-			public const uint MetalBase = 5;
-			public const uint MetalFloor = 6;
 			public const uint Paint_Gradient_A = 16;
 			public const uint Paint_Gradient_B = 17;
 			public const uint Painted_Line = 14;
