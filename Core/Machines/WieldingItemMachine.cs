@@ -20,6 +20,7 @@ namespace ChatterReborn.Machines
             this.SetupMachine();
             this.AddState(WI_State.Deciding, new WI_Deciding());
             this.AddState(WI_State.EnemyScanning, new WI_EnemyScanning());
+
             this.AddState(WI_State.EnemyScanResults, new WI_EnemyScanResults());                            
             this.StartState = this.GetState(WI_State.Deciding);
             this.SetupLocalInventory();
